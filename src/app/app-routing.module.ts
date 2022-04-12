@@ -1,3 +1,4 @@
+import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminSearchComponent } from './admin-search/admin-search.component';
 import { ClientSearchComponent } from './client-search/client-search.component';
@@ -11,7 +12,9 @@ const appRoute: Routes = [
     component: ClientSearchComponent,
     children: [{ path: 'login', component: LoginPageComponent }],
   },
+  { path: 'error', component: ErrorPageComponent },
   { path: 'admin-search', component: AdminSearchComponent },
+  { path: '*', component: ErrorPageComponent },
 ];
 
 @NgModule({
