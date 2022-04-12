@@ -10,7 +10,8 @@ import { AdminSearchComponent } from './admin-search/admin-search.component';
 import { AdminSinglePageComponent } from './admin-search/admin-single-page/admin-single-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { FormsModule } from '@angular/forms';
     AdminSinglePageComponent,
     ErrorPageComponent,
     LoginPageComponent,
+    SinglePageEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

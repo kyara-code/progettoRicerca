@@ -19,6 +19,7 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onSearch(searchForm: NgForm) {
+    this.isNewPage = false;
     this.httpReq.searchPage(searchForm.value.searchInput).subscribe({
       next: (response) => {
         console.log(response);
@@ -27,7 +28,11 @@ export class AdminSearchComponent implements OnInit {
     });
   }
 
-  onAddPage() {
+  onNewPage() {
+    this.isNewPage = true;
+  }
+
+  onDeletePage() {
   }
 
 }

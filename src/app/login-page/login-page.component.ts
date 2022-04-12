@@ -1,3 +1,5 @@
+import { User } from './user.model';
+import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -9,17 +11,21 @@ import { NgForm } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
 
   isAuthenticated = false;
+  user: User;
+  email: string;
+  password: string;
 
-  constructor() { }
+  constructor(private httpReq: HttpRequestsService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(authForm: NgForm) {
-    const email = authForm.value.email;
-    const password = authForm.value.password;
-    console.log(email)
-    console.log(password)
+    this.email = authForm.value.email;
+    this.password = authForm.value.password;
+    this.user = {
+      username: this.email, 
+      password: this.password}
     authForm.reset();
   }
 
