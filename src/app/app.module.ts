@@ -1,3 +1,7 @@
+import { AuthGuard } from './guard/auth-guard.service';
+import { AuthService } from './service/auth.service';
+import { HttpRequestsService } from './service/http-requests.service';
+import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
@@ -23,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     LoginPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [CanDeactivateGuard, HttpRequestsService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

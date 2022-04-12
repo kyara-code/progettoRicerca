@@ -13,5 +13,9 @@ export class HttpRequestsService {
     return this.http.get<WebPage[]>(
       'http://localhost:3000/ricerca?chiavi_like=' + searchInput
     );
+    // fare tre get: uno per la ricerca tra le chiavi (do 3 punti),
+    // uno per la ricerca tra i titoli, do due punti,
+    // uno per la ricerca tra le descrizioni e do un punto,
+    // e poi dispongo le pagine seguendo l'ordine della classifica
   }
 }
