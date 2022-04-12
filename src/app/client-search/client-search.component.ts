@@ -14,7 +14,7 @@ export class ClientSearchComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearch() {
-    this.httpReq.searchPage().subscribe({
+    this.httpReq.searchPage(this.searchInput).subscribe({
       next: (response) => {
         console.log(response);
       },
