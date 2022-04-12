@@ -1,3 +1,4 @@
+import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
@@ -13,7 +14,10 @@ export class ClientSearchComponent implements OnInit {
   arrayPages: WebPage[] = [];
   search: string = null;
 
-  constructor(private httpReq: HttpRequestsService) {}
+  constructor(
+    private httpReq: HttpRequestsService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {}
 

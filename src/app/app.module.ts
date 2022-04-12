@@ -1,3 +1,7 @@
+import { AuthGuard } from './guard/auth-guard.service';
+import { AuthService } from './service/auth.service';
+import { HttpRequestsService } from './service/http-requests.service';
+import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
@@ -25,7 +29,7 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     SinglePageEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [],
+  providers: [CanDeactivateGuard, HttpRequestsService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

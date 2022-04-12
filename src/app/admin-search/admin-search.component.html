@@ -1,4 +1,5 @@
 <div class="row justify-content-center">
+<<<<<<< HEAD
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <form #f="ngForm" (ngSubmit)="onSearch(f)">
             <input 
@@ -33,3 +34,33 @@
     </div>
 </div>
 
+=======
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <form #f="ngForm" (ngSubmit)="onSearch(f)">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search here..."
+        ngModel
+        name="searchInput"
+      />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+  <div class="col-3">
+    <i class="fa-solid fa-circle-xmark icon"></i>
+  </div>
+  <div class="col-3">
+    <button class="btn btn-secondary" (click)="onAddPage()">New Page</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-auto">
+    <app-admin-single-page
+      *ngFor="let page of pages"
+      [singlePage]="page"
+    ></app-admin-single-page>
+  </div>
+</div>
+>>>>>>> a5c2ca163d00ce4bab59014f90791ba63befc2a0

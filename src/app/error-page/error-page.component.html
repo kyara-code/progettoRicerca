@@ -1,5 +1,21 @@
-<div class="alert alert-danger">
-  <p>I'm sorry but you were not authenticated!</p>
-  <p>Try authenticate using this link:</p>
-  <!-- router link che rimanda alla pagina di login -->
+<div class="container page">
+  <div class="alert alert-danger">
+    <p>Ops, you are not on the right page!</p>
+    <a routerLink="/search">Home</a>
+    <!-- router link che rimanda alla pagina di login
+      distingui errore per accesso alla pag admin o errore per pagina non esistente -->
+  </div>
+  <div class="animation">
+    <h3>If you want, you can have a little fun while you wait</h3>
+    <h4>Choose your fighter:</h4>
+    <ul>
+      <li><i class="fa-solid fa-elephant"></i></li>
+      <li><i class="fa-solid fa-hippo"></i></li>
+      <li><i class="fa-solid fa-alicorn"></i></li>
+      <li><i class="fa-solid fa-sheep"></i></li>
+      <li><i class="fa-solid fa-crow"></i></li>
+    </ul>
+    <!-- inserire l'animazione qui: l'animale va avanti, se incontra degli ostacoli si stoppa e si perde -->
+    <!-- gli ostacoli sono cactus: <i class="fa-solid fa-cactus"></i> -->
+  </div>
 </div>
