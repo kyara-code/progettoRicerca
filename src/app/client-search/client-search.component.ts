@@ -18,11 +18,7 @@ export class ClientSearchComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearch() {
-<<<<<<< HEAD
-    this.httpReq.searchPage(this.searchInput).subscribe({
-=======
     this.httpReq.searchPage(this.clientSearchForm.value.searchInput).subscribe({
->>>>>>> ef986cd89ec88ff26d29c97aa4757c974d41cf71
       next: (response) => {
         console.log(response);
         this.arrayPages = response;
