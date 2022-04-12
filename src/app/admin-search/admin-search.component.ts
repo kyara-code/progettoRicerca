@@ -1,3 +1,4 @@
+import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AdminSearchComponent implements OnInit {
 
   isNewPage = false;
+  pages: WebPage[] = [];
 
   constructor(private httpReq: HttpRequestsService) { }
 
@@ -17,13 +19,15 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onSearch(searchForm: NgForm) {
-    this.httpReq.searchPage(searchForm.value.searchInput).subscribe(responseData => {
-      console.log(responseData)
-    })
+    this.httpReq.searchPage(searchForm.value.searchInput).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.pages = response;
+      },
+    });
   }
 
   onAddPage() {
-
   }
 
 }
