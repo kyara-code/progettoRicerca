@@ -11,7 +11,7 @@ export class HttpRequestsService {
   searchPage(searchInput: string) {
     console.log('Your search: ' + searchInput);
     return this.http.get<WebPage[]>(
-      'http://localhost:3000/ricerca?chiavi_q=' + searchInput
+      'http://localhost:3000/ricerca?chiavi_like=' + searchInput
     );
   }
 }

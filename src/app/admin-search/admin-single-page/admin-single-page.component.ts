@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { WebPage } from './../../model/page.model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-admin-single-page',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-single-page.component.css']
 })
 export class AdminSinglePageComponent implements OnInit {
+
+  @Input() singlePage: WebPage;
 
   constructor() { }
 
