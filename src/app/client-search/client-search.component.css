@@ -9,9 +9,15 @@
 .icon {
   font-size: 20px;
   line-height: unset;
+  color: rgb(139, 200, 224);
 }
 
 .login-btn {
   display: flex;
   justify-content: flex-end;
+}
+
+.btn,
+.icon {
+  margin: 6px;
 }
