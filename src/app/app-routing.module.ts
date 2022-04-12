@@ -7,14 +7,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoute: Routes = [
-  {
-    path: 'search',
-    component: ClientSearchComponent,
-    children: [{ path: 'login', component: LoginPageComponent }],
-  },
+  { path: 'search', component: ClientSearchComponent },
+  { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
   { path: 'admin-search', component: AdminSearchComponent },
-  { path: '*', component: ErrorPageComponent },
+  { path: '**', redirectTo: '/error' },
 ];
 
 @NgModule({
