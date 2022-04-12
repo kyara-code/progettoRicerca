@@ -20,6 +20,7 @@ export class LoginPageComponent implements OnInit {
     const password = authForm.value.password;
     console.log(email)
     console.log(password)
+    authForm.reset();
   }
 
 }

@@ -12,4 +12,8 @@ export class AdminSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onAddPage() {
+    
+  }
+
 }
