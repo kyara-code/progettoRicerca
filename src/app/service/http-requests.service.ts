@@ -6,13 +6,6 @@ import { WebPage } from '../model/page.model';
   providedIn: 'root',
 })
 export class HttpRequestsService {
-<<<<<<< HEAD
-
-  constructor(private http: HttpClient) {}
-
-  searchPage(searchInput: string) {
-    return this.http.get('http://localhost:3000/ricerca?q=' + searchInput);
-=======
   constructor(private http: HttpClient) {}
 
   searchPage(searchInput: string) {
@@ -20,6 +13,5 @@ export class HttpRequestsService {
     return this.http.get<WebPage[]>(
       'http://localhost:3000/ricerca?chiavi_like=' + searchInput
     );
->>>>>>> ef986cd89ec88ff26d29c97aa4757c974d41cf71
   }
 }
