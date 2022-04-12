@@ -1,3 +1,5 @@
+import { NgForm } from '@angular/forms';
+import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,13 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSearchComponent implements OnInit {
 
-  constructor() { }
+  isNewPage = false;
+
+  constructor(private httpReq: HttpRequestsService) { }
 
   ngOnInit(): void {
   }
 
+  onSearch(searchForm: NgForm) {
+    this.httpReq.searchPage(searchForm.value.searchInput).subscribe(responseData => {
+      console.log(responseData)
+    })
+  }
+
   onAddPage() {
-    
+
   }
 
 }
