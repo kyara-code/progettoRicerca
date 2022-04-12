@@ -1,8 +1,8 @@
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { SearchPageComponent } from './search-page/search-page.component';
 import { ClientSearchComponent } from './client-search/client-search.component';
 import { ClientSinglePageComponent } from './client-search/client-single-page/client-single-page.component';
 import { AdminSearchComponent } from './admin-search/admin-search.component';
@@ -13,18 +13,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SearchPageComponent,
     ClientSearchComponent,
     ClientSinglePageComponent,
     AdminSearchComponent,
     AdminSinglePageComponent,
     ErrorPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
