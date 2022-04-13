@@ -1,4 +1,3 @@
-import { DropdownDirective } from './directive/dropdown.directive';
 import { AuthGuard } from './guard/auth-guard.service';
 import { HttpRequestsService } from './service/http-requests.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +14,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     ErrorPageComponent,
     LoginPageComponent,
     SinglePageEditComponent,
-    DropdownDirective,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
