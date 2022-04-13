@@ -20,6 +20,13 @@
       "descrizione": "JavaScript and More ... TypeScript is an open-source language which builds on JavaScript, one of the world's most used tools, by adding static type definitions.",
       "chiavi": "language,developing",
       "url": "https://www.typescriptlang.org"
+    },
+    {
+      "titolo": "Google",
+      "descrizione": "Motore di ricerca",
+      "chiavi": "ricerca, google",
+      "url": "https://www.google.it/",
+      "id": 5
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { User } from './../login-page/user.model';
+import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WebPage } from '../model/page.model';
@@ -7,7 +7,7 @@ import { WebPage } from '../model/page.model';
   providedIn: 'root',
 })
 export class HttpRequestsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   searchPage(searchInput: string) {
     console.log('Your search: ' + searchInput);
@@ -22,7 +22,14 @@ export class HttpRequestsService {
 
   postPage(webSite: WebPage) {
     this.http
-      .post('http://localhost:3000/ricerca', webSite, {})
-      .subscribe((response) => {});
+      .post('http://localhost:3000/ricerca', webSite,
+      {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + this.authService.token }),
+      })
+      .subscribe((response) => {console.log(response)});
+  }
+
+  deletePage() {
+    
   }
 }
