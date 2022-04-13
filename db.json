@@ -22,11 +22,6 @@
       "url": "https://www.typescriptlang.org"
     },
     {
-      "email": "user",
-      "password": "password",
-      "id": 4
-    },
-    {
       "titolo": "Google",
       "descrizione": "Motore di ricerca",
       "chiavi": "ricerca, google",
