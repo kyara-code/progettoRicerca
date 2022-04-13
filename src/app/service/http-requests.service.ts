@@ -48,7 +48,9 @@ export class HttpRequestsService {
       });
   }
 
-  deletePage() {}
+  deletePage() {
+    this.http.delete('http://localhost:3000/ricerca');
+  }
 
   // getFilter(id: number) {
   //   switch (id) {
@@ -73,5 +75,4 @@ export class HttpRequestsService {
   //       console.log(this.filterSearchValue);
   //       break;
   //   }
-  // }
 }

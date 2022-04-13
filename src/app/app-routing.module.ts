@@ -1,3 +1,4 @@
+import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminSearchComponent } from './admin-search/admin-search.component';
@@ -16,6 +17,7 @@ const appRoute: Routes = [
     path: 'admin-search',
     component: AdminSearchComponent,
     canActivate: [AuthGuard],
+    children: [{path: 'edit', component: SinglePageEditComponent}]
   },
   { path: '**', redirectTo: '/error' },
 ];
