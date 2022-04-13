@@ -21,19 +21,9 @@ export class AuthService {
   }
 
   logIn(email: string, password: string) {
-    return this.http.post(
-      'http://localhost:3000/auth/login',
-      {
-        email: email,
-        password: password,
-      }
-      // {
-      //   headers: new HttpHeaders({ Authorization: 'Bearer' }),
-      // }
-    );
-  }
-
-  logOut() {
-    this.loggedIn = false;
+    return this.http.post('http://localhost:3000/auth/login', {
+      user: email,
+      password: password,
+    });
   }
 }
