@@ -1,29 +1,38 @@
+<!-- Parte di ricerca con relativi bottoni -->
 <div class="row justify-content-center">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <form #f="ngForm" (ngSubmit)="onSearch(f)">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search here..."
-        ngModel
-        name="searchInput"
-      />
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-  </div>
-  <div class="col-3">
-    <i class="fa-solid fa-circle-xmark icon"></i>
-  </div>
-  <div class="col-3">
-    <button class="btn btn-secondary" (click)="onAddPage()">New Page</button>
-  </div>
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form #f="ngForm" (ngSubmit)="onSearch(f)">
+            <input 
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+            ngModel
+            name="searchInput">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="col-3">
+        <i class="fa-solid fa-circle-xmark icon"></i>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-secondary" (click)="onNewPage()">New Page</button>
+    </div>
 </div>
 
-<div class="row">
-  <div class="col-auto">
-    <app-admin-single-page
-      *ngFor="let page of pages"
-      [singlePage]="page"
-    ></app-admin-single-page>
-  </div>
+<!-- Lista siti web -->
+<div class="row" *ngIf="!isNewPage">
+    <div class="col-auto">
+        <app-admin-single-page
+        *ngFor="let page of pages"
+        [singlePage]="page"
+      ></app-admin-single-page>
+    </div>
 </div>
+
+<!-- Sezione di modifica -->
+<div class="row" *ngIf="isNewPage">
+    <div class="col-12">
+        <app-single-page-edit></app-single-page-edit>
+    </div>
+</div>
+
