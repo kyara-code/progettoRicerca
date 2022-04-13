@@ -1,7 +1,13 @@
 <div class="container page">
   <div class="alert alert-danger">
-    <p>Ops, you are not on the right page!</p>
-    <a routerLink="/search">Home</a>
+    <h2>{{ error.status }}</h2>
+    <p>{{ error.message }}</p>
+    <div style="display: flex">
+      <a routerLink="/search">Home </a>
+      <div *ngIf="authTriedBefore">
+        | <a routerLink="/login">Login Again</a>
+      </div>
+    </div>
     <!-- router link che rimanda alla pagina di login
       distingui errore per accesso alla pag admin o errore per pagina non esistente -->
   </div>

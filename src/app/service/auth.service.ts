@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //come nel corso... da cambiare con autenticazione al server in seguito
@@ -8,22 +9,39 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   loggedIn = false;
+  error = {
+    message:
+      'An unknown error has occured, looks like you are not on the right page.' +
+      'Please consider navigate again on our website through the right routes!',
+    status: 'Unknown Route',
+  };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   isAuthenticated() {
     const promise = new Promise((resolve, rejects) => {
-      setTimeout(() => {
-        resolve(this.loggedIn);
-      }, 800);
+      resolve(this.loggedIn);
     });
     return promise;
   }
 
   logIn(email: string, password: string) {
-    return this.http.post('http://localhost:3000/auth/login', {
-      user: email,
-      password: password,
-    });
+    this.http
+      .post('http://localhost:3000/auth/login', {
+        user: email,
+        password: password,
+      }) // aggiungo qua la chiamata al service per il login
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.router.navigate(['/admin-search']);
+          this.loggedIn = true;
+        },
+        error: (errorRes) => {
+          this.router.navigate(['/error']);
+          this.error = errorRes.error;
+          console.log(errorRes.error);
+        },
+      });
   }
 }

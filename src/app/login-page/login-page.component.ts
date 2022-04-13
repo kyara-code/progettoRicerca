@@ -30,11 +30,7 @@ export class LoginPageComponent implements OnInit {
     console.log(email);
     console.log(password);
 
-    // aggiungo qua la chiamata al service per il login
-    this.authService.logIn(email, password).subscribe((response) => {
-      console.log(response);
-      this.router.navigate(['/admin-search']);
-    });
+    this.authService.logIn(email, password);
 
     authForm.reset();
   }
