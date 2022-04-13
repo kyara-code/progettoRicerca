@@ -1,7 +1,9 @@
+import { AuthGuard } from './../guard/auth-guard.service';
 import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from './user.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +16,11 @@ export class LoginPageComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private authGuard: AuthGuard
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,6 +33,7 @@ export class LoginPageComponent implements OnInit {
     // aggiungo qua la chiamata al service per il login
     this.authService.logIn(email, password).subscribe((response) => {
       console.log(response);
+      this.router.navigate(['/admin-search']);
     });
 
     authForm.reset();

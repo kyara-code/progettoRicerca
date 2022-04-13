@@ -27,7 +27,13 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     LoginPageComponent,
     SinglePageEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [CanDeactivateGuard, HttpRequestsService, AuthGuard],
   bootstrap: [AppComponent],
 })

@@ -21,9 +21,8 @@ export class HttpRequestsService {
   }
 
   postPage(webSite: WebPage) {
-    this.http.post('http://localhost:3000/ricerca', webSite,
-    {
-      headers: new HttpHeaders({ Authorization: 'Bearer' }),
-    });
+    this.http
+      .post('http://localhost:3000/ricerca', webSite, {})
+      .subscribe((response) => {});
   }
 }
