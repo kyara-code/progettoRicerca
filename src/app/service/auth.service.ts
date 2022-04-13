@@ -35,13 +35,8 @@ export class AuthService {
 
   logIn(user: string, password: string) {
     this.http
-<<<<<<< HEAD
-      .post('http://localhost:3000/auth/login', {
-        user: user,
-=======
       .post<AuthResponse>('http://localhost:3000/auth/login', {
-        user: email,
->>>>>>> e21977ec35e98ae74ac423111229753d4ca3dd02
+        user: user,
         password: password,
       })
       .subscribe({

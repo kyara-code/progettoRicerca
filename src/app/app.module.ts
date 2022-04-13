@@ -1,3 +1,4 @@
+import { DropdownDirective } from './directive/dropdown.directive';
 import { AuthGuard } from './guard/auth-guard.service';
 import { HttpRequestsService } from './service/http-requests.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +26,7 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     ErrorPageComponent,
     LoginPageComponent,
     SinglePageEditComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
