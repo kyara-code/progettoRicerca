@@ -9,7 +9,7 @@ import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
 import { AuthGuard } from './guard/auth-guard.service';
 
 const appRoute: Routes = [
-  { path: 'search', component: ClientSearchComponent },
+  { path: '', component: ClientSearchComponent, pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
   {

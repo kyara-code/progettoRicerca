@@ -20,16 +20,13 @@ export class AuthService {
     return promise;
   }
 
-  logIn(email: string, password: string) {
+  logIn(user: string, password: string) {
     return this.http.post(
-      'http://localhost:3000/auth/login',
+      'https://localhost:3000/auth/login',
       {
-        email: email,
+        user: user,
         password: password,
-      }
-      // {
-      //   headers: new HttpHeaders({ Authorization: 'Bearer' }),
-      // }
+      },
     );
   }
 

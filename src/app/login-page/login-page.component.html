@@ -3,14 +3,14 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="form-group">
         <div class="text-center">
-          <label for="email">E-mail</label>
+          <label for="username">Username</label>
         </div>
         <input
           class="form-control"
-          type="email"
-          id="email"
+          type="text"
+          id="user"
           ngModel
-          name="email"
+          name="user"
           required
         />
         <!-- ho tolto 'email' dal campo sopra perché se non ho capito male, le credenziali sono user e password -->
