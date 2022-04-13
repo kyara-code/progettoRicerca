@@ -11,6 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  token;
+
   isAuthenticated() {
     const promise = new Promise((resolve, rejects) => {
       setTimeout(() => {
@@ -21,14 +23,17 @@ export class AuthService {
   }
 
   logIn(user: string, password: string) {
-    return this.http.post(
-      'https://localhost:3000/auth/login',
+    this.http.post(
+      'http://localhost:3000/auth/login',
       {
         user: user,
         password: password,
       },
-    );
-  }
+    ).subscribe((response) => {
+      this.token = response;
+      console.log(this.token)
+  });
+}
 
   logOut() {
     this.loggedIn = false;

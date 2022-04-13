@@ -6,7 +6,7 @@ import { ClientSearchComponent } from './client-search/client-search.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
-import { AuthGuard } from './guard/auth-guard.service';
+// import { AuthGuard } from './guard/auth-guard.service';
 
 const appRoute: Routes = [
   { path: '', component: ClientSearchComponent, pathMatch: 'full' },
@@ -15,7 +15,7 @@ const appRoute: Routes = [
   {
     path: 'admin-search',
     component: AdminSearchComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '/error' },
 ];

@@ -1,4 +1,4 @@
-import { AuthGuard } from './guard/auth-guard.service';
+// import { AuthGuard } from './guard/auth-guard.service';
 import { HttpRequestsService } from './service/http-requests.service';
 import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,7 +34,9 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [CanDeactivateGuard, HttpRequestsService, AuthGuard],
+  providers: [CanDeactivateGuard, HttpRequestsService,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+//AuthGuard
