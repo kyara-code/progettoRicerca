@@ -5,11 +5,11 @@ import { ClientSearchComponent } from './client-search/client-search.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CanDeactivateGuard } from './guard/can-deactivate-guard.service';
-// import { AuthGuard } from './guard/auth-guard.service';
+import { AuthGuard } from './guard/auth-guard.service';
 
 const appRoute: Routes = [
   { path: '', component: ClientSearchComponent, pathMatch: 'full' },
+  { path: 'search', component: ClientSearchComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
   {

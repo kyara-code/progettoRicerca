@@ -13,13 +13,16 @@ export class ClientSearchComponent implements OnInit {
   @ViewChild('f') clientSearchForm: NgForm;
   arrayPages: WebPage[] = [];
   search: string = null;
+  authenticated: boolean = false;
 
   constructor(
     private httpReq: HttpRequestsService,
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authenticated = this.auth.loggedIn;
+  }
 
   onSearch() {
     this.httpReq.searchPage(this.clientSearchForm.value.searchInput).subscribe({
