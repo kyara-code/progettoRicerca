@@ -18,17 +18,17 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    // private authGuard: AuthGuard
-  ) {}
+    private router: Router
+  ) // private authGuard: AuthGuard
+  {}
 
   ngOnInit(): void {}
 
   onSubmit(authForm: NgForm) {
     const user = authForm.value.user;
     const password = authForm.value.password;
-    console.log(user)
-    console.log(password)
+    console.log(user);
+    console.log(password);
 
     this.authService.logIn(user, password);
 

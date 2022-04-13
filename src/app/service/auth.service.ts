@@ -33,12 +33,12 @@ export class AuthService {
     return promise;
   }
 
-  logIn(email: string, password: string) {
+  logIn(user: string, password: string) {
     this.http
       .post<AuthResponse>('http://localhost:3000/auth/login', {
-        user: email,
+        user: user,
         password: password,
-      }) // aggiungo qua la chiamata al service per il login
+      })
       .subscribe({
         next: (response) => {
           console.log(response);

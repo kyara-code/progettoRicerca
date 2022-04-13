@@ -21,3 +21,7 @@
 .icon {
   margin: 6px;
 }
+
+.btn-default {
+  border: 1px solid rgb(34, 41, 120);
+}
