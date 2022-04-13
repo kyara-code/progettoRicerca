@@ -1,9 +1,9 @@
-import { AuthGuard } from './../guard/auth-guard.service';
+// import { AuthGuard } from './../guard/auth-guard.service';
 import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from './user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -18,9 +18,9 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private authGuard: AuthGuard
-  ) {}
+    private router: Router
+  ) // private authGuard: AuthGuard
+  {}
 
   ngOnInit(): void {}
 
