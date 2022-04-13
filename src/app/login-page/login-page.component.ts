@@ -30,14 +30,8 @@ export class LoginPageComponent implements OnInit {
     console.log(user)
     console.log(password)
 
-<<<<<<< HEAD
     this.authService.logIn(user, password);
-      this.router.navigate(['/admin-search']);
-      
-=======
-    this.authService.logIn(email, password);
 
->>>>>>> 7a6323070496021d3e54ea55e94bca8b47117a17
     authForm.reset();
   }
 }

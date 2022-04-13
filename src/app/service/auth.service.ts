@@ -27,23 +27,6 @@ export class AuthService {
     return promise;
   }
 
-<<<<<<< HEAD
-  logIn(user: string, password: string) {
-    this.http.post(
-      'http://localhost:3000/auth/login',
-      {
-        user: user,
-        password: password,
-      },
-    ).subscribe((response) => {
-      this.token = response;
-      console.log(this.token)
-  });
-}
-
-  logOut() {
-    this.loggedIn = false;
-=======
   logIn(email: string, password: string) {
     this.http
       .post('http://localhost:3000/auth/login', {
@@ -62,6 +45,5 @@ export class AuthService {
           console.log(errorRes.error);
         },
       });
->>>>>>> 7a6323070496021d3e54ea55e94bca8b47117a17
   }
 }

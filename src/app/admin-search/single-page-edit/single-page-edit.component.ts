@@ -29,7 +29,7 @@ export class SinglePageEditComponent implements OnInit {
       url: this.newPageForm.value.url,
 
     }
-    this.http.postPage(webPage);
+    // this.http.postPage(webPage);
 
   }
 }
