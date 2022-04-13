@@ -24,7 +24,7 @@ export class HttpRequestsService {
     this.http
       .post('http://localhost:3000/ricerca', webSite,
       {
-        headers: new HttpHeaders({ Authorization: 'Bearer this.authService.token' }),
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + this.authService.token }),
       })
       .subscribe((response) => {console.log(response)});
   }

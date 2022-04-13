@@ -15,7 +15,7 @@ const appRoute: Routes = [
   {
     path: 'admin-search',
     component: AdminSearchComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '/error' },
 ];

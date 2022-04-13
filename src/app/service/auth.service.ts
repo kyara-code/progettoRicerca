@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
 //come nel corso... da cambiare con autenticazione al server in seguito
 //fake an authentication with a real server
 
+export class AuthResponse {
+  access_token: string;
+  refreshToken: string;
+  refreshTokenExpireIn: number;
+  tokenExpireIn: number;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +24,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  token;
+  token = null;
 
   isAuthenticated() {
     const promise = new Promise((resolve, rejects) => {
@@ -29,13 +35,14 @@ export class AuthService {
 
   logIn(email: string, password: string) {
     this.http
-      .post('http://localhost:3000/auth/login', {
+      .post<AuthResponse>('http://localhost:3000/auth/login', {
         user: email,
         password: password,
       }) // aggiungo qua la chiamata al service per il login
       .subscribe({
         next: (response) => {
           console.log(response);
+          this.token = response.access_token;
           this.router.navigate(['/admin-search']);
           this.loggedIn = true;
         },
