@@ -28,4 +28,8 @@ export class HttpRequestsService {
       })
       .subscribe((response) => {console.log(response)});
   }
+
+  deletePage() {
+    
+  }
 }
