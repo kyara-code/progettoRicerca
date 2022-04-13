@@ -29,7 +29,7 @@ export class HttpRequestsService {
       .subscribe((response) => {console.log(response)});
   }
 
-  deletePage() {
-    this.http.delete('http://localhost:3000/ricerca',)
+  deletePage(webSites: WebPage[]) {
+    this.http.put('http://localhost:3000/ricerca', webSites).subscribe();
   }
 }

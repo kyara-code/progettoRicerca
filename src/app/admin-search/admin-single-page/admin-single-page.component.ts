@@ -15,4 +15,7 @@ export class AdminSinglePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onDelete() {
+  }
+
 }

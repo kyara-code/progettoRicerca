@@ -18,6 +18,7 @@ export class AdminSearchComponent implements OnInit {
 
   onSearch(searchForm: NgForm) {
     this.isNewPage = false;
+    this.router.navigate(['./'] , {relativeTo: this.route});
     this.httpReq.searchPage(searchForm.value.searchInput).subscribe({
       next: (response) => {
         console.log(response);
@@ -28,14 +29,15 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
-    if(this.isNewPage) {
       this.router.navigate(['edit'], {relativeTo: this.route});
-    }
   }
-
-  onDeletePage() {}
 
   onNavigateHome() {
     this.router.navigate(['/search']);
+  }
+
+  onDelete(idPage: number) {
+    this.pages.splice(idPage,1);
+    this.httpReq.deletePage(this.pages);
   }
 }
