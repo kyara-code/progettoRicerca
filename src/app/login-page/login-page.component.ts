@@ -25,12 +25,12 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(authForm: NgForm) {
-    const email = authForm.value.email;
+    const user = authForm.value.user;
     const password = authForm.value.password;
-    console.log(email);
+    console.log(user);
     console.log(password);
 
-    this.authService.logIn(email, password);
+    this.authService.logIn(user, password);
 
     authForm.reset();
   }
