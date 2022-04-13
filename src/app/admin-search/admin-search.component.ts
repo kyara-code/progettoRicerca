@@ -1,9 +1,8 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-admin-search',
   templateUrl: './admin-search.component.html',
@@ -13,7 +12,7 @@ export class AdminSearchComponent implements OnInit {
   isNewPage = false;
   pages: WebPage[] = [];
 
-  constructor(private httpReq: HttpRequestsService, private router: Router) {}
+  constructor(private httpReq: HttpRequestsService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
@@ -29,6 +28,9 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
+    if(this.isNewPage) {
+      this.router.navigate(['edit'], {relativeTo: this.route});
+    }
   }
 
   onDeletePage() {}

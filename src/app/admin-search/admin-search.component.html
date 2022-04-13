@@ -1,5 +1,10 @@
 <!-- Parte di ricerca con relativi bottoni -->
 <div class="row justify-content-center">
+  <div class="col-1" id="homeButton">
+    <button type="button" class="btn btn-primary" (click)="onNavigateHome()">
+      Home
+    </button>
+  </div>
   <div class="col-xs-12 col-md-6 col-md-offset-3">
     <form #f="ngForm" (ngSubmit)="onSearch(f)">
       <input
@@ -9,10 +14,10 @@
         ngModel
         name="searchInput"
       />
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="btn btn-success">Search</button>
     </form>
   </div>
-  <div class="col-3">
+  <div class="col-1">
     <i class="fa-solid fa-circle-xmark icon"></i>
   </div>
   <div class="col-3">
@@ -31,12 +36,6 @@
 </div>
 
 <!-- Sezione di modifica -->
-<div class="row" *ngIf="isNewPage">
-  <div class="col-12">
-    <app-single-page-edit></app-single-page-edit>
-  </div>
-</div>
+<router-outlet></router-outlet>
 
-<button type="button" class="btn btn-default" (click)="onNavigateHome()">
-  Home
-</button>
+

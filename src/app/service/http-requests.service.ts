@@ -30,6 +30,6 @@ export class HttpRequestsService {
   }
 
   deletePage() {
-    
+    this.http.delete('http://localhost:3000/ricerca',)
   }
 }
