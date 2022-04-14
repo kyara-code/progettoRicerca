@@ -32,12 +32,10 @@
       *ngFor="let page of pages; let i = index"
       [singlePage]="page"
       [idPageInput]="i"
-      (click)="onDelete(i)"
+      (idPageDelete)="onDelete($event)"
     ></app-admin-single-page>
   </div>
 </div>
 
 <!-- Sezione di modifica -->
 <router-outlet></router-outlet>
-
-<!-- (idPageOutput)="onDelete($event)" -->

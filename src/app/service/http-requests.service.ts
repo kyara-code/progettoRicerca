@@ -48,9 +48,10 @@ export class HttpRequestsService {
       });
   }
 
-  deletePage(webSites: WebPage[]) {
-    return this.http
-      .put('http://localhost:3000/ricerca/', webSites, {
+  deletePage(idPage: number) {
+    console.log('Service attivo');
+    this.http
+      .delete('http://localhost:3000/ricerca/' + idPage, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + this.authService.token,
         }),
