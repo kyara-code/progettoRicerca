@@ -21,6 +21,7 @@ export class PagesManagerService {
       next: (response) => {
         console.log(response);
         this.pages = response;
+        this.pagesModified.next(this.pages);
         console.log(this.pages);
       },
     });
