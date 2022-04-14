@@ -1,7 +1,30 @@
-.row {
-    padding-left: 300px;
-    padding-top: 20px;
-}
 .btn {
-    margin: 6px;
+  margin: 6px;
+}
+
+.searchBar {
+  display: flex;
+}
+
+.contenitore {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  font-size: 30px;
+  line-height: unset;
+  cursor: pointer;
+  color: rgb(139, 200, 224);
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pageList {
+  display: flex;
+  justify-content: center;
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../service/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
@@ -20,8 +21,8 @@ export class AdminSearchComponent implements OnInit {
     private httpReq: HttpRequestsService,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient,
-    private pagesManagerService: PagesManagerService
+    private pagesManagerService: PagesManagerService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +41,10 @@ export class AdminSearchComponent implements OnInit {
     // this.router.navigate(['../'], { relativeTo: this.route });
   }
 
+  onResetForm(searchForm: NgForm) {
+    searchForm.reset();
+  }
+
   onNewPage() {
     this.isNewPage = true;
     this.router.navigate(['edit'], { relativeTo: this.route });
@@ -47,6 +52,11 @@ export class AdminSearchComponent implements OnInit {
 
   onNavigateHome() {
     this.router.navigate(['/search']);
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.onNavigateHome();
   }
 
   onDelete(idPage: number, i: number) {
