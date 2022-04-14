@@ -31,7 +31,9 @@
     <app-admin-single-page
       *ngFor="let page of pages; let i = index"
       [singlePage]="page"
+      [currentId]="i"
       (idPageDelete)="onDelete($event, i)"
+      (idPageModify)="onModify($event)"
     ></app-admin-single-page>
   </div>
 </div>

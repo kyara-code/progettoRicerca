@@ -1,3 +1,5 @@
+import { Router, ActivatedRoute } from '@angular/router';
+import { PagesManagerService } from './../pages-manager.service';
 import { WebPage } from './../../model/page.model';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
@@ -8,11 +10,15 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class AdminSinglePageComponent implements OnInit {
   @Input() singlePage: WebPage;
-  @Input() idPageInput: number;
+  @Input() currentId: number;
   @Output() idPageDelete = new EventEmitter<number>();
   @Output() idPageModify = new EventEmitter<number>();
 
-  constructor() {}
+  constructor(
+    private pagesManagerService: PagesManagerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {}
 
@@ -21,6 +27,9 @@ export class AdminSinglePageComponent implements OnInit {
   }
 
   onModify() {
-    this.idPageModify.emit(this.idPageInput);
+    this.pagesManagerService.isModify = true;
+    this.idPageModify.emit(this.currentId);
+    this.pagesManagerService.modifyPage(this.singlePage);
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

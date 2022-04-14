@@ -25,7 +25,7 @@ export class HttpRequestsService {
         searchInput +
         '&_page=' +
         pageNumber +
-        '&_limit=3'
+        '&_limit=5'
       //ricerca da cambiare in qualcosa_like= se ti serve qualcosa di specifico
     );
   }

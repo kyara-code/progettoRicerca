@@ -34,6 +34,13 @@
       "chiavi": "matematica, università",
       "url": "https://www.mat.uniroma2.it/",
       "id": 5
+    },
+    {
+      "titolo": "GG",
+      "descrizione": "Motore di ricerca",
+      "chiavi": "ricerca, google",
+      "url": "https://www.google.it/",
+      "id": 6
     }
   ]
 }
