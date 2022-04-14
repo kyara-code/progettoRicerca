@@ -12,13 +12,17 @@ export class AdminSearchComponent implements OnInit {
   isNewPage = false;
   pages: WebPage[] = [];
 
-  constructor(private httpReq: HttpRequestsService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private httpReq: HttpRequestsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {}
 
   onSearch(searchForm: NgForm) {
     this.isNewPage = false;
-    this.router.navigate(['./'] , {relativeTo: this.route});
+    this.router.navigate(['./'], { relativeTo: this.route });
     this.httpReq.searchPage(searchForm.value.searchInput).subscribe({
       next: (response) => {
         console.log(response);
@@ -29,7 +33,7 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
-      this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onNavigateHome() {
@@ -37,7 +41,7 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onDelete(idPage: number) {
-    this.pages.splice(idPage,1);
+    this.pages.splice(idPage, 1);
     this.httpReq.deletePage(this.pages);
   }
 }

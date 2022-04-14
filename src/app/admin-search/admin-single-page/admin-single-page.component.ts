@@ -1,5 +1,5 @@
 import { WebPage } from './../../model/page.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-admin-single-page',
@@ -9,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AdminSinglePageComponent implements OnInit {
 
   @Input() singlePage: WebPage;
+  @Input() idPageInput: number;
+  @Output() idPageOutput = new EventEmitter<number>();
 
   constructor() { }
 
@@ -16,6 +18,7 @@ export class AdminSinglePageComponent implements OnInit {
   }
 
   onDelete() {
+    this.idPageOutput.emit(this.idPageInput);
   }
 
 }

@@ -27,8 +27,7 @@ export class LoginPageComponent implements OnInit {
   onSubmit(authForm: NgForm) {
     const user = authForm.value.user;
     const password = authForm.value.password;
-    console.log(user);
-    console.log(password);
+    // Eliminato due console log ormai inutili
 
     this.authService.logIn(user, password);
 

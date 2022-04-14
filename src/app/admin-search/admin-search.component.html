@@ -29,8 +29,10 @@
 <div class="row" *ngIf="!isNewPage">
   <div class="col-auto">
     <app-admin-single-page
-      *ngFor="let page of pages"
+      *ngFor="let page of pages, let i = index"
       [singlePage]="page"
+      [idPageInput]="i"
+      (idPageOutput)="onDelete($event)"
     ></app-admin-single-page>
   </div>
 </div>

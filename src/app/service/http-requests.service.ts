@@ -49,7 +49,13 @@ export class HttpRequestsService {
   }
 
   deletePage(webSites: WebPage[]) {
-    this.http.put('http://localhost:3000/ricerca', webSites).subscribe();
+    this.http
+      .put('http://localhost:3000/ricerca', webSites, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + this.authService.token,
+        }),
+      })
+      .subscribe((response) => console.log(response));
   }
 
   // getFilter(id: number) {
