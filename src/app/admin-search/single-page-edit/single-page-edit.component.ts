@@ -36,12 +36,14 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   subscribtion: Subscription;
 
   ngOnInit(): void {
-    this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
-      (newPage) => {
-        this.newPage = newPage;
-        this.newPageForm.patchValue(newPage);
-      }
-    );
+    if (this.pagesManagerService.isModify) {
+      this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
+        (newPage) => {
+          this.newPage = newPage;
+          this.newPageForm.patchValue(newPage);
+        }
+      );
+    }
   }
 
   onSubmit() {

@@ -29,8 +29,8 @@ export class AdminSinglePageComponent implements OnInit {
   onModify() {
     this.pagesManagerService.isModify = true;
 
-    this.pagesManagerService.modifyPage(this.singlePage);
     // this.idPageModify.emit(this.currentId);
+    this.pagesManagerService.modifyPage(this.singlePage);
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

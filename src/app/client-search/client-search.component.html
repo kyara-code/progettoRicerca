@@ -38,3 +38,14 @@
 <button type="button" class="btn btn-default" (click)="changePage()">
   avanti prova
 </button>
+
+<button
+  *ngIf="authenticated"
+  type="button"
+  class="btn btn-primary"
+  (click)="gotToAdminPage()"
+>
+  Go back to admin page
+</button>
+
+<!-- aggiungi bottone logout -->

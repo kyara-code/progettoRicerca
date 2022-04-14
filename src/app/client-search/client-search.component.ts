@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
@@ -21,7 +22,8 @@ export class ClientSearchComponent implements OnInit {
   constructor(
     private httpReq: HttpRequestsService,
     private auth: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +48,9 @@ export class ClientSearchComponent implements OnInit {
 
   onCancel() {
     this.search = null;
+  }
+
+  gotToAdminPage() {
+    this.router.navigate(['/admin-search']);
   }
 }
