@@ -31,9 +31,7 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onSearch(searchForm: NgForm) {
-    // da aggiungere il secondo parametro al metodo http!!!!
     this.isNewPage = false;
-
     this.pagesManagerService.onSearch(searchForm, +this.idPage);
     this.pages = this.pagesManagerService.pages;
     console.log(this.pages);
