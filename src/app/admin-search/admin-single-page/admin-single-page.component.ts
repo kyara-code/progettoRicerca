@@ -4,21 +4,23 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-admin-single-page',
   templateUrl: './admin-single-page.component.html',
-  styleUrls: ['./admin-single-page.component.css']
+  styleUrls: ['./admin-single-page.component.css'],
 })
 export class AdminSinglePageComponent implements OnInit {
-
   @Input() singlePage: WebPage;
   @Input() idPageInput: number;
-  @Output() idPageOutput = new EventEmitter<number>();
+  @Output() idPageDelete = new EventEmitter<number>();
+  @Output() idPageModify = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onDelete() {
-    this.idPageOutput.emit(this.idPageInput);
+    this.idPageDelete.emit(this.idPageInput);
   }
 
+  onModify() {
+    this.idPageModify.emit(this.idPageInput);
+  }
 }

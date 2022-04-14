@@ -42,6 +42,6 @@ export class AdminSearchComponent implements OnInit {
 
   onDelete(idPage: number) {
     this.pages.splice(idPage, 1);
-    this.httpReq.deletePage(this.pages);
+    this.httpReq.deletePage(idPage);
   }
 }
