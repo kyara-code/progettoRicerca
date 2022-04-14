@@ -23,6 +23,8 @@ export class PaginationComponent implements OnInit {
     // let sections = Math.ceil(this.numberOfPages / this.howManyPagesDisplayed);
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
+      // Qui section non deve essere uguale a number, perché number è il numero di pagine visibili per sezione
+      // section = numeroTotalePagineDelGet / numeroPagineVisibiliPerSezione
       sections = number;
       console.log(sections);
       this.array = _.range(sections);

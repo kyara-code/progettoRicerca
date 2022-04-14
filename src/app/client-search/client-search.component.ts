@@ -40,8 +40,11 @@ export class ClientSearchComponent implements OnInit {
 
     this.httpReq.searchPage().subscribe({
       next: (response) => {
-        console.log(response);
+        // Questo array a che serve?
         this.arrayPages = response;
+        // Qui salvi in pageNumber il numero delle pagine per sezione, poi però passi lo stesso numero (di pagine) ad updateSections.
+        // Ma ad updateSections è iscritto il componente pagination che riceve il numero delle pagine al posto che il numero delle sezioni.
+        // Infatti se vai a cambiare il limite di pagine per sezione, cambierà anche il numero delle sezioni. Continuare in pagination.component.ts
         this.httpReq.pageNumber = Math.ceil(response.length);
         // da capire che numero mettere come numero di sezioni: 10 pagine --> 4 sezioni
         this.httpReq.updateSections.next(this.httpReq.pageNumber);
