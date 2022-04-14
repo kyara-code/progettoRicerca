@@ -14,7 +14,6 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     ErrorPageComponent,
     LoginPageComponent,
     SinglePageEditComponent,
-    DropdownComponent,
   ],
   imports: [
     BrowserModule,

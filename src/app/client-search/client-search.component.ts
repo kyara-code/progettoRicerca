@@ -11,6 +11,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./client-search.component.css'],
 })
 export class ClientSearchComponent implements OnInit {
+  pageNumber: string = '1';
+
   @ViewChild('f') clientSearchForm: NgForm;
   arrayPages: WebPage[] = [];
   search: string = null;
@@ -27,12 +29,19 @@ export class ClientSearchComponent implements OnInit {
   }
 
   onSearch() {
-    this.httpReq.searchPage(this.clientSearchForm.value.searchInput).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.arrayPages = response;
-      },
-    });
+    this.httpReq
+      .searchPage(this.clientSearchForm.value.searchInput, this.pageNumber)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.arrayPages = response;
+        },
+      });
+  }
+
+  changePage() {
+    this.pageNumber = (+this.pageNumber + 1).toString();
+    this.onSearch();
   }
 
   onCancel() {

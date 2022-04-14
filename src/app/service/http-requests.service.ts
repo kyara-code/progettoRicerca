@@ -18,22 +18,16 @@ export class HttpRequestsService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  searchPage(searchInput: string) {
+  searchPage(searchInput: string, pageNumber: string) {
     console.log('Your search: ' + searchInput);
-    console.log(
-      'http://localhost:3000/ricerca?' +
-        this.filterSearchValue +
-        '_like=' +
-        searchInput
-    );
     return this.http.get<WebPage[]>(
-      'http://localhost:3000/ricerca?q=' + searchInput
+      'http://localhost:3000/ricerca?q=' +
+        searchInput +
+        '&_page=' +
+        pageNumber +
+        '&_limit=3'
       //ricerca da cambiare in qualcosa_like= se ti serve qualcosa di specifico
     );
-    // fare tre get: uno per la ricerca tra le chiavi (do 3 punti),
-    // uno per la ricerca tra i titoli, do due punti,
-    // uno per la ricerca tra le descrizioni e do un punto,
-    // e poi dispongo le pagine seguendo l'ordine della classifica
   }
 
   postPage(webSite: WebPage) {

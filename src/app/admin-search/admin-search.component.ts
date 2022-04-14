@@ -23,14 +23,15 @@ export class AdminSearchComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearch(searchForm: NgForm) {
-    this.isNewPage = false;
-    this.router.navigate(['./'], { relativeTo: this.route });
-    this.httpReq.searchPage(searchForm.value.searchInput).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.pages = response;
-      },
-    });
+    // da aggiungere il secondo parametro al metodo http!!!!
+    // this.isNewPage = false;
+    // this.router.navigate(['./'], { relativeTo: this.route });
+    // this.httpReq.searchPage(searchForm.value.searchInput, ).subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     this.pages = response;
+    //   },
+    // });
   }
 
   onNewPage() {
