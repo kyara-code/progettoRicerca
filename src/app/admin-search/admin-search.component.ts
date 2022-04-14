@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
@@ -15,7 +16,8 @@ export class AdminSearchComponent implements OnInit {
   constructor(
     private httpReq: HttpRequestsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {}

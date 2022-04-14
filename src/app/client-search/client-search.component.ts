@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
@@ -17,7 +18,8 @@ export class ClientSearchComponent implements OnInit {
 
   constructor(
     private httpReq: HttpRequestsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {

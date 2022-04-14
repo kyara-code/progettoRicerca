@@ -29,10 +29,10 @@
 <div class="row" *ngIf="!isNewPage">
   <div class="col-auto">
     <app-admin-single-page
-      *ngFor="let page of pages, let i = index"
+      *ngFor="let page of pages; let i = index"
       [singlePage]="page"
       [idPageInput]="i"
-      (idPageOutput)="onDelete($event)"
+      (click)="onDelete(i)"
     ></app-admin-single-page>
   </div>
 </div>
@@ -40,4 +40,4 @@
 <!-- Sezione di modifica -->
 <router-outlet></router-outlet>
 
-
+<!-- (idPageOutput)="onDelete($event)" -->
