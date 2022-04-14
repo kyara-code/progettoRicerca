@@ -1,4 +1,4 @@
-import { PagesManagerService } from './../pages-manager.service';
+import { PagesManagerService } from '../../service/pages-manager.service';
 import { Router } from '@angular/router';
 import { WebPage } from './../../model/page.model';
 import { HttpRequestsService } from './../../service/http-requests.service';

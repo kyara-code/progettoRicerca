@@ -5,12 +5,11 @@ import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
-import { PagesManagerService } from './pages-manager.service';
+import { PagesManagerService } from '../service/pages-manager.service';
 @Component({
   selector: 'app-admin-search',
   templateUrl: './admin-search.component.html',
   styleUrls: ['./admin-search.component.css'],
-  providers: [PagesManagerService],
 })
 export class AdminSearchComponent implements OnInit {
   isNewPage = false;
@@ -35,7 +34,7 @@ export class AdminSearchComponent implements OnInit {
     // da aggiungere il secondo parametro al metodo http!!!!
     this.isNewPage = false;
 
-    this.pagesManagerService.onSearch(searchForm, this.idPage);
+    this.pagesManagerService.onSearch(searchForm, +this.idPage);
     this.pages = this.pagesManagerService.pages;
     console.log(this.pages);
     // this.router.navigate(['../'], { relativeTo: this.route });

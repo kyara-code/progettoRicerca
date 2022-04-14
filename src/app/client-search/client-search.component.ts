@@ -1,3 +1,4 @@
+import { PagesManagerService } from './../service/pages-manager.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../service/auth.service';
@@ -12,7 +13,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./client-search.component.css'],
 })
 export class ClientSearchComponent implements OnInit {
-  pageNumber: string = '1';
+  pageNumber: number = 1;
 
   @ViewChild('f') clientSearchForm: NgForm;
   arrayPages: WebPage[] = [];
@@ -23,26 +24,33 @@ export class ClientSearchComponent implements OnInit {
     private httpReq: HttpRequestsService,
     private auth: AuthService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private pagesService: PagesManagerService
   ) {}
 
   ngOnInit(): void {
     this.authenticated = this.auth.loggedIn;
+    this.pagesService.newSection.subscribe((pagesOfThisSection) => {
+      this.arrayPages = pagesOfThisSection;
+    });
   }
 
   onSearch() {
-    this.httpReq
-      .searchPage(this.clientSearchForm.value.searchInput, this.pageNumber)
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          this.arrayPages = response;
-        },
-      });
+    this.httpReq.searchInput = this.clientSearchForm.value.searchInput;
+
+    this.httpReq.searchPage().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.arrayPages = response;
+        this.httpReq.pageNumber = Math.ceil(response.length);
+        // da capire che numero mettere come numero di sezioni: 10 pagine --> 4 sezioni
+        this.httpReq.updateSections.next(this.httpReq.pageNumber);
+      },
+    });
   }
 
   changePage() {
-    this.pageNumber = (+this.pageNumber + 1).toString();
+    this.pageNumber = this.pageNumber + 1;
     this.onSearch();
   }
 

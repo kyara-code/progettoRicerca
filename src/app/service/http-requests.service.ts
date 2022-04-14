@@ -2,11 +2,16 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WebPage } from '../model/page.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpRequestsService {
+  pageNumber: number = 1;
+  pageChanged = new Subject<number>();
+  updateSections = new Subject<number>();
+  searchInput = '';
   filterSearchValue = '';
   items = [
     { id: 0, name: 'key' },
@@ -18,14 +23,15 @@ export class HttpRequestsService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  searchPage(searchInput: string, pageNumber: string) {
-    console.log('Your search: ' + searchInput);
+  searchPage() {
+    let section = this.pageNumber.toString();
+    console.log('Your search: ' + this.searchInput);
     return this.http.get<WebPage[]>(
       'http://localhost:3000/ricerca?q=' +
-        searchInput +
+        this.searchInput +
         '&_page=' +
-        pageNumber +
-        '&_limit=5'
+        section +
+        '&_limit=3'
       //ricerca da cambiare in qualcosa_like= se ti serve qualcosa di specifico
     );
   }
