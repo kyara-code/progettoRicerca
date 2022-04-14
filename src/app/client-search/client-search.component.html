@@ -3,6 +3,9 @@
     <button class="btn btn-primary" routerLink="/login" *ngIf="!authenticated">
       Admin Login
     </button>
+    <button class="btn btn-primary" (click)="logout()" *ngIf="authenticated">
+      Logout
+    </button>
   </div>
   <div class="container">
     <div class="row">

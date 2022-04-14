@@ -22,9 +22,9 @@ export class AuthService {
     status: 'Unknown Route',
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
-
   token = null;
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   isAuthenticated() {
     const promise = new Promise((resolve, rejects) => {
@@ -52,5 +52,10 @@ export class AuthService {
           console.log(errorRes.error);
         },
       });
+  }
+
+  logout() {
+    this.token = null;
+    // this.loggedIn = false;
   }
 }

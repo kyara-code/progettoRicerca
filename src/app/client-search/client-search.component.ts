@@ -53,4 +53,10 @@ export class ClientSearchComponent implements OnInit {
   gotToAdminPage() {
     this.router.navigate(['/admin-search']);
   }
+
+  // logout da aggiustare da fare un subject per iscrivere i cambiamenti
+  logout() {
+    this.authenticated = false;
+    this.auth.logout();
+  }
 }

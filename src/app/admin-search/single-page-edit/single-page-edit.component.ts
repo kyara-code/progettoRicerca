@@ -47,19 +47,25 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const webPage = {
-      titolo: this.newPageForm.value.titolo,
-      descrizione: this.newPageForm.value.descrizione,
-      chiavi: this.newPageForm.value.chiavi,
-      url: this.newPageForm.value.url,
-      id: this.newPage.id,
-    };
-    this.pagesManagerService.newPage = webPage;
     if (this.pagesManagerService.isModify) {
+      const webPage = {
+        titolo: this.newPageForm.value.titolo,
+        descrizione: this.newPageForm.value.descrizione,
+        chiavi: this.newPageForm.value.chiavi,
+        url: this.newPageForm.value.url,
+        id: this.newPage.id,
+      };
+      this.pagesManagerService.newPage = webPage;
       this.pagesManagerService.pagesModified.next(
         this.pagesManagerService.updatePage()
       );
     } else {
+      const webPage = {
+        titolo: this.newPageForm.value.titolo,
+        descrizione: this.newPageForm.value.descrizione,
+        chiavi: this.newPageForm.value.chiavi,
+        url: this.newPageForm.value.url,
+      };
       this.http.postPage(webPage);
     }
     this.pagesManagerService.isModify = false;
@@ -68,6 +74,8 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscribtion.unsubscribe();
+    if (this.pagesManagerService.isModify) {
+      this.subscribtion.unsubscribe();
+    }
   }
 }
