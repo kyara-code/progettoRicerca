@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { PagesManagerService } from './../pages-manager.service';
+import { PagesManagerService } from '../../service/pages-manager.service';
 import { WebPage } from './../../model/page.model';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 

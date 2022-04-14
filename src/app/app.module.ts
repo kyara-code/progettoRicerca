@@ -14,6 +14,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
     ErrorPageComponent,
     LoginPageComponent,
     SinglePageEditComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
