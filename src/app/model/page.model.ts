@@ -3,4 +3,5 @@ export interface WebPage {
   descrizione: string;
   chiavi: string;
   url: string;
+  id?: number;
 }

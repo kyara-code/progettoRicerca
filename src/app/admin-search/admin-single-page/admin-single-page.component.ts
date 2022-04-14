@@ -17,7 +17,7 @@ export class AdminSinglePageComponent implements OnInit {
   ngOnInit(): void {}
 
   onDelete() {
-    this.idPageDelete.emit(this.idPageInput);
+    this.idPageDelete.emit(this.singlePage.id);
   }
 
   onModify() {

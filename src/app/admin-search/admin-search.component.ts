@@ -42,8 +42,8 @@ export class AdminSearchComponent implements OnInit {
     this.router.navigate(['/search']);
   }
 
-  onDelete(idPage: number) {
-    this.pages.splice(idPage, 1);
+  onDelete(idPage: number, i: number) {
+    this.pages.splice(i, 1);
     this.httpReq.deletePage(idPage);
   }
 }
