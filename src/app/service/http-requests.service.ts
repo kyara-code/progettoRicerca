@@ -30,6 +30,16 @@ export class HttpRequestsService {
     );
   }
 
+  updatePage(webPage: WebPage) {
+    this.http
+      .put('http://localhost:3000/ricerca/' + webPage.id, webPage, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + this.authService.token,
+        }),
+      })
+      .subscribe((response) => console.log(response));
+  }
+
   postPage(webSite: WebPage) {
     this.http
       .post('http://localhost:3000/ricerca', webSite, {

@@ -8,6 +8,8 @@ import { Subject } from 'rxjs';
 export class PagesManagerService {
   pages: WebPage[] = [];
   pagesChanged = new Subject<WebPage>();
+  pagesModified = new Subject<WebPage[]>();
+  isPageModified = false;
   isModify = false;
   newPage: WebPage;
   currentId: number;
@@ -26,6 +28,7 @@ export class PagesManagerService {
 
   updatePage() {
     this.pages[this.currentId] = this.newPage;
+    this.httpReq.updatePage(this.pages[this.currentId]);
     return this.pages.slice();
   }
 

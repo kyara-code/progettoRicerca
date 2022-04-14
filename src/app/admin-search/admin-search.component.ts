@@ -24,7 +24,11 @@ export class AdminSearchComponent implements OnInit {
     private pagesManagerService: PagesManagerService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pagesManagerService.pagesModified.subscribe((pages) => {
+      this.pages = pages;
+    });
+  }
 
   onSearch(searchForm: NgForm) {
     // da aggiungere il secondo parametro al metodo http!!!!
@@ -51,8 +55,8 @@ export class AdminSearchComponent implements OnInit {
 
   onModify(idPage: number) {
     this.pagesManagerService.currentId = idPage;
-    this.router.navigate(['edit'], { relativeTo: this.route });
-    this.pages = this.pagesManagerService.updatePage();
+    // this.pages = this.pagesManagerService.updatePage();
     console.log(this.pages);
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

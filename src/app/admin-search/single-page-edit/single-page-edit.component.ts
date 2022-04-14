@@ -2,7 +2,13 @@ import { PagesManagerService } from './../pages-manager.service';
 import { Router } from '@angular/router';
 import { WebPage } from './../../model/page.model';
 import { HttpRequestsService } from './../../service/http-requests.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -12,6 +18,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./single-page-edit.component.css'],
 })
 export class SinglePageEditComponent implements OnInit, OnDestroy {
+  newPage: WebPage;
+
   newPageForm = new FormGroup({
     titolo: new FormControl(null, Validators.required),
     url: new FormControl(null, Validators.required),
@@ -30,6 +38,7 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
       (newPage) => {
+        this.newPage = newPage;
         this.newPageForm.patchValue(newPage);
       }
     );
@@ -41,13 +50,18 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
       descrizione: this.newPageForm.value.descrizione,
       chiavi: this.newPageForm.value.chiavi,
       url: this.newPageForm.value.url,
+      id: this.newPage.id,
     };
     this.pagesManagerService.newPage = webPage;
     if (this.pagesManagerService.isModify) {
-      this.pagesManagerService.updatePage();
+      this.pagesManagerService.pagesModified.next(
+        this.pagesManagerService.updatePage()
+      );
     } else {
       this.http.postPage(webPage);
     }
+    this.pagesManagerService.isModify = false;
+    this.pagesManagerService.isPageModified = true;
     this.router.navigate(['/admin-search']);
   }
 

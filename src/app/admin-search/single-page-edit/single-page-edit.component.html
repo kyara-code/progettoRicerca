@@ -2,10 +2,10 @@
   <div class="col-6">
     <form [formGroup]="newPageForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="titolo">Title</label>
         <input
           type="text"
-          id="title"
+          id="titolo"
           class="form-control"
           formControlName="titolo"
         />
@@ -18,18 +18,18 @@
           formControlName="url"
         />
 
-        <label for="key">Key</label>
+        <label for="chiavi">Key</label>
         <input
           type="text"
-          id="key"
+          id="chiavi"
           class="form-control"
           formControlName="chiavi"
         />
 
-        <label for="description">Description</label>
+        <label for="descrizione">Description</label>
         <textarea
           type="text"
-          id="description"
+          id="descrizione"
           class="form-control"
           formControlName="descrizione"
         >
