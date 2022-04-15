@@ -17,6 +17,13 @@ export class PagesManagerService {
 
   constructor(private httpReq: HttpRequestsService) {}
 
+  hasSearched() {
+    // const promise = new Promise((resolve, rejects) => {
+    //   resolve(this.pages !== []);
+    // });
+    return this.pages !== [];
+  }
+
   onSearch(searchForm: NgForm, idPage: number) {
     this.httpReq.searchInput = searchForm.value.searchInput;
     this.httpReq.pageNumber = idPage;

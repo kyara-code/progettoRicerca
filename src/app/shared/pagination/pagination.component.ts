@@ -51,7 +51,7 @@ export class PaginationComponent implements OnInit {
   }
 
   onNext() {
-    if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
+    if (this.httpReq.pageNumber < this.httpReq.getReqCounter - 1) {
       this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
       this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;

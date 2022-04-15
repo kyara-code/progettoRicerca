@@ -15,6 +15,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { SearchGuard } from './guard/search-guard.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [HttpRequestsService, AuthGuard],
+  providers: [HttpRequestsService, AuthGuard, SearchGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

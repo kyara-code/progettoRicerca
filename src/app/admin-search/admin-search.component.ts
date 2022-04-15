@@ -62,9 +62,9 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onModify(idPage: number) {
+    this.isNewPage = true;
     this.pagesManagerService.currentId = idPage;
     // this.pages = this.pagesManagerService.updatePage();
     console.log(this.pages);
-    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

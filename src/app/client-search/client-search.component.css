@@ -22,6 +22,16 @@
   margin: 6px;
 }
 
-.btn-default {
-  border: 1px solid rgb(34, 41, 120);
+.log {
+  border-radius: 40px;
+}
+
+.top-portion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-primary {
+  background-color: rgb(88, 154, 253);
+  color: rgb(0, 62, 117);
 }

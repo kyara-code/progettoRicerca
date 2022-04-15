@@ -3,7 +3,7 @@
     <li
       class="page-item"
       (click)="onPrevious()"
-      [routerLink]="['/search', httpReq.pageNumber]"
+      [routerLink]="['/search', httpReq.pageNumber - 1]"
     >
       <a class="page-link" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
