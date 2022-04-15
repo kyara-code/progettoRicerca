@@ -37,7 +37,8 @@ export class ClientSearchComponent implements OnInit {
 
   onSearch() {
     this.httpReq.searchInput = this.clientSearchForm.value.searchInput;
-
+    this.httpReq.getReqCounter = 0;
+    this.httpReq.determineSections();
     this.httpReq.searchPage().subscribe({
       next: (response) => {
         // Questo array a che serve?
@@ -46,11 +47,15 @@ export class ClientSearchComponent implements OnInit {
         // Qui salvi in pageNumber il numero delle pagine per sezione, poi però passi lo stesso numero (di pagine) ad updateSections.
         // Ma ad updateSections è iscritto il componente pagination che riceve il numero delle pagine al posto che il numero delle sezioni.
         // Infatti se vai a cambiare il limite di pagine per sezione, cambierà anche il numero delle sezioni. Continuare in pagination.component.ts
-        this.httpReq.pageNumber = Math.ceil(response.length);
+
+        // this.httpReq.pageNumber = Math.ceil(response.length);
+
         // da capire che numero mettere come numero di sezioni: 10 pagine --> 4 sezioni
-        this.httpReq.updateSections.next(this.httpReq.pageNumber);
+        // this.httpReq.updateSections.next(this.httpReq.pageNumber);
+        // this.router.navigate(['/search/0']);
       },
     });
+    this.router.navigate(['/search', 0]);
   }
 
   changePage() {

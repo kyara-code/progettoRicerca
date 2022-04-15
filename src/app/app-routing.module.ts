@@ -10,14 +10,18 @@ import { AuthGuard } from './guard/auth-guard.service';
 
 const appRoute: Routes = [
   { path: '', component: ClientSearchComponent, pathMatch: 'full' },
-  { path: 'search', component: ClientSearchComponent },
+  {
+    path: 'search',
+    component: ClientSearchComponent,
+    children: [{ path: ':id', component: ClientSearchComponent }],
+  },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
   {
     path: 'admin-search',
     component: AdminSearchComponent,
     canActivate: [AuthGuard],
-    children: [{path: 'edit', component: SinglePageEditComponent}]
+    children: [{ path: 'edit', component: SinglePageEditComponent }],
   },
   { path: '**', redirectTo: '/error' },
 ];

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpRequestsService } from './../../service/http-requests.service';
 import { PagesManagerService } from './../../service/pages-manager.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -9,18 +10,19 @@ import _ from 'lodash';
   styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnInit {
-  numberOfPages: number = 9;
   array = [];
-  howManyPagesDisplayed: number = 3;
+  // pageNumber: number;
 
   constructor(
     private pagesService: PagesManagerService,
-    private httpReq: HttpRequestsService
+    public httpReq: HttpRequestsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     // this.numberOfPages = this.pagesService.pages.length;
     // let sections = Math.ceil(this.numberOfPages / this.howManyPagesDisplayed);
+    // this.pageNumber = this.httpReq.pageNumber;
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
       // Qui section non deve essere uguale a number, perché number è il numero di pagine visibili per sezione
@@ -31,27 +33,31 @@ export class PaginationComponent implements OnInit {
 
       // esempio: ho 7 risultati totali --> 1° richiesta: mi da i primi 3, 2° richiesta mi dà altri tre, 3° richiesta me ne dà uno,
       // section voglio che sia uguale a 3... quindi mi sa ci conviene mettere direttamente un counter che incrementa ad ogni richiesta
-      sections = number;
-      console.log(sections);
+      sections = +number;
+      console.log('Section: ' + sections);
       this.array = _.range(sections);
       console.log(this.array);
     });
   }
 
   onPrevious() {
-    this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
-    this.httpReq.searchPage().subscribe((response) => {
-      this.pagesService.pages = response;
-      this.pagesService.newSection.next(this.pagesService.pages);
-    });
+    if (this.httpReq.pageNumber >= this.httpReq.getReqCounter) {
+      this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
+      this.httpReq.searchPage().subscribe((response) => {
+        this.pagesService.pages = response;
+        this.pagesService.newSection.next(this.pagesService.pages);
+      });
+    }
   }
 
   onNext() {
-    this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
-    this.httpReq.searchPage().subscribe((response) => {
-      this.pagesService.pages = response;
-      this.pagesService.newSection.next(this.pagesService.pages);
-    });
+    if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
+      this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
+      this.httpReq.searchPage().subscribe((response) => {
+        this.pagesService.pages = response;
+        this.pagesService.newSection.next(this.pagesService.pages);
+      });
+    }
   }
 
   onChangePage(number: number) {

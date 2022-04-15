@@ -13,6 +13,9 @@ export class HttpRequestsService {
   updateSections = new Subject<number>();
   searchInput = '';
   filterSearchValue = '';
+
+  getReqCounter = 0;
+
   items = [
     { id: 0, name: 'key' },
     { id: 1, name: 'title' },
@@ -23,6 +26,16 @@ export class HttpRequestsService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  determineSections() {
+    this.http
+      .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
+      .subscribe((response) => {
+        this.getReqCounter = Math.ceil(response.length / 3);
+        this.updateSections.next(this.getReqCounter);
+        console.log(this.getReqCounter);
+      });
+  }
+
   searchPage() {
     let section = this.pageNumber.toString();
     console.log('Your search: ' + this.searchInput);
@@ -32,7 +45,6 @@ export class HttpRequestsService {
         '&_page=' +
         section +
         '&_limit=3'
-      //ricerca da cambiare in qualcosa_like= se ti serve qualcosa di specifico
     );
   }
 
