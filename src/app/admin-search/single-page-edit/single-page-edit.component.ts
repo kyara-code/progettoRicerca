@@ -41,6 +41,7 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
         (newPage) => {
           this.newPage = newPage;
           this.newPageForm.patchValue(newPage);
+          console.log(newPage);
         }
       );
     }

@@ -27,6 +27,8 @@ export class HttpRequestsService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   determineSections() {
+    // per evitare di trovare un miliardo di siti si puo mettere il limite di 10 sezioni:
+    // se è piu piccolo (il db) bene, senno si pone getReqCounter come il massimo (10)
     this.http
       .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
       .subscribe((response) => {

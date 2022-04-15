@@ -1,3 +1,4 @@
+import { SearchGuard } from './guard/search-guard.service';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -13,7 +14,13 @@ const appRoute: Routes = [
   {
     path: 'search',
     component: ClientSearchComponent,
-    children: [{ path: ':id', component: ClientSearchComponent }],
+    children: [
+      {
+        path: ':id',
+        component: ClientSearchComponent,
+      },
+    ],
+    canActivate: [SearchGuard],
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
