@@ -29,7 +29,7 @@ const appRoute: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'edit', component: SinglePageEditComponent },
-      { path: ':id', component: DisplayPagesComponent },
+      { path: ':searchInput/:id', component: DisplayPagesComponent },
     ],
   },
   { path: '**', redirectTo: '/error' },

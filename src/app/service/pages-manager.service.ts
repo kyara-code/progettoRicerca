@@ -14,10 +14,7 @@ export class PagesManagerService {
   isModify = false;
   newPage: WebPage;
   currentId: number;
-
-  //se sto nell'admin o nel client search...
   currentClient: string = 'search';
-
   isNewPage = false;
 
   constructor(private httpReq: HttpRequestsService) {}
@@ -30,19 +27,6 @@ export class PagesManagerService {
     console.log(this.pages !== []);
     return promise;
   }
-
-  // onSearch(searchForm: NgForm, idPage: number) {
-  //   this.httpReq.searchInput = searchForm.value.searchInput;
-  //   this.httpReq.pageNumber = idPage;
-  //   this.httpReq.searchPage().subscribe({
-  //     next: (response) => {
-  //       console.log(response);
-  //       this.pages = response;
-  //       this.pagesModified.next(this.pages);
-  //       console.log(this.pages);
-  //     },
-  //   });
-  // }
 
   comparePage(newPageForm: FormGroup) {
     let url = newPageForm.value.url;

@@ -13,7 +13,6 @@ export class HttpRequestsService {
   updateSections = new Subject<number>();
   searchInput = '';
   filterSearchValue = '';
-
   getReqCounter = 0;
 
   items = [
@@ -93,28 +92,4 @@ export class HttpRequestsService {
   compareNewPage(url: string) {
     return this.http.get<WebPage[]>('http://localhost:3000/ricerca?url=' + url);
   }
-
-  // getFilter(id: number) {
-  //   switch (id) {
-  //     case 0:
-  //       this.filterSearchValue = 'chiavi';
-  //       console.log(this.filterSearchValue);
-  //       break;
-  //     case 1:
-  //       this.filterSearchValue = 'titolo';
-  //       console.log(this.filterSearchValue);
-  //       break;
-  //     case 2:
-  //       this.filterSearchValue = 'descrizione';
-  //       console.log(this.filterSearchValue);
-  //       break;
-  //     case 3:
-  //       this.filterSearchValue = 'lingua';
-  //       console.log(this.filterSearchValue);
-  //       break;
-  //     case 4:
-  //       this.filterSearchValue = 'data';
-  //       console.log(this.filterSearchValue);
-  //       break;
-  //   }
 }

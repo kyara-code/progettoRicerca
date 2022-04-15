@@ -20,10 +20,6 @@ export class DisplayPagesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.pagesService.newSection.subscribe((pagesOfThisSection) => {
-    //   this.arrayPages = pagesOfThisSection;
-    // });
-
     this.route.params.subscribe((params: Params) => {
       console.log(params['id']);
 

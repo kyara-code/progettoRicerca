@@ -2,7 +2,7 @@
 import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { User } from './user.model';
+import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,19 +16,13 @@ export class LoginPageComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) // private authGuard: AuthGuard
-  {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit(authForm: NgForm) {
     const user = authForm.value.user;
     const password = authForm.value.password;
-    // Eliminato due console log ormai inutili
-
     this.authService.logIn(user, password);
 
     authForm.reset();
