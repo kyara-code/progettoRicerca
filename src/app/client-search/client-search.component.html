@@ -32,10 +32,10 @@
       <div class="col-sm-12 col-md-12">
         <form #f="ngForm" (ngSubmit)="onSearch()">
           <div class="form-group cancel-btn input-area">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass icon"></i>
             <input
               type="text"
-              class="form-control"
+              class="form-control input"
               [placeholder]="!f.touched ? 'Search here...' : ''"
               [(ngModel)]="search"
               name="searchInput"
@@ -49,14 +49,7 @@
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-12">
-        <app-client-single-page
-          *ngFor="let page of arrayPages"
-          [page]="page"
-        ></app-client-single-page>
-      </div>
-    </div>
-    <app-pagination *ngIf="searched"></app-pagination>
+    <router-outlet></router-outlet>
+    <app-pagination></app-pagination>
   </div>
 </div>

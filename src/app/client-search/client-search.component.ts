@@ -32,17 +32,6 @@ export class ClientSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticated = this.auth.loggedIn;
-    this.pagesService.newSection.subscribe((pagesOfThisSection) => {
-      this.arrayPages = pagesOfThisSection;
-    });
-
-    this.route.params.subscribe((params: Params) => {
-      // let url = params.toString();
-      // console.log(url);
-      // if (url !== '') {
-      // }
-      console.log(params);
-    });
 
     this.pagesService.currentClient = 'search';
   }
@@ -52,17 +41,15 @@ export class ClientSearchComponent implements OnInit {
     this.httpReq.searchInput = this.clientSearchForm.value.searchInput;
     this.httpReq.getReqCounter = 0;
     this.httpReq.determineSections();
-    this.httpReq.searchPage().subscribe({
-      next: (response) => {
-        this.arrayPages = response;
-      },
-    });
+    // this.httpReq.searchPage().subscribe({
+    //   next: (response) => {
+    //     this.pagesService.newSection.next(response);
+    //   },
+    // });
     this.router.navigate([
       '/search',
-      this.httpReq.searchInput +
-        '&_page=' +
-        +this.httpReq.pageNumber +
-        '&_limit=3',
+      this.httpReq.searchInput,
+      '&_page=' + +this.httpReq.pageNumber + '&_limit=3',
     ]);
   }
 
