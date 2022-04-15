@@ -22,21 +22,33 @@ export class AdminSearchComponent implements OnInit {
     private httpReq: HttpRequestsService,
     private router: Router,
     private route: ActivatedRoute,
-    private pagesManagerService: PagesManagerService,
+    public pagesManagerService: PagesManagerService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.pagesManagerService.pagesModified.subscribe((pages) => {
-      this.pages = pages;
+    // this.pagesManagerService.pagesModified.subscribe((pages) => {
+    //   this.pages = pages;
+    // });
+    this.pagesManagerService.newSection.subscribe((pagesOfThisSection) => {
+      this.pages = pagesOfThisSection;
     });
+    this.pagesManagerService.currentClient = 'admin-search';
   }
 
   onSearch(searchForm: NgForm) {
     this.searched = true;
     this.isNewPage = false;
-    this.pagesManagerService.onSearch(searchForm, +this.idPage);
-    this.pages = this.pagesManagerService.pages;
+    // this.pagesManagerService.onSearch(searchForm, +this.idPage);
+    this.httpReq.searchInput = searchForm.value.searchInput;
+    this.httpReq.getReqCounter = 0;
+    this.httpReq.determineSections();
+
+    this.httpReq.searchPage().subscribe((response) => {
+      this.pages = response;
+    });
+
+    this.router.navigate(['admin-search', 0]);
   }
 
   onResetForm(searchForm: NgForm) {
@@ -45,7 +57,7 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    // this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onNavigateHome() {
@@ -67,12 +79,10 @@ export class AdminSearchComponent implements OnInit {
     this.pagesManagerService.modifyPage(page);
     // this.router.navigate(['edit'], { relativeTo: this.route });
     this.pagesManagerService.currentId = idPage;
-<<<<<<< HEAD
-    console.log(this.pages);
-
-    this.router.navigate(['edit'], { relativeTo: this.route });
-=======
     // this.pages = this.pagesManagerService.updatePage();
->>>>>>> 96818ab360b00950267f8c5a597ac5d7bf1dead8
+  }
+
+  doneAddingPage(addPageDone: boolean) {
+    this.isNewPage = false;
   }
 }

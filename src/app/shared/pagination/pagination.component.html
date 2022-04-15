@@ -3,7 +3,7 @@
     <li
       class="page-item"
       (click)="onPrevious()"
-      [routerLink]="['/search', httpReq.pageNumber - 1]"
+      [routerLink]="['/' + currentClient, httpReq.pageNumber]"
     >
       <a class="page-link" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -14,7 +14,7 @@
       class="page-item"
       *ngFor="let number of array"
       (click)="onChangePage(number)"
-      [routerLink]="['/search', number]"
+      [routerLink]="['/' + currentClient, number]"
       routerLinkActive="active"
     >
       <a class="page-link">{{ number + 1 }}</a>
@@ -22,7 +22,11 @@
     <li
       class="page-item"
       (click)="onNext()"
-      [routerLink]="['/search', httpReq.pageNumber - 1]"
+      [routerLink]="
+        httpReq.pageNumber < httpReq.getReqCounter
+          ? ['/' + currentClient, httpReq.pageNumber]
+          : ['/' + currentClient, httpReq.pageNumber - 1]
+      "
     >
       <a class="page-link" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -31,3 +35,9 @@
     </li>
   </ul>
 </nav>
+
+<!-- [routerLink]="
+        httpReq.pageNumber >= httpReq.getReqCounter
+          ? ['/' + currentClient, httpReq.pageNumber - 1]
+          : ['/' + currentClient, httpReq.pageNumber]
+      " -->

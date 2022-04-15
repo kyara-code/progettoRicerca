@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpRequestsService } from './../../service/http-requests.service';
 import { PagesManagerService } from './../../service/pages-manager.service';
@@ -9,9 +10,12 @@ import _ from 'lodash';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
   array = [];
   // pageNumber: number;
+  currentClient: string;
+
+  subscribe: Subscription = null;
 
   constructor(
     private pagesService: PagesManagerService,
@@ -20,30 +24,23 @@ export class PaginationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.numberOfPages = this.pagesService.pages.length;
-    // let sections = Math.ceil(this.numberOfPages / this.howManyPagesDisplayed);
-    // this.pageNumber = this.httpReq.pageNumber;
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
-      // Qui section non deve essere uguale a number, perché number è il numero di pagine visibili per sezione
-      // section = numeroTotalePagineDelGet / numeroPagineVisibiliPerSezione
-
-      //chiara: però la richiesta del get, avendo messo '&_page=section&limit=3' ti dà un array con 3 elementi,
-      // se section è uguale a uno... questa cosa è da capire bene
-
-      // esempio: ho 7 risultati totali --> 1° richiesta: mi da i primi 3, 2° richiesta mi dà altri tre, 3° richiesta me ne dà uno,
-      // section voglio che sia uguale a 3... quindi mi sa ci conviene mettere direttamente un counter che incrementa ad ogni richiesta
       sections = +number;
       console.log('Section: ' + sections);
       this.array = _.range(sections);
       console.log(this.array);
     });
+
+    this.currentClient = this.pagesService.currentClient;
   }
 
   onPrevious() {
-    if (this.httpReq.pageNumber >= this.httpReq.getReqCounter) {
+    if (this.httpReq.pageNumber >= 1) {
       this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
-      this.httpReq.searchPage().subscribe((response) => {
+      console.log('pageNumber = ' + this.httpReq.pageNumber);
+      console.log('getReqCounter = ' + this.httpReq.getReqCounter);
+      this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);
       });
@@ -53,7 +50,9 @@ export class PaginationComponent implements OnInit {
   onNext() {
     if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
       this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
-      this.httpReq.searchPage().subscribe((response) => {
+      console.log('pageNumber = ' + this.httpReq.pageNumber);
+      console.log('getReqCounter = ' + this.httpReq.getReqCounter);
+      this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);
       });
@@ -63,9 +62,15 @@ export class PaginationComponent implements OnInit {
   onChangePage(number: number) {
     this.httpReq.pageNumber = number + 1;
 
-    this.httpReq.searchPage().subscribe((response) => {
+    this.subscribe = this.httpReq.searchPage().subscribe((response) => {
       this.pagesService.pages = response;
       this.pagesService.newSection.next(this.pagesService.pages);
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscribe) {
+      this.subscribe.unsubscribe();
+    }
   }
 }

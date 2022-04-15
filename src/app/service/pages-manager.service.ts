@@ -15,6 +15,11 @@ export class PagesManagerService {
   newPage: WebPage;
   currentId: number;
 
+  //se sto nell'admin o nel client search...
+  currentClient: string = 'search';
+
+  isNewPage = false;
+
   constructor(private httpReq: HttpRequestsService) {}
 
   // da fare il metodo hasSearched per la guard di navigazione quando cerco
@@ -26,18 +31,18 @@ export class PagesManagerService {
     return promise;
   }
 
-  onSearch(searchForm: NgForm, idPage: number) {
-    this.httpReq.searchInput = searchForm.value.searchInput;
-    this.httpReq.pageNumber = idPage;
-    this.httpReq.searchPage().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.pages = response;
-        this.pagesModified.next(this.pages);
-        console.log(this.pages);
-      },
-    });
-  }
+  // onSearch(searchForm: NgForm, idPage: number) {
+  //   this.httpReq.searchInput = searchForm.value.searchInput;
+  //   this.httpReq.pageNumber = idPage;
+  //   this.httpReq.searchPage().subscribe({
+  //     next: (response) => {
+  //       console.log(response);
+  //       this.pages = response;
+  //       this.pagesModified.next(this.pages);
+  //       console.log(this.pages);
+  //     },
+  //   });
+  // }
 
   comparePage(newPageForm: FormGroup) {
     let url = newPageForm.value.url;
