@@ -33,7 +33,7 @@
   </form>
 
   <!-- Lista siti web -->
-  <div class="pageList">
+  <div class="pageList" *ngIf="!isNewPage">
     <div class="row">
       <app-admin-single-page
         *ngFor="let page of pages; let i = index"
@@ -47,6 +47,11 @@
   </div>
 
   <!-- Sezione di modifica -->
-  <app-single-page-edit></app-single-page-edit>
+  <div *ngIf="isNewPage">
+    <app-single-page-edit
+      (addPageDone)="doneAddingPage($event)"
+    ></app-single-page-edit>
+  </div>
+
   <!-- <router-outlet></router-outlet> -->
 </div>

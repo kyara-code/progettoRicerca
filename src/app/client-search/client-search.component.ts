@@ -34,6 +34,8 @@ export class ClientSearchComponent implements OnInit {
     this.pagesService.newSection.subscribe((pagesOfThisSection) => {
       this.arrayPages = pagesOfThisSection;
     });
+
+    this.pagesService.currentClient = 'search';
   }
 
   onSearch() {
@@ -58,11 +60,6 @@ export class ClientSearchComponent implements OnInit {
       },
     });
     this.router.navigate(['/search', 0]);
-  }
-
-  changePage() {
-    this.pageNumber = this.pageNumber + 1;
-    this.onSearch();
   }
 
   onCancel() {

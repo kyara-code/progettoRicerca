@@ -22,21 +22,33 @@ export class AdminSearchComponent implements OnInit {
     private httpReq: HttpRequestsService,
     private router: Router,
     private route: ActivatedRoute,
-    private pagesManagerService: PagesManagerService,
+    public pagesManagerService: PagesManagerService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.pagesManagerService.pagesModified.subscribe((pages) => {
-      this.pages = pages;
+    // this.pagesManagerService.pagesModified.subscribe((pages) => {
+    //   this.pages = pages;
+    // });
+    this.pagesManagerService.newSection.subscribe((pagesOfThisSection) => {
+      this.pages = pagesOfThisSection;
     });
+    this.pagesManagerService.currentClient = 'admin-search';
   }
 
   onSearch(searchForm: NgForm) {
     this.searched = true;
     this.isNewPage = false;
-    this.pagesManagerService.onSearch(searchForm, +this.idPage);
-    this.pages = this.pagesManagerService.pages;
+    // this.pagesManagerService.onSearch(searchForm, +this.idPage);
+    this.httpReq.searchInput = searchForm.value.searchInput;
+    this.httpReq.getReqCounter = 0;
+    this.httpReq.determineSections();
+
+    this.httpReq.searchPage().subscribe((response) => {
+      this.pages = response;
+    });
+
+    this.router.navigate(['admin-search', 0]);
   }
 
   onResetForm(searchForm: NgForm) {
@@ -67,5 +79,9 @@ export class AdminSearchComponent implements OnInit {
     // this.router.navigate(['edit'], { relativeTo: this.route });
     this.pagesManagerService.currentId = idPage;
     // this.pages = this.pagesManagerService.updatePage();
+  }
+
+  doneAddingPage(addPageDone: boolean) {
+    this.isNewPage = false;
   }
 }

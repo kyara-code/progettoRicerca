@@ -20,6 +20,8 @@ import { Subscription } from 'rxjs';
 export class SinglePageEditComponent implements OnInit, OnDestroy {
   newPage: WebPage;
 
+  addPageDone = new EventEmitter<boolean>();
+
   newPageForm = new FormGroup({
     titolo: new FormControl(null, Validators.required),
     url: new FormControl(null, Validators.required),
@@ -72,6 +74,7 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
     this.pagesManagerService.isModify = false;
     this.pagesManagerService.isPageModified = true;
     this.router.navigate(['/admin-search']);
+    this.addPageDone.emit(true);
   }
 
   ngOnDestroy() {

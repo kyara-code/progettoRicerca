@@ -29,7 +29,10 @@ const appRoute: Routes = [
     path: 'admin-search',
     component: AdminSearchComponent,
     canActivate: [AuthGuard],
-    children: [{ path: 'edit', component: SinglePageEditComponent }],
+    children: [
+      { path: 'edit', component: SinglePageEditComponent },
+      { path: ':id', component: AdminSearchComponent },
+    ],
   },
   { path: '**', redirectTo: '/error' },
 ];
