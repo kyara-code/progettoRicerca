@@ -45,7 +45,6 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
-    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onNavigateHome() {
@@ -67,12 +66,6 @@ export class AdminSearchComponent implements OnInit {
     this.pagesManagerService.modifyPage(page);
     // this.router.navigate(['edit'], { relativeTo: this.route });
     this.pagesManagerService.currentId = idPage;
-<<<<<<< HEAD
-    console.log(this.pages);
-
-    this.router.navigate(['edit'], { relativeTo: this.route });
-=======
     // this.pages = this.pagesManagerService.updatePage();
->>>>>>> 96818ab360b00950267f8c5a597ac5d7bf1dead8
   }
 }
