@@ -12,7 +12,7 @@ export class AdminSinglePageComponent implements OnInit {
   @Input() singlePage: WebPage;
   @Input() currentId: number;
   @Output() idPageDelete = new EventEmitter<number>();
-  @Output() idPageModify = new EventEmitter<number>();
+  @Output() idPageModify = new EventEmitter<WebPage>();
 
   constructor(
     private pagesManagerService: PagesManagerService,
@@ -27,11 +27,9 @@ export class AdminSinglePageComponent implements OnInit {
   }
 
   onModify() {
+    // this.router.navigate(['admin-search/edit']);
     this.pagesManagerService.isModify = true;
-
     // this.pagesManagerService.pagesChanged.next(this.singlePage);
-    this.router.navigate(['edit'], { relativeTo: this.route });
-    this.idPageModify.emit(this.currentId);
-    this.pagesManagerService.modifyPage(this.singlePage);
+    this.idPageModify.emit(this.singlePage);
   }
 }

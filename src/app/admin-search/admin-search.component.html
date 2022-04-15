@@ -17,7 +17,7 @@
   <form #f="ngForm" (ngSubmit)="onSearch(f)">
     <div class="form-group searchBar">
       <input
-        type="text"
+        type="search"
         class="form-control"
         placeholder="Search here..."
         ngModel
@@ -34,18 +34,18 @@
 
   <!-- Lista siti web -->
   <div class="pageList">
-    <div class="row" *ngIf="!isNewPage">
+    <div class="row">
       <app-admin-single-page
         *ngFor="let page of pages; let i = index"
         [singlePage]="page"
         [currentId]="i"
         (idPageDelete)="onDelete($event, i)"
-        (idPageModify)="onModify(i)"
+        (idPageModify)="onModify(i, $event)"
       ></app-admin-single-page>
     </div>
   </div>
 
   <!-- Sezione di modifica -->
-
-  <router-outlet *ngIf="isNewPage"></router-outlet>
+  <app-single-page-edit></app-single-page-edit>
+  <!-- <router-outlet></router-outlet> -->
 </div>
