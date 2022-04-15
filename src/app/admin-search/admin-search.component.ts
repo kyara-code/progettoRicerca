@@ -37,9 +37,6 @@ export class AdminSearchComponent implements OnInit {
     this.isNewPage = false;
     this.pagesManagerService.onSearch(searchForm, +this.idPage);
     this.pages = this.pagesManagerService.pages;
-    console.log(this.pages);
-
-    // this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onResetForm(searchForm: NgForm) {
@@ -65,11 +62,17 @@ export class AdminSearchComponent implements OnInit {
     this.httpReq.deletePage(idPage);
   }
 
-  onModify(idPage: number) {
+  onModify(idPage: number, page: WebPage) {
     this.isNewPage = true;
+    this.pagesManagerService.modifyPage(page);
+    // this.router.navigate(['edit'], { relativeTo: this.route });
     this.pagesManagerService.currentId = idPage;
+<<<<<<< HEAD
     console.log(this.pages);
 
     this.router.navigate(['edit'], { relativeTo: this.route });
+=======
+    // this.pages = this.pagesManagerService.updatePage();
+>>>>>>> 96818ab360b00950267f8c5a597ac5d7bf1dead8
   }
 }
