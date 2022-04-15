@@ -27,15 +27,6 @@ export class AdminSinglePageComponent implements OnInit {
   }
 
   onModify() {
-    // this.router.navigate(['admin-search/edit']);
-    this.pagesManagerService.isModify = true;
-    this.pagesManagerService.isNewPage = true;
-    // this.pagesManagerService.pagesChanged.next(this.singlePage);
     this.idPageModify.emit(this.singlePage);
-  }
-
-  onModifica() {
-    this.idPageModify.emit(this.singlePage);
-    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }
