@@ -4,6 +4,10 @@
 
 .searchBar {
   display: flex;
+  border: 1px solid #ced4da;
+  border-radius: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .contenitore {
@@ -11,8 +15,17 @@
   justify-content: space-between;
 }
 
+.btn {
+  border-radius: 10px;
+}
+
+.icon,
+.btn {
+  margin: 6px;
+}
+
 .icon {
-  font-size: 30px;
+  font-size: 20px;
   line-height: unset;
   cursor: pointer;
   color: rgb(139, 200, 224);
@@ -30,4 +43,8 @@
 }
 .container {
   margin-top: 30px;
+}
+
+.input {
+  border: none;
 }
