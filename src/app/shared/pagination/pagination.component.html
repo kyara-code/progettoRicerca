@@ -7,25 +7,19 @@
         httpReq.pageNumber < httpReq.getReqCounter
           ? [
               '/' + currentClient,
-              this.httpReq.searchInput +
-                '&_page=' +
-                +this.httpReq.pageNumber +
-                '&_limit=3'
+              this.httpReq.searchInput,
+              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
             ]
           : httpReq.pageNumber > 1
           ? [
               '/' + currentClient,
-              this.httpReq.searchInput +
-                '&_page=' +
-                +(this.httpReq.pageNumber - 1) +
-                '&_limit=3'
+              this.httpReq.searchInput,
+              '&_page=' + +(this.httpReq.pageNumber - 1) + '&_limit=3'
             ]
           : [
               '/' + currentClient,
-              this.httpReq.searchInput +
-                '&_page=' +
-                +this.httpReq.pageNumber +
-                '&_limit=3'
+              this.httpReq.searchInput,
+              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
             ]
       "
     >
@@ -40,7 +34,8 @@
       (click)="onChangePage(number)"
       [routerLink]="[
         '/' + currentClient,
-        this.httpReq.searchInput + '&_page=' + +(number + 1) + '&_limit=3'
+        this.httpReq.searchInput,
+        '&_page=' + +(number + 1) + '&_limit=3'
       ]"
       routerLinkActive="active"
     >
@@ -53,17 +48,13 @@
         httpReq.pageNumber < httpReq.getReqCounter
           ? [
               '/' + currentClient,
-              this.httpReq.searchInput +
-                '&_page=' +
-                +(this.httpReq.pageNumber + 1) +
-                '&_limit=3'
+              this.httpReq.searchInput,
+              '&_page=' + +(this.httpReq.pageNumber + 1) + '&_limit=3'
             ]
           : [
               '/' + currentClient,
-              this.httpReq.searchInput +
-                '&_page=' +
-                +this.httpReq.pageNumber +
-                '&_limit=3'
+              this.httpReq.searchInput,
+              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
             ]
       "
     >

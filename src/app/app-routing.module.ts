@@ -1,4 +1,4 @@
-import { SearchGuard } from './guard/search-guard.service';
+import { DisplayPagesComponent } from './display-pages/display-pages.component';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -16,10 +16,8 @@ const appRoute: Routes = [
     component: ClientSearchComponent,
     children: [
       {
-        path: ':id',
-        component: ClientSearchComponent,
-
-        canActivate: [SearchGuard],
+        path: ':searchInput/:id',
+        component: DisplayPagesComponent,
       },
     ],
   },
@@ -31,7 +29,7 @@ const appRoute: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'edit', component: SinglePageEditComponent },
-      { path: ':id', component: AdminSearchComponent },
+      { path: ':id', component: DisplayPagesComponent },
     ],
   },
   { path: '**', redirectTo: '/error' },
