@@ -3,7 +3,31 @@
     <li
       class="page-item"
       (click)="onPrevious()"
-      [routerLink]="['/' + currentClient, httpReq.pageNumber]"
+      [routerLink]="
+        httpReq.pageNumber < httpReq.getReqCounter
+          ? [
+              '/' + currentClient,
+              this.httpReq.searchInput +
+                '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=3'
+            ]
+          : httpReq.pageNumber > 1
+          ? [
+              '/' + currentClient,
+              this.httpReq.searchInput +
+                '&_page=' +
+                +(this.httpReq.pageNumber - 1) +
+                '&_limit=3'
+            ]
+          : [
+              '/' + currentClient,
+              this.httpReq.searchInput +
+                '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=3'
+            ]
+      "
     >
       <a class="page-link" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -14,7 +38,10 @@
       class="page-item"
       *ngFor="let number of array"
       (click)="onChangePage(number)"
-      [routerLink]="['/' + currentClient, number]"
+      [routerLink]="[
+        '/' + currentClient,
+        this.httpReq.searchInput + '&_page=' + +(number + 1) + '&_limit=3'
+      ]"
       routerLinkActive="active"
     >
       <a class="page-link">{{ number + 1 }}</a>
@@ -24,8 +51,20 @@
       (click)="onNext()"
       [routerLink]="
         httpReq.pageNumber < httpReq.getReqCounter
-          ? ['/' + currentClient, httpReq.pageNumber]
-          : ['/' + currentClient, httpReq.pageNumber - 1]
+          ? [
+              '/' + currentClient,
+              this.httpReq.searchInput +
+                '&_page=' +
+                +(this.httpReq.pageNumber + 1) +
+                '&_limit=3'
+            ]
+          : [
+              '/' + currentClient,
+              this.httpReq.searchInput +
+                '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=3'
+            ]
       "
     >
       <a class="page-link" aria-label="Next">

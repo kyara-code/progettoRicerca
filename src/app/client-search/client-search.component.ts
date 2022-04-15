@@ -1,5 +1,5 @@
 import { PagesManagerService } from './../service/pages-manager.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
@@ -26,6 +26,7 @@ export class ClientSearchComponent implements OnInit {
     private auth: AuthService,
     private http: HttpClient,
     private router: Router,
+    private route: ActivatedRoute,
     private pagesService: PagesManagerService
   ) {}
 
@@ -33,6 +34,14 @@ export class ClientSearchComponent implements OnInit {
     this.authenticated = this.auth.loggedIn;
     this.pagesService.newSection.subscribe((pagesOfThisSection) => {
       this.arrayPages = pagesOfThisSection;
+    });
+
+    this.route.params.subscribe((params: Params) => {
+      // let url = params.toString();
+      // console.log(url);
+      // if (url !== '') {
+      // }
+      console.log(params);
     });
 
     this.pagesService.currentClient = 'search';
@@ -45,21 +54,16 @@ export class ClientSearchComponent implements OnInit {
     this.httpReq.determineSections();
     this.httpReq.searchPage().subscribe({
       next: (response) => {
-        // Questo array a che serve?
-        // chiara: a stampare le pagine che con le varie richieste get mi arrivano
         this.arrayPages = response;
-        // Qui salvi in pageNumber il numero delle pagine per sezione, poi però passi lo stesso numero (di pagine) ad updateSections.
-        // Ma ad updateSections è iscritto il componente pagination che riceve il numero delle pagine al posto che il numero delle sezioni.
-        // Infatti se vai a cambiare il limite di pagine per sezione, cambierà anche il numero delle sezioni. Continuare in pagination.component.ts
-
-        // this.httpReq.pageNumber = Math.ceil(response.length);
-
-        // da capire che numero mettere come numero di sezioni: 10 pagine --> 4 sezioni
-        // this.httpReq.updateSections.next(this.httpReq.pageNumber);
-        // this.router.navigate(['/search/0']);
       },
     });
-    this.router.navigate(['/search', 0]);
+    this.router.navigate([
+      '/search',
+      this.httpReq.searchInput +
+        '&_page=' +
+        +this.httpReq.pageNumber +
+        '&_limit=3',
+    ]);
   }
 
   onCancel() {

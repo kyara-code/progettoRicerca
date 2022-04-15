@@ -36,9 +36,9 @@ export class PaginationComponent implements OnInit, OnDestroy {
   }
 
   onPrevious() {
-    if (this.httpReq.pageNumber >= 1) {
+    if (this.httpReq.pageNumber > 1) {
       this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
-      console.log('pageNumber = ' + this.httpReq.pageNumber);
+      console.log('pageNumber onPrevious = ' + this.httpReq.pageNumber);
       console.log('getReqCounter = ' + this.httpReq.getReqCounter);
       this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
@@ -50,7 +50,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onNext() {
     if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
       this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
-      console.log('pageNumber = ' + this.httpReq.pageNumber);
+      console.log('pageNumber onNext = ' + this.httpReq.pageNumber);
       console.log('getReqCounter = ' + this.httpReq.getReqCounter);
       this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
