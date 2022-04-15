@@ -3,22 +3,27 @@
   <div class="contenitore">
     <div>
       <button type="button" class="btn btn-primary" (click)="onNavigateHome()">
-        Home</button
+        Home <i class="fa-solid fa-house"></i></button
       >|
-      <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+      <button class="btn btn-danger" (click)="onLogout()">
+        Logout <i class="fa-solid fa-user-large-slash"></i>
+      </button>
     </div>
     <!-- Bottone New Page -->
     <div>
-      <button class="btn btn-secondary" (click)="onNewPage()">New Page</button>
+      <button class="btn btn-warning" (click)="onNewPage()">
+        New Page <i class="fa-solid fa-circle-plus"></i>
+      </button>
     </div>
   </div>
 
   <!-- Barra di ricerca -->
   <form #f="ngForm" (ngSubmit)="onSearch(f)">
     <div class="form-group searchBar">
+      <i class="fa-solid fa-magnifying-glass icon"></i>
       <input
-        type="search"
-        class="form-control"
+        type="text"
+        class="form-control input"
         placeholder="Search here..."
         ngModel
         name="searchInput"

@@ -1,4 +1,4 @@
-<div class="page">
+<div class="container page">
   <div class="top-portion">
     <div class="container">
       <button
@@ -12,17 +12,13 @@
     </div>
     <div class="container login-btn">
       <button
-        class="btn btn-primary log"
+        class="btn btn-primary"
         routerLink="/login"
         *ngIf="!authenticated"
       >
         Login <i class="fa-solid fa-user-shield"></i>
       </button>
-      <button
-        class="btn btn-primary log"
-        (click)="logout()"
-        *ngIf="authenticated"
-      >
+      <button class="btn btn-danger" (click)="logout()" *ngIf="authenticated">
         Logout <i class="fa-solid fa-user-large-slash"></i>
       </button>
     </div>

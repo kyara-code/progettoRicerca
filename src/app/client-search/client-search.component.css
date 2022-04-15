@@ -9,6 +9,7 @@
 .icon {
   font-size: 20px;
   line-height: unset;
+  cursor: pointer;
   color: rgb(139, 200, 224);
 }
 
@@ -22,8 +23,8 @@
   margin: 6px;
 }
 
-.log {
-  border-radius: 40px;
+.btn {
+  border-radius: 10px;
 }
 
 .top-portion {
