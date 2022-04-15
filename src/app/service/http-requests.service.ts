@@ -1,7 +1,7 @@
+import { WebPage } from './../model/page.model';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { WebPage } from '../model/page.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -82,6 +82,10 @@ export class HttpRequestsService {
         next: (response) => console.log(response),
         error: (error) => console.log(error),
       });
+  }
+
+  compareNewPage(url: string) {
+    return this.http.get<WebPage[]>('http://localhost:3000/ricerca?url=' + url);
   }
 
   // getFilter(id: number) {
