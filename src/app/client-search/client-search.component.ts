@@ -41,6 +41,7 @@ export class ClientSearchComponent implements OnInit {
     this.httpReq.searchPage().subscribe({
       next: (response) => {
         // Questo array a che serve?
+        // chiara: a stampare le pagine che con le varie richieste get mi arrivano
         this.arrayPages = response;
         // Qui salvi in pageNumber il numero delle pagine per sezione, poi però passi lo stesso numero (di pagine) ad updateSections.
         // Ma ad updateSections è iscritto il componente pagination che riceve il numero delle pagine al posto che il numero delle sezioni.

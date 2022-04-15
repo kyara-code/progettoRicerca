@@ -25,6 +25,12 @@ export class PaginationComponent implements OnInit {
     this.httpReq.updateSections.subscribe((number) => {
       // Qui section non deve essere uguale a number, perché number è il numero di pagine visibili per sezione
       // section = numeroTotalePagineDelGet / numeroPagineVisibiliPerSezione
+
+      //chiara: però la richiesta del get, avendo messo '&_page=section&limit=3' ti dà un array con 3 elementi,
+      // se section è uguale a uno... questa cosa è da capire bene
+
+      // esempio: ho 7 risultati totali --> 1° richiesta: mi da i primi 3, 2° richiesta mi dà altri tre, 3° richiesta me ne dà uno,
+      // section voglio che sia uguale a 3... quindi mi sa ci conviene mettere direttamente un counter che incrementa ad ogni richiesta
       sections = number;
       console.log(sections);
       this.array = _.range(sections);
