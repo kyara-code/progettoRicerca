@@ -30,8 +30,11 @@ export class AdminSinglePageComponent implements OnInit {
     this.pagesManagerService.isModify = true;
 
     // this.pagesManagerService.pagesChanged.next(this.singlePage);
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    // this.router.navigate(['edit'], { relativeTo: this.route });
     this.idPageModify.emit(this.currentId);
     this.pagesManagerService.modifyPage(this.singlePage);
+    console.log(this.singlePage);
+
+    // fino a qua ci arriva, e la pagina la stampa correttamente 1
   }
 }

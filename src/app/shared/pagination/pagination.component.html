@@ -22,7 +22,7 @@
     <li
       class="page-item"
       (click)="onNext()"
-      [routerLink]="['/search', httpReq.pageNumber]"
+      [routerLink]="['/search', httpReq.pageNumber - 1]"
     >
       <a class="page-link" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

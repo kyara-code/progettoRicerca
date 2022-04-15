@@ -33,16 +33,19 @@
   </form>
 
   <!-- Lista siti web -->
-  <div class="pageList">
-    <div class="row" *ngIf="!isNewPage">
-      <app-admin-single-page
-        *ngFor="let page of pages; let i = index"
-        [singlePage]="page"
-        [currentId]="i"
-        (idPageDelete)="onDelete($event, i)"
-        (idPageModify)="onModify(i)"
-      ></app-admin-single-page>
+  <div class="container">
+    <div class="pageList">
+      <div class="row" *ngIf="!isNewPage">
+        <app-admin-single-page
+          *ngFor="let page of pages; let i = index"
+          [singlePage]="page"
+          [currentId]="i"
+          (idPageDelete)="onDelete($event, i)"
+          (idPageModify)="onModify(i)"
+        ></app-admin-single-page>
+      </div>
     </div>
+    <app-pagination *ngIf="searched"></app-pagination>
   </div>
 
   <!-- Sezione di modifica -->

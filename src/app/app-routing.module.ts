@@ -18,9 +18,10 @@ const appRoute: Routes = [
       {
         path: ':id',
         component: ClientSearchComponent,
+
+        canActivate: [SearchGuard],
       },
     ],
-    canActivate: [SearchGuard],
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },

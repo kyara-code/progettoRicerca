@@ -17,11 +17,13 @@ export class PagesManagerService {
 
   constructor(private httpReq: HttpRequestsService) {}
 
+  // da fare il metodo hasSearched per la guard di navigazione quando cerco
   hasSearched() {
-    // const promise = new Promise((resolve, rejects) => {
-    //   resolve(this.pages !== []);
-    // });
-    return this.pages !== [];
+    const promise = new Promise((resolve, rejects) => {
+      resolve(this.pages !== []);
+    });
+    console.log(this.pages !== []);
+    return promise;
   }
 
   onSearch(searchForm: NgForm, idPage: number) {

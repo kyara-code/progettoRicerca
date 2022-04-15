@@ -16,6 +16,8 @@ export class AdminSearchComponent implements OnInit {
   pages: WebPage[] = [];
   idPage = '1';
 
+  searched = false;
+
   constructor(
     private httpReq: HttpRequestsService,
     private router: Router,
@@ -31,10 +33,12 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onSearch(searchForm: NgForm) {
+    this.searched = true;
     this.isNewPage = false;
     this.pagesManagerService.onSearch(searchForm, +this.idPage);
     this.pages = this.pagesManagerService.pages;
     console.log(this.pages);
+
     // this.router.navigate(['../'], { relativeTo: this.route });
   }
 
@@ -64,7 +68,8 @@ export class AdminSearchComponent implements OnInit {
   onModify(idPage: number) {
     this.isNewPage = true;
     this.pagesManagerService.currentId = idPage;
-    // this.pages = this.pagesManagerService.updatePage();
     console.log(this.pages);
+
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

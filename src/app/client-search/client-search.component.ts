@@ -14,6 +14,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ClientSearchComponent implements OnInit {
   pageNumber: number = 1;
+  searched = false;
 
   @ViewChild('f') clientSearchForm: NgForm;
   arrayPages: WebPage[] = [];
@@ -36,6 +37,7 @@ export class ClientSearchComponent implements OnInit {
   }
 
   onSearch() {
+    this.searched = true;
     this.httpReq.searchInput = this.clientSearchForm.value.searchInput;
     this.httpReq.getReqCounter = 0;
     this.httpReq.determineSections();
