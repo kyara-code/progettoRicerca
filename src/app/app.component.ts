@@ -1,4 +1,4 @@
-import { LoginService } from './service/login.service';
+import { AuthService } from './service/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'progettoRicerca';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.loginService.autoLogin();
+    this.authService.autoLogin();
   }
 }

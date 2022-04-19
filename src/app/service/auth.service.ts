@@ -41,10 +41,11 @@ export class AuthService {
       })
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.token = response.access_token;
           this.router.navigate(['/admin-search']);
           this.loggedIn = true;
+          // Imposto una stringa nel localStorage
+          localStorage.setItem('isAuthenticated', 'true');
         },
         error: (errorRes) => {
           this.router.navigate(['/error']);
@@ -54,8 +55,21 @@ export class AuthService {
       });
   }
 
+  autoLogin() {
+    // Verifico se sono già loggato oppure no
+    if (localStorage.getItem('isAuthenticated') === 'true') {
+      this.loggedIn = true;
+    } else {
+      return;
+    }
+  }
+
+  autoLogout() {}
+
   logout() {
     this.token = null;
     this.loggedIn = false;
+    // Imposto la stringa salvata nel localStorage come falsa
+    localStorage.setItem('isAuthenticated', 'false');
   }
 }

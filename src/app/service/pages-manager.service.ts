@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { assertPlatform, Injectable } from '@angular/core';
 import { HttpRequestsService } from './http-requests.service';
 import { NgForm, FormGroup } from '@angular/forms';
 import { WebPage } from '../model/page.model';
@@ -10,7 +10,6 @@ export class PagesManagerService {
   pagesChanged = new Subject<WebPage>();
   pagesModified = new Subject<WebPage[]>();
   newSection = new Subject<WebPage[]>();
-  isPageModified = false;
   isModify = false;
   newPage: WebPage;
   currentId: number;
@@ -45,13 +44,49 @@ export class PagesManagerService {
     }
   }
 
-  modifyPage(currentPage: WebPage) {
-    this.pagesChanged.next(currentPage);
-  }
-
   updatePage() {
     this.pages[this.currentId] = this.newPage;
     this.httpReq.updatePage(this.pages[this.currentId]);
     return this.pages.slice();
+  }
+
+  // Messo metodo da component a service per pulizia del codice
+  modifyPage(newPageForm: FormGroup, id: number) {
+    const webPage = {
+      titolo: newPageForm.value.titolo,
+      descrizione: newPageForm.value.descrizione,
+      chiavi: newPageForm.value.chiavi,
+      url: newPageForm.value.url,
+      id: id,
+    };
+    this.newPage = webPage;
+    this.pagesModified.next(this.updatePage());
+  }
+
+  // Ho cambiato il nome di questo metodo, aggiorna la lista delle pagine con le modifiche fatte
+  modifyPageUpdate(currentPage: WebPage) {
+    this.pagesChanged.next(currentPage);
+  }
+
+  // Aggiunto metodo da component a service per pulizia
+  addNewPage(newPageForm: FormGroup) {
+    const webPage = {
+      titolo: newPageForm.value.titolo,
+      descrizione: newPageForm.value.descrizione,
+      chiavi: newPageForm.value.chiavi,
+      url: newPageForm.value.url,
+    };
+    // Controllo se la pagina esiste già
+    this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
+      console.log(response);
+      if (response) {
+        this.isNewPage = true;
+      }
+    });
+    if (this.isNewPage) {
+      this.httpReq.postPage(webPage);
+    } else {
+      alert('This page already exist!');
+    }
   }
 }

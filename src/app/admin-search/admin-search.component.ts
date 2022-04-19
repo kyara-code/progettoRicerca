@@ -21,7 +21,6 @@ export class AdminSearchComponent implements OnInit {
   constructor(
     private httpReq: HttpRequestsService,
     private router: Router,
-    private route: ActivatedRoute,
     public pagesManagerService: PagesManagerService,
     private authService: AuthService
   ) {}
@@ -73,11 +72,11 @@ export class AdminSearchComponent implements OnInit {
 
   onModify(idPage: number, page: WebPage) {
     this.isNewPage = true;
-    this.pagesManagerService.modifyPage(page);
+    this.pagesManagerService.modifyPageUpdate(page);
     this.pagesManagerService.currentId = idPage;
   }
 
-  doneAddingPage(addPageDone: boolean) {
+  doneAddingPage() {
     this.isNewPage = false;
   }
 }
