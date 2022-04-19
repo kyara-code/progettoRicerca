@@ -27,7 +27,6 @@ export class localService {
   onModify(idPage: number, page: WebPage) {
     this.searched = false;
     this.isNewPage = true;
-    // this.pagesManagerService.modifyPageUpdate(page);
     this.currentPage = page;
     console.log(this.currentPage);
     this.pagesManagerService.currentId = idPage;

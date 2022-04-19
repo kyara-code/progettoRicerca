@@ -1,7 +1,6 @@
 <div class="container">
-  <!-- Bottone Home -->
   <div class="contenitore">
-    <div>
+    <div class="buttonContainer">
       <button type="button" class="btn btn-primary" (click)="onNavigateHome()">
         Home <i class="fa-solid fa-house"></i></button
       >|
@@ -9,7 +8,6 @@
         Logout <i class="fa-solid fa-user-large-slash"></i>
       </button>
     </div>
-    <!-- Bottone New Page -->
     <div>
       <button
         *ngIf="!local.isNewPage"
@@ -21,11 +19,14 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div class="container searchButton">
     <app-logo></app-logo>
   </div>
 
   <!-- Barra di ricerca -->
+=======
+>>>>>>> 2055ddb66353264808baeab612a05d8d8ed67908
   <form #f="ngForm" (ngSubmit)="onSearch(f)">
     <div class="form-group searchBar">
       <i class="fa-solid fa-magnifying-glass icon"></i>
@@ -40,7 +41,6 @@
       <i class="fa-solid fa-circle-xmark icon" (click)="onResetForm(f)"></i>
     </div>
 
-    <!-- Bottone Search -->
     <div class="searchButton">
       <button type="submit" class="btn btn-success" [disabled]="!f.valid">
         Search
@@ -48,7 +48,6 @@
     </div>
   </form>
 
-  <!-- Lista siti web -->
   <div class="pageList">
     <router-outlet></router-outlet>
   </div>

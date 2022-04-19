@@ -12,7 +12,6 @@ import _ from 'lodash';
 })
 export class PaginationComponent implements OnInit, OnDestroy {
   array = [];
-  // pageNumber: number;
   currentClient: string;
   pageLimit = '3';
 
@@ -26,10 +25,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.httpReq.pageLimitChanged.subscribe((newLimit) => {
-    //   this.pageLimit = newLimit;
-    // });
-
     this.route.params.subscribe((params: Params) => {
       let str = params['id'];
       if (str) {

@@ -1,12 +1,9 @@
 <div class="row pageList">
-  <!-- Lista siti -->
   <div class="col-6">
     <h3>{{ singlePage.titolo }}</h3>
     <a [href]="singlePage.url">{{ singlePage.url }}</a>
     <p>{{ singlePage.descrizione }}</p>
   </div>
-
-  <!-- Bottoni -->
   <div class="col-md-2 col-sm-2">
     <button class="btn btn-danger" (click)="onDelete()">Delete</button> |
     <button class="btn btn-warning" (click)="onModify()">Modify</button>

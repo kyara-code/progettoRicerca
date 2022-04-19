@@ -1,7 +1,6 @@
 import { Subscription } from 'rxjs';
 import { PagesManagerService } from './../service/pages-manager.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
@@ -26,9 +25,7 @@ export class ClientSearchComponent implements OnInit, OnDestroy {
   constructor(
     private httpReq: HttpRequestsService,
     private auth: AuthService,
-    private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute,
     private pagesService: PagesManagerService
   ) {}
 

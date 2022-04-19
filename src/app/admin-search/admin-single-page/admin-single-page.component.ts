@@ -16,8 +16,7 @@ export class AdminSinglePageComponent implements OnInit {
 
   constructor(
     private pagesManagerService: PagesManagerService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -27,7 +26,6 @@ export class AdminSinglePageComponent implements OnInit {
   }
 
   onModify() {
-    // Cambio la variabile isModify in modo da avvertire il programma che sono nella modalità di modifica
     this.pagesManagerService.isModify = true;
     this.idPageModify.emit(this.singlePage);
     this.router.navigate(['/admin-search/edit']);

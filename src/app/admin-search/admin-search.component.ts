@@ -1,6 +1,5 @@
 import { Subscription } from 'rxjs';
 import { AuthService } from './../service/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
@@ -14,17 +13,12 @@ import { localService } from './local.service';
   styleUrls: ['./admin-search.component.css'],
   providers: [localService],
 })
-export class AdminSearchComponent implements OnInit, OnDestroy {
-  // isNewPage = false;
+export class AdminSearchComponent implements OnInit {
   pages: WebPage[] = [];
   idPage = '1';
-
   currentPage: WebPage;
   currentPath: string;
-
   subscription: Subscription;
-
-  // searched = false;
 
   constructor(
     private httpReq: HttpRequestsService,
@@ -50,7 +44,7 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
       this.pages = pages;
     });
   }
-
+  // Da mettere in un service
   onSearch(searchForm: NgForm) {
     this.local.searched = true;
     this.local.isNewPage = false;
@@ -79,7 +73,7 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
   onResetForm(searchForm: NgForm) {
     searchForm.reset();
   }
-
+  //Da mettere in un service
   onNewPage() {
     this.local.isNewPage = true;
     this.local.currentPage = null;
