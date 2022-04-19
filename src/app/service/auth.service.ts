@@ -2,7 +2,7 @@ import { HttpRequestsService } from './http-requests.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 //come nel corso... da cambiare con autenticazione al server in seguito
 //fake an authentication with a real server
 
@@ -25,6 +25,7 @@ export class AuthService {
   };
 
   token: AuthResponse = null;
+  autoExit = new Subject<void>();
 
   tokenExpirationTimer: any;
   accessToken: string = null;
@@ -52,7 +53,7 @@ export class AuthService {
           this.loggedIn = true;
           // Imposto una stringa nel localStorage
           localStorage.setItem('token', JSON.stringify(response));
-          this.autoLogout(response.tokenExpireIn);
+          this.autoLogout(response.refreshTokenExpireIn);
         },
         error: (errorRes) => {
           this.router.navigate(['/error']);
@@ -63,12 +64,11 @@ export class AuthService {
   }
 
   autoLogin() {
-    // Verifico se sono già loggato oppure no
     this.token = JSON.parse(localStorage.getItem('token'));
     if (this.token !== null) {
       if (this.token.tokenExpireIn > 0) {
         this.loggedIn = true;
-        this.autoLogout(this.token.tokenExpireIn);
+        this.autoLogout(this.token.refreshTokenExpireIn);
       } else {
         return;
       }
@@ -78,21 +78,19 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    console.log(expirationDuration);
+    let time = expirationDuration - new Date().getTime();
     this.tokenExpirationTimer = setTimeout(() => {
+      this.autoExit.next();
       this.logout();
-    }, expirationDuration);
+    }, time);
   }
 
   logout() {
     this.token = null;
     this.loggedIn = false;
-    // Imposto la stringa salvata nel localStorage come falsa
     localStorage.setItem('token', null);
     if (this.tokenExpirationTimer) {
-      // clearTimeout(this.tokenExpirationTimer);
-      this.tokenExpirationTimer = null;
+      clearTimeout(this.tokenExpirationTimer);
     }
-    // this.tokenExpirationTimer = null;
   }
 }
