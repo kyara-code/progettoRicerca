@@ -9,10 +9,8 @@ import { Subject, Subscription } from 'rxjs';
 })
 export class HttpRequestsService implements OnDestroy {
   pageNumber: number = 1;
-  pageChanged = new Subject<number>();
   updateSections = new Subject<number>();
   searchInput = '';
-  filterSearchValue = '';
   getReqCounter = 0;
 
   subscribe1: Subscription;
@@ -22,14 +20,6 @@ export class HttpRequestsService implements OnDestroy {
 
   pageLimitChanged = new Subject<number>();
   pageLimit = '3';
-
-  items = [
-    { id: 0, name: 'key' },
-    { id: 1, name: 'title' },
-    { id: 2, name: 'description' },
-    { id: 3, name: 'language' },
-    { id: 4, name: 'most recent first' },
-  ];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
