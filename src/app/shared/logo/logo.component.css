@@ -1,0 +1,23 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.letter {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: bold;
+  font-size: 70px;
+}
+
+.blue {
+  color: #4285f4;
+}
+.red {
+  color: #ea4335;
+}
+.yellow {
+  color: #fbbc05;
+}
+.green {
+  color: #34a853;
+}
