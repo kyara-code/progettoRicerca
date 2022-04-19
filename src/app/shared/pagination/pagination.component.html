@@ -8,18 +8,27 @@
           ? [
               '/' + currentClient,
               this.httpReq.searchInput,
-              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
+              '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=' +
+                httpReq.pageLimit
             ]
           : httpReq.pageNumber > 1
           ? [
               '/' + currentClient,
               this.httpReq.searchInput,
-              '&_page=' + +(this.httpReq.pageNumber - 1) + '&_limit=3'
+              '&_page=' +
+                +(this.httpReq.pageNumber - 1) +
+                '&_limit=' +
+                httpReq.pageLimit
             ]
           : [
               '/' + currentClient,
               this.httpReq.searchInput,
-              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
+              '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=' +
+                httpReq.pageLimit
             ]
       "
     >
@@ -35,7 +44,7 @@
       [routerLink]="[
         '/' + currentClient,
         this.httpReq.searchInput,
-        '&_page=' + +(number + 1) + '&_limit=3'
+        '&_page=' + +(number + 1) + '&_limit=' + httpReq.pageLimit
       ]"
       routerLinkActive="active"
     >
@@ -49,12 +58,18 @@
           ? [
               '/' + currentClient,
               this.httpReq.searchInput,
-              '&_page=' + +(this.httpReq.pageNumber + 1) + '&_limit=3'
+              '&_page=' +
+                +(this.httpReq.pageNumber + 1) +
+                '&_limit=' +
+                httpReq.pageLimit
             ]
           : [
               '/' + currentClient,
               this.httpReq.searchInput,
-              '&_page=' + +this.httpReq.pageNumber + '&_limit=3'
+              '&_page=' +
+                +this.httpReq.pageNumber +
+                '&_limit=' +
+                httpReq.pageLimit
             ]
       "
     >

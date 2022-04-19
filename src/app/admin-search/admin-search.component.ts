@@ -54,6 +54,7 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
+    this.router.navigate(['/admin-search/edit']);
   }
 
   onNavigateHome() {

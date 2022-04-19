@@ -16,7 +16,7 @@ export class HttpRequestsService {
   getReqCounter = 0;
 
   pageLimitChanged = new Subject<number>();
-  pageLimit = 3;
+  pageLimit = '3';
 
   items = [
     { id: 0, name: 'key' },
@@ -38,7 +38,7 @@ export class HttpRequestsService {
     this.http
       .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
       .subscribe((response) => {
-        this.getReqCounter = Math.ceil(response.length / this.pageLimit);
+        this.getReqCounter = Math.ceil(response.length / +this.pageLimit);
         this.updateSections.next(this.getReqCounter);
         console.log(this.getReqCounter);
       });

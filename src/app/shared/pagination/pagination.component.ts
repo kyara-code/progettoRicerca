@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { HttpRequestsService } from './../../service/http-requests.service';
 import { PagesManagerService } from './../../service/pages-manager.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,20 +14,34 @@ export class PaginationComponent implements OnInit, OnDestroy {
   array = [];
   // pageNumber: number;
   currentClient: string;
-  pageLimit = 3;
+  pageLimit = '3';
 
   subscribe: Subscription = null;
 
   constructor(
     private pagesService: PagesManagerService,
+    private route: ActivatedRoute,
     public httpReq: HttpRequestsService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.httpReq.pageLimitChanged.subscribe((newLimit) => {
-      this.pageLimit = newLimit;
+    // this.httpReq.pageLimitChanged.subscribe((newLimit) => {
+    //   this.pageLimit = newLimit;
+    // });
+
+    console.log(this.route);
+
+    this.route.params.subscribe((params: Params) => {
+      let str = params['id'];
+      if (str) {
+        let n = str.length;
+        let lastChar = str[n - 1];
+        this.httpReq.pageLimit = lastChar;
+        console.log(lastChar);
+      }
     });
+
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
       sections = +number;

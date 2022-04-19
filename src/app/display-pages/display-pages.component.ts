@@ -29,6 +29,7 @@ export class DisplayPagesComponent implements OnInit {
       this.httpReq.determineSections();
 
       let url = params['searchInput'] + params['id'];
+      console.log(url);
       this.httpReq.onSearchWithParams(url).subscribe((response) => {
         this.arrayPages = response;
       });
