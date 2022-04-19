@@ -15,6 +15,9 @@ export class HttpRequestsService {
   filterSearchValue = '';
   getReqCounter = 0;
 
+  pageLimitChanged = new Subject<number>();
+  pageLimit = 3;
+
   items = [
     { id: 0, name: 'key' },
     { id: 1, name: 'title' },
@@ -35,7 +38,7 @@ export class HttpRequestsService {
     this.http
       .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
       .subscribe((response) => {
-        this.getReqCounter = Math.ceil(response.length / 3);
+        this.getReqCounter = Math.ceil(response.length / this.pageLimit);
         this.updateSections.next(this.getReqCounter);
         console.log(this.getReqCounter);
       });
@@ -49,7 +52,8 @@ export class HttpRequestsService {
         this.searchInput +
         '&_page=' +
         section +
-        '&_limit=3'
+        '&_limit=' +
+        this.pageLimit
     );
   }
 

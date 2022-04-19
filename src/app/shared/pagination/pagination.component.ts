@@ -14,6 +14,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   array = [];
   // pageNumber: number;
   currentClient: string;
+  pageLimit = 3;
 
   subscribe: Subscription = null;
 
@@ -24,6 +25,9 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.httpReq.pageLimitChanged.subscribe((newLimit) => {
+      this.pageLimit = newLimit;
+    });
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
       sections = +number;

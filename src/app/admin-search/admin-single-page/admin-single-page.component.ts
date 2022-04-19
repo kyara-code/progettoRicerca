@@ -28,5 +28,6 @@ export class AdminSinglePageComponent implements OnInit {
 
   onModify() {
     this.idPageModify.emit(this.singlePage);
+    this.router.navigate(['/admin-search/edit']);
   }
 }
