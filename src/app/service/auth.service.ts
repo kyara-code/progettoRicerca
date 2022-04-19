@@ -53,7 +53,7 @@ export class AuthService {
           this.loggedIn = true;
           // Imposto una stringa nel localStorage
           localStorage.setItem('token', JSON.stringify(response));
-          this.autoLogout(response.refreshTokenExpireIn);
+          this.autoLogout(response.tokenExpireIn);
         },
         error: (errorRes) => {
           this.router.navigate(['/error']);
@@ -69,7 +69,7 @@ export class AuthService {
     if (this.token !== null) {
       if (this.token.tokenExpireIn > 0) {
         this.loggedIn = true;
-        this.autoLogout(this.token.refreshTokenExpireIn);
+        this.autoLogout(this.token.tokenExpireIn);
       } else {
         return;
       }
