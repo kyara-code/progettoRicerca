@@ -18,18 +18,6 @@ export class PagesManagerService {
 
   constructor(private httpReq: HttpRequestsService) {}
 
-<<<<<<< HEAD
-  // da fare il metodo hasSearched per la guard di navigazione quando cerco
-  // hasSearched() {
-  //   const promise = new Promise((resolve, rejects) => {
-  //     resolve(this.pages !== []);
-  //   });
-  //   console.log(this.pages !== []);
-  //   return promise;
-  // }
-
-=======
->>>>>>> 2055ddb66353264808baeab612a05d8d8ed67908
   comparePage(newPageForm: FormGroup) {
     let url = newPageForm.value.url;
     let pageAlreadyExist: boolean;
