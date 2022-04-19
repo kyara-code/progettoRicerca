@@ -24,26 +24,30 @@
   </div>
 
   <!-- Barra di ricerca -->
-  <form #f="ngForm" (ngSubmit)="onSearch(f)">
-    <div class="form-group searchBar">
-      <i class="fa-solid fa-magnifying-glass icon"></i>
-      <input
-        type="text"
-        class="form-control input"
-        placeholder="Search here..."
-        ngModel
-        name="searchInput"
-        required
-      />
-      <i class="fa-solid fa-circle-xmark icon" (click)="onResetForm(f)"></i>
-    </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <form #f="ngForm" (ngSubmit)="onSearch(f)">
+        <div class="form-group searchBar">
+          <i class="fa-solid fa-magnifying-glass icon"></i>
+          <input
+            type="text"
+            class="form-control input"
+            placeholder="Search here..."
+            ngModel
+            name="searchInput"
+            required
+          />
+          <i class="fa-solid fa-circle-xmark icon" (click)="onResetForm(f)"></i>
+        </div>
 
-    <div class="searchButton">
-      <button type="submit" class="btn btn-success" [disabled]="!f.valid">
-        Search
-      </button>
+        <div class="searchButton">
+          <button type="submit" class="btn btn-success" [disabled]="!f.valid">
+            Search
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 
   <div class="pageList">
     <router-outlet></router-outlet>
