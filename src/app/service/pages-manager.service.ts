@@ -18,15 +18,6 @@ export class PagesManagerService {
 
   constructor(private httpReq: HttpRequestsService) {}
 
-  // da fare il metodo hasSearched per la guard di navigazione quando cerco
-  hasSearched() {
-    const promise = new Promise((resolve, rejects) => {
-      resolve(this.pages !== []);
-    });
-    console.log(this.pages !== []);
-    return promise;
-  }
-
   comparePage(newPageForm: FormGroup) {
     let url = newPageForm.value.url;
     let pageAlreadyExist: boolean;
@@ -50,7 +41,6 @@ export class PagesManagerService {
     return this.pages.slice();
   }
 
-  // Messo metodo da component a service per pulizia del codice
   modifyPage(newPageForm: FormGroup, id: number) {
     const webPage = {
       titolo: newPageForm.value.titolo,
@@ -64,12 +54,10 @@ export class PagesManagerService {
     this.isModify = false;
   }
 
-  // Ho cambiato il nome di questo metodo, aggiorna la lista delle pagine con le modifiche fatte
   modifyPageUpdate(currentPage: WebPage) {
     this.pagesChanged.next(currentPage);
   }
 
-  // Aggiunto metodo da component a service per pulizia
   addNewPage(newPageForm: FormGroup) {
     const webPage = {
       titolo: newPageForm.value.titolo,
@@ -77,7 +65,6 @@ export class PagesManagerService {
       chiavi: newPageForm.value.chiavi,
       url: newPageForm.value.url,
     };
-    // Controllo se la pagina esiste già
     this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
       console.log(response);
       if (response) {
@@ -86,10 +73,5 @@ export class PagesManagerService {
         alert('This page already exist!');
       }
     });
-    // if (this.isNewPage) {
-    //   this.httpReq.postPage(webPage);
-    // } else {
-    //   alert('This page already exist!');
-    // }
   }
 }

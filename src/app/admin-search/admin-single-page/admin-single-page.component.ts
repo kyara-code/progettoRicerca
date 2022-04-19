@@ -16,8 +16,7 @@ export class AdminSinglePageComponent implements OnInit {
 
   constructor(
     private pagesManagerService: PagesManagerService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {}

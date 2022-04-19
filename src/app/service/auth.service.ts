@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { interval, Subject } from 'rxjs';
-//come nel corso... da cambiare con autenticazione al server in seguito
-//fake an authentication with a real server
 
 export class AuthResponse {
   access_token: string;

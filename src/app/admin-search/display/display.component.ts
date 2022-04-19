@@ -23,21 +23,15 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      console.log(params['id']);
-
       this.httpReq.searchInput = params['searchInput'];
-      console.log(params['searchInput']);
       this.httpReq.getReqCounter = 0;
       this.httpReq.determineSections();
-
       let url = params['searchInput'] + params['id'];
-      console.log(url);
       this.httpReq.onSearchWithParams(url).subscribe((response) => {
         this.local.pages = response;
         this.arrayPages = this.local.pages;
       });
     });
-
     this.pagesService.newSection.subscribe((pagesOfThisSection) => {
       this.local.pages = pagesOfThisSection;
       this.arrayPages = this.local.pages;

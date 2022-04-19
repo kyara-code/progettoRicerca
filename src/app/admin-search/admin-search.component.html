@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- Bottone Home -->
   <div class="contenitore">
     <div>
       <button type="button" class="btn btn-primary" (click)="onNavigateHome()">
@@ -9,7 +8,6 @@
         Logout <i class="fa-solid fa-user-large-slash"></i>
       </button>
     </div>
-    <!-- Bottone New Page -->
     <div>
       <button
         *ngIf="!local.isNewPage"
@@ -21,7 +19,6 @@
     </div>
   </div>
 
-  <!-- Barra di ricerca -->
   <form #f="ngForm" (ngSubmit)="onSearch(f)">
     <div class="form-group searchBar">
       <i class="fa-solid fa-magnifying-glass icon"></i>
@@ -36,7 +33,6 @@
       <i class="fa-solid fa-circle-xmark icon" (click)="onResetForm(f)"></i>
     </div>
 
-    <!-- Bottone Search -->
     <div class="searchButton">
       <button type="submit" class="btn btn-success" [disabled]="!f.valid">
         Search
@@ -44,7 +40,6 @@
     </div>
   </form>
 
-  <!-- Lista siti web -->
   <div class="pageList">
     <router-outlet></router-outlet>
   </div>

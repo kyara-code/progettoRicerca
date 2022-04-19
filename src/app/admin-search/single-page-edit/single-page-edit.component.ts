@@ -49,6 +49,7 @@ export class SinglePageEditComponent implements OnInit {
     } else {
       this.pagesManagerService.addNewPage(this.newPageForm);
     }
+    // Da mettere in un service?
     this.pagesManagerService.isModify = false;
     this.local.addPageDone.next();
     console.log(this.local.currentPath);

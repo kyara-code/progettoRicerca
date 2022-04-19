@@ -1,6 +1,5 @@
 import { HttpRequestsService } from './../service/http-requests.service';
 import { WebPage } from './../model/page.model';
-import { PagesManagerService } from './../service/pages-manager.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +14,6 @@ export class DisplayPagesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pagesService: PagesManagerService,
     private httpReq: HttpRequestsService
   ) {}
 
