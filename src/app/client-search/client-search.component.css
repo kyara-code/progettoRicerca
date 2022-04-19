@@ -37,6 +37,12 @@
   color: rgb(0, 62, 117);
 }
 
+.searchButton {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .input {
   border: none;
 }

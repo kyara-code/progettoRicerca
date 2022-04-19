@@ -40,14 +40,16 @@
 
             <i class="fa-solid fa-circle-xmark icon" (click)="onCancel()"></i>
           </div>
-          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
-            Search
-          </button>
+          <div class="searchButton">
+            <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+              Search
+            </button>
+          </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="pageList">
     <router-outlet></router-outlet>
   </div>
 </div>
