@@ -31,28 +31,22 @@
         placeholder="Search here..."
         ngModel
         name="searchInput"
+        required
       />
       <i class="fa-solid fa-circle-xmark icon" (click)="onResetForm(f)"></i>
     </div>
 
     <!-- Bottone Search -->
     <div class="searchButton">
-      <button type="submit" class="btn btn-success">Search</button>
+      <button type="submit" class="btn btn-success" [disabled]="!f.valid">
+        Search
+      </button>
     </div>
   </form>
 
   <!-- Lista siti web -->
   <div class="container">
     <div class="pageList">
-      <!-- <div class="row">
-        <app-admin-single-page
-          *ngFor="let page of pages; let i = index"
-          [singlePage]="page"
-          [currentId]="i"
-          (idPageDelete)="onDelete($event, i)"
-          (idPageModify)="onModify(i, $event)"
-        ></app-admin-single-page>
-      </div> -->
       <router-outlet></router-outlet>
     </div>
   </div>
