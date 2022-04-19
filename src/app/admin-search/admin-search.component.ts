@@ -1,4 +1,4 @@
-import { interval, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from './../service/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
@@ -13,7 +13,7 @@ import { localService } from './local.service';
   styleUrls: ['./admin-search.component.css'],
   providers: [localService],
 })
-export class AdminSearchComponent implements OnInit {
+export class AdminSearchComponent implements OnInit, OnDestroy {
   pages: WebPage[] = [];
   idPage = '1';
   currentPage: WebPage;
