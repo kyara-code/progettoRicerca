@@ -1,6 +1,8 @@
+import { HttpRequestsService } from './http-requests.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { interval } from 'rxjs';
 //come nel corso... da cambiare con autenticazione al server in seguito
 //fake an authentication with a real server
 
@@ -22,7 +24,10 @@ export class AuthService {
     status: 'Unknown Route',
   };
 
-  token = null;
+  token: AuthResponse = null;
+
+  tokenExpirationTimer: any;
+  accessToken: string = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -41,11 +46,13 @@ export class AuthService {
       })
       .subscribe({
         next: (response) => {
-          this.token = response.access_token;
+          console.log(response);
+          this.accessToken = response.access_token;
           this.router.navigate(['/admin-search']);
           this.loggedIn = true;
           // Imposto una stringa nel localStorage
-          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('token', JSON.stringify(response));
+          this.autoLogout(response.tokenExpireIn);
         },
         error: (errorRes) => {
           this.router.navigate(['/error']);
@@ -57,19 +64,35 @@ export class AuthService {
 
   autoLogin() {
     // Verifico se sono già loggato oppure no
-    if (localStorage.getItem('isAuthenticated') === 'true') {
-      this.loggedIn = true;
+    this.token = JSON.parse(localStorage.getItem('token'));
+    if (this.token !== null) {
+      if (this.token.tokenExpireIn > 0) {
+        this.loggedIn = true;
+        this.autoLogout(this.token.tokenExpireIn);
+      } else {
+        return;
+      }
     } else {
       return;
     }
   }
 
-  autoLogout() {}
+  autoLogout(expirationDuration: number) {
+    console.log(expirationDuration);
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
 
   logout() {
     this.token = null;
     this.loggedIn = false;
     // Imposto la stringa salvata nel localStorage come falsa
-    localStorage.setItem('isAuthenticated', 'false');
+    localStorage.setItem('token', null);
+    if (this.tokenExpirationTimer) {
+      // clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
+    // this.tokenExpirationTimer = null;
   }
 }
