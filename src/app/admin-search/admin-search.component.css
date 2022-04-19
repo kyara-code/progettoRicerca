@@ -28,9 +28,8 @@
   margin: 6px;
 }
 
-.left {
-  display: flex;
-  justify-content: flex-end;
+.newpage-but {
+  color: #ced4da;
 }
 
 .icon {
