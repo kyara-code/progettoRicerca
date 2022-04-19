@@ -1,5 +1,11 @@
 .btn {
-  margin: 6px;
+  margin: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
+}
+
+.buttonContainer {
+  margin-bottom: 20px;
 }
 
 .searchBar {
@@ -15,16 +21,8 @@
   justify-content: space-between;
 }
 
-.btn {
-  border-radius: 10px;
-}
-
-.icon,
-.btn {
-  margin: 6px;
-}
-
 .icon {
+  margin: 6px;
   font-size: 20px;
   line-height: unset;
   cursor: pointer;
@@ -38,7 +36,7 @@
 }
 
 .container {
-  margin-top: 30px;
+  margin-top: 70px;
 }
 
 .input {
