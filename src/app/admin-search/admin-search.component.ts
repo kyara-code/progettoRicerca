@@ -1,10 +1,11 @@
+import { Subscription } from 'rxjs';
 import { AuthService } from './../service/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PagesManagerService } from '../service/pages-manager.service';
 import { localService } from './local.service';
 @Component({
@@ -13,13 +14,15 @@ import { localService } from './local.service';
   styleUrls: ['./admin-search.component.css'],
   providers: [localService],
 })
-export class AdminSearchComponent implements OnInit {
+export class AdminSearchComponent implements OnInit, OnDestroy {
   // isNewPage = false;
   pages: WebPage[] = [];
   idPage = '1';
 
   currentPage: WebPage;
   currentPath: string;
+
+  subscription: Subscription;
 
   // searched = false;
 
@@ -37,7 +40,7 @@ export class AdminSearchComponent implements OnInit {
       this.doneAddingPage();
     });
 
-    this.authService.autoExit.subscribe(() => {
+    this.subscription = this.authService.autoExit.subscribe(() => {
       this.router.navigate(['/search']);
     });
 
@@ -107,5 +110,9 @@ export class AdminSearchComponent implements OnInit {
     this.httpReq.onSearchWithParams(this.currentPath).subscribe((response) => {
       this.pages = response;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
