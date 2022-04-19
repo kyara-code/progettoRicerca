@@ -14,14 +14,10 @@ import { localService } from './local.service';
   providers: [localService],
 })
 export class AdminSearchComponent implements OnInit {
-  // isNewPage = false;
   pages: WebPage[] = [];
   idPage = '1';
-
   currentPage: WebPage;
   currentPath: string;
-
-  // searched = false;
 
   constructor(
     private httpReq: HttpRequestsService,
