@@ -18,23 +18,6 @@ export class PagesManagerService {
 
   constructor(private httpReq: HttpRequestsService) {}
 
-  comparePage(newPageForm: FormGroup) {
-    let url = newPageForm.value.url;
-    let pageAlreadyExist: boolean;
-    this.httpReq.compareNewPage(url).subscribe((response) => {
-      if (response.length) {
-        pageAlreadyExist = true;
-      } else {
-        pageAlreadyExist = false;
-      }
-    });
-    if (pageAlreadyExist) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   updatePage() {
     this.pages[this.currentId] = this.newPage;
     this.httpReq.updatePage(this.pages[this.currentId]);
@@ -68,9 +51,9 @@ export class PagesManagerService {
     this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
       console.log(response);
       if (response) {
-        this.httpReq.postPage(webPage);
-      } else {
         alert('This page already exist!');
+      } else {
+        this.httpReq.postPage(webPage);
       }
     });
   }

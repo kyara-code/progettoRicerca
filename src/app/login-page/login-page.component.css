@@ -6,3 +6,10 @@ input.ng-invalid.ng-touched {
   margin: 6px;
   border-radius: 10px;
 }
+
+.container {
+  margin-top: 70px;
+  border: 1px solid rgb(86, 86, 86);
+  border-radius: 10px;
+  width: 400px;
+}

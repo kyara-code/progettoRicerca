@@ -31,13 +31,17 @@ export class SinglePageEditComponent implements OnInit {
   ngOnInit(): void {
     this.newPageForm.patchValue(this.local.currentPage);
 
-    this.local.currentPath =
-      '/admin-search/' +
-      this.httpReq.searchInput +
-      '/&_page=' +
-      this.httpReq.pageNumber +
-      '&_limit=' +
-      this.httpReq.pageLimit;
+    if (this.httpReq.searchInput) {
+      this.local.currentPath =
+        '/admin-search/' +
+        this.httpReq.searchInput +
+        '/&_page=' +
+        this.httpReq.pageNumber +
+        '&_limit=' +
+        this.httpReq.pageLimit;
+    } else {
+      this.local.currentPath = '/admin-search';
+    }
   }
 
   onSubmit() {

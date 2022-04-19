@@ -1,36 +1,38 @@
-<div class="row justify-content-center">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-      <div class="form-group">
-        <div class="text-center">
-          <label for="username">Username</label>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group">
+          <div class="text-center">
+            <label for="username">Username</label>
+          </div>
+          <input
+            class="form-control"
+            type="text"
+            id="user"
+            ngModel
+            name="user"
+            required
+          />
+          <div class="text-center">
+            <label for="password">Password</label>
+          </div>
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+          />
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+              Submit
+            </button>
+          </div>
         </div>
-        <input
-          class="form-control"
-          type="text"
-          id="user"
-          ngModel
-          name="user"
-          required
-        />
-        <div class="text-center">
-          <label for="password">Password</label>
-        </div>
-        <input
-          class="form-control"
-          type="password"
-          id="password"
-          ngModel
-          name="password"
-          required
-          minlength="6"
-        />
-        <div class="text-center">
-          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
