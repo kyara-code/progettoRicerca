@@ -58,10 +58,10 @@
   <!-- Sezione di modifica -->
   <div [hidden]="!isNewPage">
     <app-single-page-edit
-      (addPageDone)="doneAddingPage($event)"
+      (addPageDone)="doneAddingPage()"
     ></app-single-page-edit>
   </div>
-  <!-- To-do: Modificare il form in modo che funzioni con il routing
+  <!-- To-do: Modificare il form in modo che funzioni con il routing (Notato che non riesco a pulire il form)
    -->
   <!-- <router-outlet></router-outlet> -->
 </div>

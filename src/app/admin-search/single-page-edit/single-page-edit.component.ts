@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 export class SinglePageEditComponent implements OnInit, OnDestroy {
   newPage: WebPage;
 
-  addPageDone = new EventEmitter<boolean>();
+  @Output() addPageDone = new EventEmitter<boolean>();
 
   newPageForm = new FormGroup({
     titolo: new FormControl(null, Validators.required),
@@ -38,43 +38,26 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   subscribtion: Subscription;
 
   ngOnInit(): void {
-    // if (this.pagesManagerService.isModify) {
     this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
       (newPage) => {
         this.newPage = newPage;
         this.newPageForm.patchValue(newPage);
-        console.log(newPage);
       }
     );
-    // }
   }
 
+  // Pulito il metodo e aggiunto il fatto che non si possano inserire pagine con lo stesso url
   onSubmit() {
+    //Parte di modifica
     if (this.pagesManagerService.isModify) {
-      const webPage = {
-        titolo: this.newPageForm.value.titolo,
-        descrizione: this.newPageForm.value.descrizione,
-        chiavi: this.newPageForm.value.chiavi,
-        url: this.newPageForm.value.url,
-        id: this.newPage.id,
-      };
-      this.pagesManagerService.newPage = webPage;
-      this.pagesManagerService.pagesModified.next(
-        this.pagesManagerService.updatePage()
-      );
+      this.pagesManagerService.modifyPage(this.newPageForm, this.newPage.id);
     } else {
-      const webPage = {
-        titolo: this.newPageForm.value.titolo,
-        descrizione: this.newPageForm.value.descrizione,
-        chiavi: this.newPageForm.value.chiavi,
-        url: this.newPageForm.value.url,
-      };
-      this.http.postPage(webPage);
+      // Parte di aggiunta nuova pagina
+      this.pagesManagerService.addNewPage(this.newPageForm);
     }
     this.pagesManagerService.isModify = false;
-    this.pagesManagerService.isPageModified = true;
+    this.addPageDone.emit();
     this.router.navigate(['/admin-search']);
-    this.addPageDone.emit(true);
   }
 
   ngOnDestroy() {
