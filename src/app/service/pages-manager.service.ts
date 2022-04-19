@@ -1,13 +1,12 @@
-import { assertPlatform, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpRequestsService } from './http-requests.service';
-import { NgForm, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { WebPage } from '../model/page.model';
 import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PagesManagerService {
   pages: WebPage[] = [];
-  pagesChanged = new Subject<WebPage>();
   pagesModified = new Subject<WebPage[]>();
   newSection = new Subject<WebPage[]>();
   isModify = false;
@@ -35,10 +34,6 @@ export class PagesManagerService {
     this.newPage = webPage;
     this.pagesModified.next(this.updatePage());
     this.isModify = false;
-  }
-
-  modifyPageUpdate(currentPage: WebPage) {
-    this.pagesChanged.next(currentPage);
   }
 
   addNewPage(newPageForm: FormGroup) {

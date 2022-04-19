@@ -34,13 +34,6 @@
       "chiavi": "matematica, università",
       "url": "https://www.mat.uniroma2.it/",
       "id": 5
-    },
-    {
-      "titolo": "Yahoo!",
-      "descrizione": "Motore di ricerca",
-      "chiavi": "domande",
-      "url": "www.yahoo.com",
-      "id": 6
     }
   ]
 }

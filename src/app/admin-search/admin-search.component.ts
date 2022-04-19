@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { AuthService } from './../service/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebPage } from './../model/page.model';
@@ -18,7 +18,8 @@ export class AdminSearchComponent implements OnInit {
   idPage = '1';
   currentPage: WebPage;
   currentPath: string;
-  subscription: Subscription;
+  firstSubscription: Subscription;
+  secondSubscription: Subscription;
 
   constructor(
     private httpReq: HttpRequestsService,
@@ -30,11 +31,11 @@ export class AdminSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.local.addPageDone.subscribe(() => {
+    this.firstSubscription = this.local.addPageDone.subscribe(() => {
       this.doneAddingPage();
     });
 
-    this.subscription = this.authService.autoExit.subscribe(() => {
+    this.secondSubscription = this.authService.autoExit.subscribe(() => {
       this.router.navigate(['/search']);
     });
 
@@ -107,6 +108,7 @@ export class AdminSearchComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.firstSubscription.unsubscribe();
+    this.secondSubscription.unsubscribe();
   }
 }
