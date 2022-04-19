@@ -1,16 +1,18 @@
+import { Subscription } from 'rxjs';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { WebPage } from './../model/page.model';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-display-pages',
   templateUrl: './display-pages.component.html',
   styleUrls: ['./display-pages.component.css'],
 })
-export class DisplayPagesComponent implements OnInit {
+export class DisplayPagesComponent implements OnInit, OnDestroy {
   arrayPages: WebPage[] = [];
   searchInput = '';
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,10 +26,15 @@ export class DisplayPagesComponent implements OnInit {
       this.httpReq.determineSections();
 
       let url = params['searchInput'] + params['id'];
-      console.log(url);
-      this.httpReq.onSearchWithParams(url).subscribe((response) => {
-        this.arrayPages = response;
-      });
+      this.subscription = this.httpReq
+        .onSearchWithParams(url)
+        .subscribe((response) => {
+          this.arrayPages = response;
+        });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

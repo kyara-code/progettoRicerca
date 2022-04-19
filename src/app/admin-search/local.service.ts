@@ -28,7 +28,6 @@ export class localService {
     this.searched = false;
     this.isNewPage = true;
     this.currentPage = page;
-    console.log(this.currentPage);
     this.pagesManagerService.currentId = idPage;
   }
 }

@@ -50,7 +50,7 @@ export class PagesManagerService {
     };
     this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
       console.log(response);
-      if (response) {
+      if (response.length) {
         alert('This page already exist!');
       } else {
         this.httpReq.postPage(webPage);

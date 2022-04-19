@@ -1,5 +1,5 @@
-import { Subscription } from 'rxjs';
-import { Router, Params, ActivatedRoute } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
+import { Params, ActivatedRoute } from '@angular/router';
 import { HttpRequestsService } from './../../service/http-requests.service';
 import { PagesManagerService } from './../../service/pages-manager.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -15,13 +15,15 @@ export class PaginationComponent implements OnInit, OnDestroy {
   currentClient: string;
   pageLimit = '3';
 
-  subscribe: Subscription = null;
+  subscribe1: Subscription;
+  subscribe2: Subscription;
+  subscribe3: Subscription;
+  subscribe4: Subscription;
 
   constructor(
     private pagesService: PagesManagerService,
     private route: ActivatedRoute,
-    public httpReq: HttpRequestsService,
-    private router: Router
+    public httpReq: HttpRequestsService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
     });
 
     let sections;
-    this.httpReq.updateSections.subscribe((number) => {
+    this.subscribe1 = this.httpReq.updateSections.subscribe((number) => {
       sections = +number;
       this.array = _.range(sections);
     });
@@ -46,7 +48,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onPrevious() {
     if (this.httpReq.pageNumber > 1) {
       this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
-      this.subscribe = this.httpReq.searchPage().subscribe((response) => {
+      this.subscribe2 = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);
       });
@@ -56,7 +58,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onNext() {
     if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
       this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
-      this.subscribe = this.httpReq.searchPage().subscribe((response) => {
+      this.subscribe3 = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);
       });
@@ -66,15 +68,24 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onChangePage(number: number) {
     this.httpReq.pageNumber = number + 1;
 
-    this.subscribe = this.httpReq.searchPage().subscribe((response) => {
+    this.subscribe4 = this.httpReq.searchPage().subscribe((response) => {
       this.pagesService.pages = response;
       this.pagesService.newSection.next(this.pagesService.pages);
     });
   }
 
   ngOnDestroy(): void {
-    if (this.subscribe) {
-      this.subscribe.unsubscribe();
+    if (this.subscribe1) {
+      this.subscribe1.unsubscribe();
+    }
+    if (this.subscribe2) {
+      this.subscribe2.unsubscribe();
+    }
+    if (this.subscribe3) {
+      this.subscribe3.unsubscribe();
+    }
+    if (this.subscribe4) {
+      this.subscribe4.unsubscribe();
     }
   }
 }

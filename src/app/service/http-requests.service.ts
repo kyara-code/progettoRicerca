@@ -1,19 +1,24 @@
 import { WebPage } from './../model/page.model';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpRequestsService {
+export class HttpRequestsService implements OnDestroy {
   pageNumber: number = 1;
   pageChanged = new Subject<number>();
   updateSections = new Subject<number>();
   searchInput = '';
   filterSearchValue = '';
   getReqCounter = 0;
+
+  subscribe1: Subscription;
+  subscribe2: Subscription;
+  subscribe3: Subscription;
+  subscribe4: Subscription;
 
   pageLimitChanged = new Subject<number>();
   pageLimit = '3';
@@ -48,7 +53,6 @@ export class HttpRequestsService {
 
   searchPage() {
     let section = this.pageNumber.toString();
-    console.log('Your search: ' + this.searchInput);
     return this.http.get<WebPage[]>(
       'http://localhost:3000/ricerca?q=' +
         this.searchInput +
@@ -66,7 +70,10 @@ export class HttpRequestsService {
           Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
-      .subscribe((response) => console.log(response));
+      .subscribe(
+        (response) => {}
+        // console.log(response)
+      );
   }
 
   postPage(webSite: WebPage) {
@@ -77,7 +84,7 @@ export class HttpRequestsService {
         }),
       })
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
       });
   }
 
@@ -90,12 +97,19 @@ export class HttpRequestsService {
         }),
       })
       .subscribe({
-        next: (response) => console.log(response),
-        error: (error) => console.log(error),
+        // next: (response) => console.log(response),
+        // error: (error) => console.log(error),
       });
   }
 
   compareNewPage(url: string) {
     return this.http.get<WebPage[]>('http://localhost:3000/ricerca?url=' + url);
+  }
+
+  ngOnDestroy(): void {
+    this.subscribe1.unsubscribe();
+    this.subscribe2.unsubscribe();
+    this.subscribe3.unsubscribe();
+    this.subscribe4.unsubscribe();
   }
 }
