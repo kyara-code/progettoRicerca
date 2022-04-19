@@ -1,16 +1,8 @@
 import { localService } from './../local.service';
 import { PagesManagerService } from '../../service/pages-manager.service';
 import { Router } from '@angular/router';
-import { WebPage } from './../../model/page.model';
 import { HttpRequestsService } from './../../service/http-requests.service';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -20,12 +12,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./single-page-edit.component.css'],
 })
 export class SinglePageEditComponent implements OnInit {
-  // newPage: WebPage;
-
-  // @Input() newPage: WebPage;
-  // @Input() path: string;
-  // @Output() addPageDone = new EventEmitter<boolean>();
-
   newPageForm = new FormGroup({
     titolo: new FormControl(null, Validators.required),
     url: new FormControl(null, Validators.required),

@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { PagesManagerService } from './../service/pages-manager.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -5,14 +6,14 @@ import { AuthService } from './../service/auth.service';
 import { WebPage } from './../model/page.model';
 import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-client-search',
   templateUrl: './client-search.component.html',
   styleUrls: ['./client-search.component.css'],
 })
-export class ClientSearchComponent implements OnInit {
+export class ClientSearchComponent implements OnInit, OnDestroy {
   pageNumber: number = 1;
   searched = false;
 
@@ -20,6 +21,7 @@ export class ClientSearchComponent implements OnInit {
   arrayPages: WebPage[] = [];
   search: string = null;
   authenticated: boolean = false;
+  subscription: Subscription;
 
   constructor(
     private httpReq: HttpRequestsService,
@@ -33,6 +35,10 @@ export class ClientSearchComponent implements OnInit {
   ngOnInit(): void {
     this.authenticated = this.auth.loggedIn;
     this.pagesService.currentClient = 'search';
+    this.subscription = this.auth.autoExit.subscribe(() => {
+      this.authenticated = false;
+      console.log(this.authenticated);
+    });
   }
 
   onSearch() {
@@ -58,5 +64,9 @@ export class ClientSearchComponent implements OnInit {
   logout() {
     this.authenticated = false;
     this.auth.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
