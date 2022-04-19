@@ -1,6 +1,6 @@
 <div class="container">
   <div class="contenitore">
-    <div class="buttonContainer">
+    <div class="buttonContainer container">
       <button type="button" class="btn btn-primary" (click)="onNavigateHome()">
         Home <i class="fa-solid fa-house"></i></button
       >|
@@ -8,7 +8,7 @@
         Logout <i class="fa-solid fa-user-large-slash"></i>
       </button>
     </div>
-    <div>
+    <div class="container left">
       <button
         *ngIf="!local.isNewPage"
         class="btn btn-warning"

@@ -1,6 +1,4 @@
 .btn {
-  margin: 10px;
-  margin-top: 5px;
   border-radius: 10px;
 }
 
@@ -25,8 +23,17 @@
   justify-content: space-between;
 }
 
+.btn,
 .icon {
   margin: 6px;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon {
   font-size: 20px;
   line-height: unset;
   cursor: pointer;
