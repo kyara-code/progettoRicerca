@@ -28,8 +28,10 @@
   margin: 6px;
 }
 
-.newpage-but {
-  color: #ced4da;
+.newpage-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .icon {
