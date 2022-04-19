@@ -65,6 +65,7 @@ export class AuthService {
 
   autoLogin() {
     this.token = JSON.parse(localStorage.getItem('token'));
+    this.accessToken = this.token.access_token;
     if (this.token !== null) {
       if (this.token.tokenExpireIn > 0) {
         this.loggedIn = true;

@@ -22,6 +22,7 @@ export class SinglePageEditComponent implements OnInit {
   // newPage: WebPage;
 
   @Input() newPage: WebPage;
+  @Input() path: string;
   @Output() addPageDone = new EventEmitter<boolean>();
 
   newPageForm = new FormGroup({
@@ -32,7 +33,7 @@ export class SinglePageEditComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpRequestsService,
+    private httpReq: HttpRequestsService,
     private router: Router,
     private pagesManagerService: PagesManagerService
   ) {}
@@ -40,26 +41,17 @@ export class SinglePageEditComponent implements OnInit {
   subscribtion: Subscription;
 
   ngOnInit(): void {
-    // this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
-    //   (newPage) => {
-    //     this.newPage = newPage;
-    //     this.newPageForm.patchValue(newPage);
-    //   }
-    // );ù
     this.newPageForm.patchValue(this.newPage);
   }
 
-  // Pulito il metodo e aggiunto il fatto che non si possano inserire pagine con lo stesso url
   onSubmit() {
-    //Parte di modifica
     if (this.pagesManagerService.isModify) {
       this.pagesManagerService.modifyPage(this.newPageForm, this.newPage.id);
     } else {
-      // Parte di aggiunta nuova pagina
       this.pagesManagerService.addNewPage(this.newPageForm);
     }
     this.pagesManagerService.isModify = false;
     this.addPageDone.emit();
-    this.router.navigate(['/admin-search']);
+    this.router.navigate(['/admin-search/' + this.path]);
   }
 }

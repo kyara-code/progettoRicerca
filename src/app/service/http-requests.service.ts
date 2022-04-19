@@ -63,7 +63,7 @@ export class HttpRequestsService {
     this.http
       .put('http://localhost:3000/ricerca/' + webPage.id, webPage, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.token,
+          Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
       .subscribe((response) => console.log(response));
@@ -73,7 +73,7 @@ export class HttpRequestsService {
     this.http
       .post('http://localhost:3000/ricerca', webSite, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.token,
+          Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
       .subscribe((response) => {
@@ -86,7 +86,7 @@ export class HttpRequestsService {
     this.http
       .delete('http://localhost:3000/ricerca/' + idPage, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.token,
+          Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
       .subscribe({

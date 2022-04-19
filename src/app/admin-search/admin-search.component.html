@@ -55,19 +55,10 @@
     </div>
   </div>
 
-  <!-- Sezione di modifica -->
-  <!-- <div [hidden]="!isNewPage">
-    <app-single-page-edit
-       
-    ></app-single-page-edit>
-  </div> -->
-  <!-- To-do: Modificare il form in modo che funzioni con il routing (Notato che non riesco a pulire il form)
-   -->
-  <!-- <router-outlet></router-outlet> -->
-
   <app-single-page-edit
     *ngIf="isNewPage"
     (addPageDone)="doneAddingPage()"
     [newPage]="currentPage"
+    [path]="currentPath"
   ></app-single-page-edit>
 </div>
