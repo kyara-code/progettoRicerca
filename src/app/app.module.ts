@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinglePageEditComponent } from './admin-search/single-page-edit/single-page-edit.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { DisplayPagesComponent } from './display-pages/display-pages.component';
+import { LogoComponent } from './shared/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DisplayPagesComponent } from './display-pages/display-pages.component';
     SinglePageEditComponent,
     PaginationComponent,
     DisplayPagesComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
