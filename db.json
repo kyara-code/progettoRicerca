@@ -1,11 +1,11 @@
 {
   "ricerca": [
     {
-      "id": 1,
-      "titolo": "Home Aubay. - Aubay |",
+      "titolo": "Home Aubay. - Aubay ",
       "descrizione": "Activity areas. Aubay lavora solo con i principali attori di mercato ed è particolarmente presente in quello bancario e assicurativo. Aubay lavora ...",
       "chiavi": "consulenza,it, angular",
-      "url": "https://www.aubay.it"
+      "url": "https://www.aubay.it",
+      "id": 1
     },
     {
       "id": 2,
@@ -15,11 +15,11 @@
       "url": "https://angular.io"
     },
     {
+      "id": 3,
       "titolo": "TypeScript: Typed JavaScript at Any Scale.",
       "descrizione": "JavaScript and More ... TypeScript is an open-source language which builds on JavaScript, one of the world's most used tools, by adding static type definitions.",
       "chiavi": "language,developing",
-      "url": "https://www.typescriptlang.org",
-      "id": 3
+      "url": "https://www.typescriptlang.org"
     },
     {
       "titolo": "Google",
@@ -37,7 +37,7 @@
     },
     {
       "titolo": "Yahoo!",
-      "descrizione": "Motore di ricerca",
+      "descrizione": "a",
       "chiavi": "domande",
       "url": "www.yahoo.com",
       "id": 8

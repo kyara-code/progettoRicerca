@@ -5,6 +5,7 @@ import { HttpRequestsService } from './../../service/http-requests.service';
 import {
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -17,9 +18,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './single-page-edit.component.html',
   styleUrls: ['./single-page-edit.component.css'],
 })
-export class SinglePageEditComponent implements OnInit, OnDestroy {
-  newPage: WebPage;
+export class SinglePageEditComponent implements OnInit {
+  // newPage: WebPage;
 
+  @Input() newPage: WebPage;
   @Output() addPageDone = new EventEmitter<boolean>();
 
   newPageForm = new FormGroup({
@@ -38,12 +40,13 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
   subscribtion: Subscription;
 
   ngOnInit(): void {
-    this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
-      (newPage) => {
-        this.newPage = newPage;
-        this.newPageForm.patchValue(newPage);
-      }
-    );
+    // this.subscribtion = this.pagesManagerService.pagesChanged.subscribe(
+    //   (newPage) => {
+    //     this.newPage = newPage;
+    //     this.newPageForm.patchValue(newPage);
+    //   }
+    // );ù
+    this.newPageForm.patchValue(this.newPage);
   }
 
   // Pulito il metodo e aggiunto il fatto che non si possano inserire pagine con lo stesso url
@@ -58,11 +61,5 @@ export class SinglePageEditComponent implements OnInit, OnDestroy {
     this.pagesManagerService.isModify = false;
     this.addPageDone.emit();
     this.router.navigate(['/admin-search']);
-  }
-
-  ngOnDestroy() {
-    if (this.pagesManagerService.isModify) {
-      this.subscribtion.unsubscribe();
-    }
   }
 }

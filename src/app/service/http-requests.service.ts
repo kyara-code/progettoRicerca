@@ -33,14 +33,16 @@ export class HttpRequestsService {
   }
 
   determineSections() {
-    // per evitare di trovare un miliardo di siti si puo mettere il limite di 10 sezioni:
-    // se è piu piccolo (il db) bene, senno si pone getReqCounter come il massimo (10)
     this.http
       .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
       .subscribe((response) => {
-        this.getReqCounter = Math.ceil(response.length / +this.pageLimit);
-        this.updateSections.next(this.getReqCounter);
-        console.log(this.getReqCounter);
+        if (response.length > 30) {
+          this.getReqCounter = 10;
+          this.updateSections.next(this.getReqCounter);
+        } else {
+          this.getReqCounter = Math.ceil(response.length / +this.pageLimit);
+          this.updateSections.next(this.getReqCounter);
+        }
       });
   }
 

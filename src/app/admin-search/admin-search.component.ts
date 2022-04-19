@@ -16,6 +16,8 @@ export class AdminSearchComponent implements OnInit {
   pages: WebPage[] = [];
   idPage = '1';
 
+  currentPage: WebPage;
+
   searched = false;
 
   constructor(
@@ -54,6 +56,7 @@ export class AdminSearchComponent implements OnInit {
 
   onNewPage() {
     this.isNewPage = true;
+    this.currentPage = null;
     this.router.navigate(['/admin-search/edit']);
   }
 
@@ -73,7 +76,9 @@ export class AdminSearchComponent implements OnInit {
 
   onModify(idPage: number, page: WebPage) {
     this.isNewPage = true;
-    this.pagesManagerService.modifyPageUpdate(page);
+    // this.pagesManagerService.modifyPageUpdate(page);
+    this.currentPage = page;
+    console.log(this.currentPage);
     this.pagesManagerService.currentId = idPage;
   }
 

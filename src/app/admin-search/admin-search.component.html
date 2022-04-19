@@ -11,7 +11,7 @@
     </div>
     <!-- Bottone New Page -->
     <div>
-      <button class="btn btn-warning" (click)="onNewPage()">
+      <button *ngIf="!isNewPage" class="btn btn-warning" (click)="onNewPage()">
         New Page <i class="fa-solid fa-circle-plus"></i>
       </button>
     </div>
@@ -56,12 +56,18 @@
   </div>
 
   <!-- Sezione di modifica -->
-  <div [hidden]="!isNewPage">
+  <!-- <div [hidden]="!isNewPage">
     <app-single-page-edit
-      (addPageDone)="doneAddingPage()"
+       
     ></app-single-page-edit>
-  </div>
+  </div> -->
   <!-- To-do: Modificare il form in modo che funzioni con il routing (Notato che non riesco a pulire il form)
    -->
   <!-- <router-outlet></router-outlet> -->
+
+  <app-single-page-edit
+    *ngIf="isNewPage"
+    (addPageDone)="doneAddingPage()"
+    [newPage]="currentPage"
+  ></app-single-page-edit>
 </div>
