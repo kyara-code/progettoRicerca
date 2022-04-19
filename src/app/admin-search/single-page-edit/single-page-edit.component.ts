@@ -67,6 +67,7 @@ export class SinglePageEditComponent implements OnInit {
     this.local.addPageDone.next();
     console.log(this.local.currentPath);
     this.local.isNewPage = false;
+    console.log(this.local.currentPath);
     this.router.navigate([this.local.currentPath]);
   }
 }
