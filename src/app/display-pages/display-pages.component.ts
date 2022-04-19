@@ -21,10 +21,7 @@ export class DisplayPagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      console.log(params['id']);
-
       this.httpReq.searchInput = params['searchInput'];
-      console.log(params['searchInput']);
       this.httpReq.getReqCounter = 0;
       this.httpReq.determineSections();
 

@@ -30,24 +30,19 @@ export class PaginationComponent implements OnInit, OnDestroy {
     //   this.pageLimit = newLimit;
     // });
 
-    console.log(this.route);
-
     this.route.params.subscribe((params: Params) => {
       let str = params['id'];
       if (str) {
         let n = str.length;
         let lastChar = str[n - 1];
         this.httpReq.pageLimit = lastChar;
-        console.log(lastChar);
       }
     });
 
     let sections;
     this.httpReq.updateSections.subscribe((number) => {
       sections = +number;
-      console.log('Section: ' + sections);
       this.array = _.range(sections);
-      console.log(this.array);
     });
 
     this.currentClient = this.pagesService.currentClient;
@@ -56,8 +51,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onPrevious() {
     if (this.httpReq.pageNumber > 1) {
       this.httpReq.pageNumber = this.httpReq.pageNumber - 1;
-      console.log('pageNumber onPrevious = ' + this.httpReq.pageNumber);
-      console.log('getReqCounter = ' + this.httpReq.getReqCounter);
       this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);
@@ -68,8 +61,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onNext() {
     if (this.httpReq.pageNumber < this.httpReq.getReqCounter) {
       this.httpReq.pageNumber = this.httpReq.pageNumber + 1;
-      console.log('pageNumber onNext = ' + this.httpReq.pageNumber);
-      console.log('getReqCounter = ' + this.httpReq.getReqCounter);
       this.subscribe = this.httpReq.searchPage().subscribe((response) => {
         this.pagesService.pages = response;
         this.pagesService.newSection.next(this.pagesService.pages);

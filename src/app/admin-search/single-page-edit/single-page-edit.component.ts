@@ -1,3 +1,4 @@
+import { localService } from './../local.service';
 import { PagesManagerService } from '../../service/pages-manager.service';
 import { Router } from '@angular/router';
 import { WebPage } from './../../model/page.model';
@@ -21,9 +22,9 @@ import { Subscription } from 'rxjs';
 export class SinglePageEditComponent implements OnInit {
   // newPage: WebPage;
 
-  @Input() newPage: WebPage;
-  @Input() path: string;
-  @Output() addPageDone = new EventEmitter<boolean>();
+  // @Input() newPage: WebPage;
+  // @Input() path: string;
+  // @Output() addPageDone = new EventEmitter<boolean>();
 
   newPageForm = new FormGroup({
     titolo: new FormControl(null, Validators.required),
@@ -35,23 +36,37 @@ export class SinglePageEditComponent implements OnInit {
   constructor(
     private httpReq: HttpRequestsService,
     private router: Router,
-    private pagesManagerService: PagesManagerService
+    private pagesManagerService: PagesManagerService,
+    private local: localService
   ) {}
 
   subscribtion: Subscription;
 
   ngOnInit(): void {
-    this.newPageForm.patchValue(this.newPage);
+    this.newPageForm.patchValue(this.local.currentPage);
+
+    this.local.currentPath =
+      '/admin-search/' +
+      this.httpReq.searchInput +
+      '/&_page=' +
+      this.httpReq.pageNumber +
+      '&_limit=' +
+      this.httpReq.pageLimit;
   }
 
   onSubmit() {
     if (this.pagesManagerService.isModify) {
-      this.pagesManagerService.modifyPage(this.newPageForm, this.newPage.id);
+      this.pagesManagerService.modifyPage(
+        this.newPageForm,
+        this.local.currentPage.id
+      );
     } else {
       this.pagesManagerService.addNewPage(this.newPageForm);
     }
     this.pagesManagerService.isModify = false;
-    this.addPageDone.emit();
-    this.router.navigate(['/admin-search/' + this.path]);
+    this.local.addPageDone.next();
+    console.log(this.local.currentPath);
+    this.local.isNewPage = false;
+    this.router.navigate([this.local.currentPath]);
   }
 }

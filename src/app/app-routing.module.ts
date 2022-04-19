@@ -8,6 +8,7 @@ import { ClientSearchComponent } from './client-search/client-search.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth-guard.service';
+import { DisplayComponent } from './admin-search/display/display.component';
 
 const appRoute: Routes = [
   { path: '', component: ClientSearchComponent, pathMatch: 'full' },
@@ -29,7 +30,7 @@ const appRoute: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'edit', component: SinglePageEditComponent },
-      { path: ':searchInput/:id', component: DisplayPagesComponent },
+      { path: ':searchInput/:id', component: DisplayComponent },
     ],
   },
   { path: '**', redirectTo: '/error' },

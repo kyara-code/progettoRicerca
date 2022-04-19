@@ -43,10 +43,7 @@ export class ClientSearchComponent implements OnInit {
     this.router.navigate([
       '/search',
       this.httpReq.searchInput,
-      '&_page=' +
-        +this.httpReq.pageNumber +
-        '&_limit=' +
-        this.httpReq.pageLimit,
+      '&_page=' + '1' + '&_limit=' + this.httpReq.pageLimit,
     ]);
   }
 

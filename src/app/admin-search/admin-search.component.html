@@ -11,7 +11,11 @@
     </div>
     <!-- Bottone New Page -->
     <div>
-      <button *ngIf="!isNewPage" class="btn btn-warning" (click)="onNewPage()">
+      <button
+        *ngIf="!local.isNewPage"
+        class="btn btn-warning"
+        (click)="onNewPage()"
+      >
         New Page <i class="fa-solid fa-circle-plus"></i>
       </button>
     </div>
@@ -39,8 +43,8 @@
 
   <!-- Lista siti web -->
   <div class="container">
-    <div class="pageList" *ngIf="!isNewPage">
-      <div class="row">
+    <div class="pageList">
+      <!-- <div class="row">
         <app-admin-single-page
           *ngFor="let page of pages; let i = index"
           [singlePage]="page"
@@ -48,17 +52,8 @@
           (idPageDelete)="onDelete($event, i)"
           (idPageModify)="onModify(i, $event)"
         ></app-admin-single-page>
-      </div>
-    </div>
-    <div>
-      <app-pagination *ngIf="searched"></app-pagination>
+      </div> -->
+      <router-outlet></router-outlet>
     </div>
   </div>
-
-  <app-single-page-edit
-    *ngIf="isNewPage"
-    (addPageDone)="doneAddingPage()"
-    [newPage]="currentPage"
-    [path]="currentPath"
-  ></app-single-page-edit>
 </div>

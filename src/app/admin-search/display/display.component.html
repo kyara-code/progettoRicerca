@@ -1,1 +1,13 @@
-<p>display works!</p>
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <app-admin-single-page
+      *ngFor="let page of arrayPages; let i = index"
+      [singlePage]="page"
+      [currentId]="i"
+      (idPageDelete)="onDelete($event, i)"
+      (idPageModify)="onModify(i, $event)"
+    ></app-admin-single-page>
+
+    <app-pagination></app-pagination>
+  </div>
+</div>

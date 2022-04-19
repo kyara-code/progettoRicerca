@@ -61,6 +61,7 @@ export class PagesManagerService {
     };
     this.newPage = webPage;
     this.pagesModified.next(this.updatePage());
+    this.isModify = false;
   }
 
   // Ho cambiato il nome di questo metodo, aggiorna la lista delle pagine con le modifiche fatte
@@ -80,13 +81,15 @@ export class PagesManagerService {
     this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
       console.log(response);
       if (response) {
-        this.isNewPage = true;
+        this.httpReq.postPage(webPage);
+      } else {
+        alert('This page already exist!');
       }
     });
-    if (this.isNewPage) {
-      this.httpReq.postPage(webPage);
-    } else {
-      alert('This page already exist!');
-    }
+    // if (this.isNewPage) {
+    //   this.httpReq.postPage(webPage);
+    // } else {
+    //   alert('This page already exist!');
+    // }
   }
 }

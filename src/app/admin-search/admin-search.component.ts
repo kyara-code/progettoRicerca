@@ -6,51 +6,41 @@ import { NgForm } from '@angular/forms';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { Component, OnInit } from '@angular/core';
 import { PagesManagerService } from '../service/pages-manager.service';
+import { localService } from './local.service';
 @Component({
   selector: 'app-admin-search',
   templateUrl: './admin-search.component.html',
   styleUrls: ['./admin-search.component.css'],
+  providers: [localService],
 })
 export class AdminSearchComponent implements OnInit {
-  isNewPage = false;
+  // isNewPage = false;
   pages: WebPage[] = [];
   idPage = '1';
 
   currentPage: WebPage;
   currentPath: string;
 
-  searched = false;
+  // searched = false;
 
   constructor(
     private httpReq: HttpRequestsService,
     private router: Router,
     private route: ActivatedRoute,
     public pagesManagerService: PagesManagerService,
-    private authService: AuthService
+    private authService: AuthService,
+    public local: localService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      console.log(params['id']); //unde
-
-      this.httpReq.searchInput = params['searchInput'];
-      console.log(params['searchInput']); //und
-      this.httpReq.getReqCounter = 0;
-      this.httpReq.determineSections();
-
-      let url = params['searchInput'] + params['id'];
-      console.log(url); //NaN
-      this.httpReq.onSearchWithParams(url).subscribe((response) => {
-        this.pages = response;
-      });
+    this.local.addPageDone.subscribe(() => {
+      this.doneAddingPage();
     });
 
     this.authService.autoExit.subscribe(() => {
       this.router.navigate(['/search']);
     });
-    this.pagesManagerService.newSection.subscribe((pagesOfThisSection) => {
-      this.pages = pagesOfThisSection;
-    });
+
     this.pagesManagerService.currentClient = 'admin-search';
 
     this.pagesManagerService.pagesModified.subscribe((pages) => {
@@ -59,29 +49,27 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onSearch(searchForm: NgForm) {
-    this.searched = true;
-    this.isNewPage = false;
+    this.local.searched = true;
+    this.local.isNewPage = false;
     this.httpReq.searchInput = searchForm.value.searchInput;
     this.httpReq.getReqCounter = 0;
     this.httpReq.determineSections();
     this.httpReq.searchPage().subscribe((response) => {
       this.pages = response;
     });
-    this.currentPath =
+
+    this.local.currentPath =
+      '/admin-search/' +
       this.httpReq.searchInput +
       '/&_page=' +
-      +this.httpReq.pageNumber +
+      '1' +
       '&_limit=' +
       this.httpReq.pageLimit;
-    console.log(this.currentPath);
 
     this.router.navigate([
       '/admin-search',
       this.httpReq.searchInput,
-      '&_page=' +
-        +this.httpReq.pageNumber +
-        '&_limit=' +
-        this.httpReq.pageLimit,
+      '&_page=' + '1' + '&_limit=' + this.httpReq.pageLimit,
     ]);
   }
 
@@ -90,11 +78,16 @@ export class AdminSearchComponent implements OnInit {
   }
 
   onNewPage() {
-    this.isNewPage = true;
-    this.currentPage = null;
-    this.searched = false;
+    this.local.isNewPage = true;
+    this.local.currentPage = null;
+    this.local.searched = false;
     this.route.params.subscribe((params: Params) => {
-      this.currentPath = params['searchInput'] + '/' + params['id'];
+      if (params['searchInput'] && params['id']) {
+        this.local.currentPath =
+          '/admin-search/' + params['searchInput'] + '/' + params['id'];
+      } else {
+        this.local.currentPath = '/admin-search';
+      }
     });
     this.router.navigate(['/admin-search/edit']);
   }
@@ -108,23 +101,9 @@ export class AdminSearchComponent implements OnInit {
     this.onNavigateHome();
   }
 
-  onDelete(idPage: number, i: number) {
-    this.pages.splice(i, 1);
-    this.httpReq.deletePage(idPage);
-  }
-
-  onModify(idPage: number, page: WebPage) {
-    this.searched = false;
-    this.isNewPage = true;
-    // this.pagesManagerService.modifyPageUpdate(page);
-    this.currentPage = page;
-    console.log(this.currentPage);
-    this.pagesManagerService.currentId = idPage;
-  }
-
   doneAddingPage() {
-    this.searched = true;
-    this.isNewPage = false;
+    this.local.searched = true;
+    this.local.isNewPage = false;
     this.httpReq.onSearchWithParams(this.currentPath).subscribe((response) => {
       this.pages = response;
     });
