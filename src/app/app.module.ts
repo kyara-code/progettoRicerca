@@ -17,6 +17,7 @@ import { SinglePageEditComponent } from './admin-search/single-page-edit/single-
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { DisplayPagesComponent } from './display-pages/display-pages.component';
 import { LogoComponent } from './shared/logo/logo.component';
+import { DisplayComponent } from './admin-search/display/display.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LogoComponent } from './shared/logo/logo.component';
     PaginationComponent,
     DisplayPagesComponent,
     LogoComponent,
+    DisplayComponent,
   ],
   imports: [
     BrowserModule,
