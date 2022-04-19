@@ -28,6 +28,9 @@ export class AdminSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authService.autoExit.subscribe(() => {
+      this.router.navigate(['/search']);
+    });
     this.pagesManagerService.newSection.subscribe((pagesOfThisSection) => {
       this.pages = pagesOfThisSection;
     });
@@ -46,7 +49,10 @@ export class AdminSearchComponent implements OnInit {
     this.router.navigate([
       '/admin-search',
       this.httpReq.searchInput,
-      '&_page=' + +this.httpReq.pageNumber + '&_limit=3',
+      '&_page=' +
+        +this.httpReq.pageNumber +
+        '&_limit=' +
+        this.httpReq.pageLimit,
     ]);
   }
 
