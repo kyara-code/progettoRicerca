@@ -64,7 +64,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
   }
 
-  @HostListener('keydown.ArrowRight') onForward() {
+  onForward() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.cactusX - 10 > -50) {
       this.cactusX = this.cactusX - 10;

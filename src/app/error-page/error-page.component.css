@@ -2,6 +2,17 @@
   margin: 10px;
 }
 
+canvas {
+  width: 500;
+  height: 250px;
+}
+
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .animation-container {
   margin: 20px;
   height: 100px;
