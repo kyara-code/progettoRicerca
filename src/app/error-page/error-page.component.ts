@@ -44,14 +44,15 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.isAnimationOn = true;
     this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.img1 = new Image(30, 30); // Create new img element
+    this.img1 = new Image(30, 30);
     this.img1.src = 'assets/img/dino.png';
 
     this.img2 = new Image(17, 30);
     this.img2.src = 'assets/img/cactus.png';
 
-    // this.ctx.drawImage(this.img1, 30, 0);
-    this.ctx.drawImage(this.img2, 40, 0);
+    // this.ctx.drawImage(this.img1, 0, 0);
+    // this.ctx.globalAlpha = 0.5;
+    this.ctx.drawImage(this.img2, 0, 0, 30, 30);
   }
 
   @HostListener('keyup.Space') onJump() {
