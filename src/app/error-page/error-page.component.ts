@@ -89,7 +89,6 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   salita() {
     this.subscribe2 = interval(100).subscribe(() => {
-      console.log('parto');
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       while (this.dinoY > -80) {
         this.dinoY = this.dinoY - 20;
@@ -101,7 +100,6 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   discesa() {
     this.subscribe3 = interval(100).subscribe(() => {
-      console.log('parto2');
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       while (this.dinoY < 0) {
         this.dinoY = this.dinoY + 40;
@@ -121,6 +119,9 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
       this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
     }
     this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
+    if (this.cactusX < 75 && this.dinoY > -20) {
+      this.isGameOver = true;
+    }
   }
 
   onStopAnimation() {
