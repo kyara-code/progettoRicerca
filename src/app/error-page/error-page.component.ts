@@ -47,8 +47,9 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   }
 
   onStart() {
-    this.isAnimationOn = false;
+    this.isGameOver = false;
     this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    this.cactusX = this.canvas.width - 50;
     this.ctx = this.canvas.getContext('2d');
     this.img1 = new Image(30, 30);
     this.img1.src = 'assets/img/dino.png';
@@ -69,7 +70,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   // mettere cactus e dinosauro allo stesso livello
 
-  @HostListener('keyup.Space') onJump() {
+  @HostListener('keydown.ArrowUp') onJump() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.dinoY = this.dinoY === 0 ? -80 : 0;
     this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
@@ -80,10 +81,10 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
       this.subscribe2.unsubscribe();
       setTimeout(() => {
         this.discesa();
-      }, 500);
+      }, 700);
       setTimeout(() => {
         this.subscribe3.unsubscribe();
-      }, 800);
+      }, 1000);
     }, 400);
   }
 
@@ -119,15 +120,22 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
       this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
     }
     this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
-    if (this.cactusX < 75 && this.dinoY > -20) {
+    if (this.cactusX < 55 && this.dinoY > -20) {
+      this.onStopAnimation();
       this.isGameOver = true;
     }
   }
 
   onStopAnimation() {
-    this.isAnimationOn = !this.isAnimationOn;
     if (this.subscribe) {
       this.subscribe.unsubscribe();
+    }
+
+    if (this.subscribe2) {
+      this.subscribe2.unsubscribe();
+    }
+    if (this.subscribe3) {
+      this.subscribe3.unsubscribe();
     }
   }
 
