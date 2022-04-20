@@ -34,17 +34,13 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
       this.authTriedBefore = true;
     }
 
-    // interval(300).subscribe((count) => {
-    //   let bottomFire = this.fire.nativeElement.getBoundingClientRect().bottom;
-    //   let leftSnowman = this.snowman.nativeElement.getBoundingClientRect().left;
-    //   let leftFire = this.fire.nativeElement.getBoundingClientRect().left;
-    //   let bottomSnowman =
-    //     this.fire.nativeElement.getBoundingClientRect().bottom;
-    //   if (leftFire === leftSnowman) {
-    //     console.log('game over');
-    //     this.isGameOver = true;
-    //   }
-    // });
+    const canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image(50, 50); // Create new img element
+    img.src =
+      'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chromium_T-Rex-error-offline.png';
+    ctx.drawImage(img, 0, 0);
+    // img.src = '../../assets/img/dino.png';
   }
 
   onJump() {
