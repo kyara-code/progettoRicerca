@@ -56,14 +56,6 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
       this.pages = response;
     });
 
-    this.local.currentPath =
-      '/admin-search/' +
-      this.httpReq.searchInput +
-      '/&_page=' +
-      '1' +
-      '&_limit=' +
-      this.httpReq.pageLimit;
-
     this.router.navigate([
       '/admin-search',
       this.httpReq.searchInput,
@@ -79,14 +71,7 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
     this.local.isNewPage = true;
     this.local.currentPage = null;
     this.local.searched = false;
-    this.route.params.subscribe((params: Params) => {
-      if (params['searchInput'] && params['id']) {
-        this.local.currentPath =
-          '/admin-search/' + params['searchInput'] + '/' + params['id'];
-      } else {
-        this.local.currentPath = '/admin-search';
-      }
-    });
+
     this.router.navigate(['/admin-search/edit']);
   }
 

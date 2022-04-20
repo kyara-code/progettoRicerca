@@ -24,16 +24,26 @@ export class DisplayComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log('display is alive');
     this.route.params.subscribe((params: Params) => {
       this.httpReq.searchInput = params['searchInput'];
       this.httpReq.getReqCounter = 0;
       this.httpReq.determineSections();
+
+      this.local.currentPath =
+        '/admin-search/' + params['searchInput'] + '/' + params['id'];
+
       let url = params['searchInput'] + params['id'];
+
+      console.log('url: ' + url);
+      console.log('currentpath: ' + this.local.currentPath);
       this.httpReq.onSearchWithParams(url).subscribe((response) => {
         this.local.pages = response;
         this.arrayPages = this.local.pages;
+        console.log(response);
       });
     });
+
     this.subscribe = this.pagesService.newSection.subscribe(
       (pagesOfThisSection) => {
         this.local.pages = pagesOfThisSection;

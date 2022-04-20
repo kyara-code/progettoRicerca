@@ -1,3 +1,4 @@
+import { PagesManagerService } from 'src/app/service/pages-manager.service';
 import { WebPage } from './../model/page.model';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -60,36 +61,27 @@ export class HttpRequestsService implements OnDestroy {
           Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
-      .subscribe(
-        (response) => {}
-        // console.log(response)
-      );
+      .subscribe((response) => {});
   }
 
   postPage(webSite: WebPage) {
     this.http
-      .post('http://localhost:3000/ricerca', webSite, {
+      .post<WebPage>('http://localhost:3000/ricerca', webSite, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
-      .subscribe((response) => {
-        // console.log(response);
-      });
+      .subscribe((response) => {});
   }
 
   deletePage(idPage: number) {
-    console.log('Service attivo');
     this.http
       .delete('http://localhost:3000/ricerca/' + idPage, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
-      .subscribe({
-        // next: (response) => console.log(response),
-        // error: (error) => console.log(error),
-      });
+      .subscribe({});
   }
 
   compareNewPage(url: string) {

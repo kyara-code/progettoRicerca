@@ -10,7 +10,7 @@ export class localService {
   searched: boolean = false;
   isNewPage: boolean = false;
   currentPage: WebPage;
-  currentPath: string;
+  currentPath: string = '/admin-search';
 
   addPageDone = new Subject<void>();
 
