@@ -78,11 +78,13 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.salita();
     setTimeout(() => {
       this.subscribe2.unsubscribe();
-      this.discesa();
+      setTimeout(() => {
+        this.discesa();
+      }, 500);
+      setTimeout(() => {
+        this.subscribe3.unsubscribe();
+      }, 800);
     }, 400);
-    setTimeout(() => {
-      this.subscribe3.unsubscribe();
-    }, 800);
   }
 
   salita() {
@@ -102,7 +104,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
       console.log('parto2');
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       while (this.dinoY < 0) {
-        this.dinoY = this.dinoY + 20;
+        this.dinoY = this.dinoY + 40;
         this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
         this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
       }
