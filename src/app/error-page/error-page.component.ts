@@ -18,6 +18,10 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   @ViewChild('snowman') snowman: ElementRef = null;
   @ViewChild('fire') fire: ElementRef = null;
 
+  canvas;
+  ctx;
+  img;
+
   error = null;
   authTriedBefore = false;
 
@@ -36,16 +40,18 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   }
 
   onStart() {
-    const canvas = <HTMLCanvasElement>document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image(); // Create new img element
-    img.src =
+    this.isAnimationOn = true;
+    this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.img = new Image(); // Create new img element
+    this.img.src =
       'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chromium_T-Rex-error-offline.png';
-    console.log(img.src);
-    ctx.drawImage(img, 0, 0);
+    this.ctx.drawImage(this.img, 0, 0);
   }
 
-  onJump() {}
+  @HostListener('keyup.Space') onJump() {
+    alert('parto!');
+  }
 
   onStopAnimation() {
     this.isAnimationOn = !this.isAnimationOn;
