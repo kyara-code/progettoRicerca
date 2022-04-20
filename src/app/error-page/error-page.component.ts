@@ -20,7 +20,8 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   canvas;
   ctx;
-  img;
+  img1;
+  img2;
 
   error = null;
   authTriedBefore = false;
@@ -43,20 +44,19 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.isAnimationOn = true;
     this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.img = new Image(30, 30); // Create new img element
-    this.img.src =
-      'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chromium_T-Rex-error-offline.png';
-    this.ctx.drawImage(this.img, 30, 0);
+    this.img1 = new Image(30, 30); // Create new img element
+    this.img1.src = 'assets/img/dino.png';
+
+    this.img2 = new Image(17, 30);
+    this.img2.src = 'assets/img/cactus.png';
+
+    // this.ctx.drawImage(this.img1, 30, 0);
+    this.ctx.drawImage(this.img2, 40, 0);
   }
 
   @HostListener('keyup.Space') onJump() {
     alert('parto!');
-    requestAnimationFrame(() => {
-      let cactusImg = new Image();
-      cactusImg.src =
-        'https://static.wikia.nocookie.net/trex-runner/images/9/96/Cactusdisplay.png/revision/latest/smart/width/250/height/250?cb=20190423055903';
-      this.ctx.drawImage(cactusImg, 100, 0);
-    });
+    requestAnimationFrame(() => {});
   }
 
   onStopAnimation() {
