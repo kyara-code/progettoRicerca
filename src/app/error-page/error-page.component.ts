@@ -50,9 +50,8 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.img2 = new Image(17, 30);
     this.img2.src = 'assets/img/cactus.png';
 
-    // this.ctx.drawImage(this.img1, 0, 0);
-    // this.ctx.globalAlpha = 0.5;
-    this.ctx.drawImage(this.img2, 0, 0, 30, 30);
+    this.ctx.drawImage(this.img2, 60, 0, 120, 210);
+    this.ctx.drawImage(this.img1, 0, 0);
   }
 
   @HostListener('keyup.Space') onJump() {
