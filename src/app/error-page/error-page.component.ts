@@ -23,6 +23,9 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   img1;
   img2;
 
+  cactusX = 60;
+  dinoY = 0;
+
   error = null;
   authTriedBefore = false;
 
@@ -50,13 +53,27 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.img2 = new Image(17, 30);
     this.img2.src = 'assets/img/cactus.png';
 
-    this.ctx.drawImage(this.img2, 60, 0, 120, 210);
-    this.ctx.drawImage(this.img1, 0, 0);
+    this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+    this.ctx.drawImage(this.img1, 0, this.dinoY);
   }
 
   @HostListener('keyup.Space') onJump() {
-    alert('parto!');
-    requestAnimationFrame(() => {});
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.dinoY = this.dinoY === 0 ? -40 : 0;
+    this.ctx.drawImage(this.img1, 0, this.dinoY);
+    this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+  }
+
+  @HostListener('keydown.ArrowRight') onForward() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.cactusX - 10 > -50) {
+      this.cactusX = this.cactusX - 10;
+      this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+    } else {
+      this.cactusX = this.canvas.width - 50;
+      this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+    }
+    this.ctx.drawImage(this.img1, 0, 0);
   }
 
   onStopAnimation() {
