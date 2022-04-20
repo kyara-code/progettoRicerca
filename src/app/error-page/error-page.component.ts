@@ -34,6 +34,9 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   subscribe: Subscription = null;
   isGameOver: boolean = false;
 
+  subscribe2: Subscription = null;
+  subscribe3: Subscription = null;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -44,7 +47,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   }
 
   onStart() {
-    this.isAnimationOn = true;
+    this.isAnimationOn = false;
     this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
     this.img1 = new Image(30, 30);
@@ -53,8 +56,8 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.img2 = new Image(17, 30);
     this.img2.src = 'assets/img/cactus.png';
 
-    this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
-    this.ctx.drawImage(this.img1, 0, this.dinoY);
+    this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
+    this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
 
     if (this.subscribe) {
       this.subscribe.unsubscribe();
@@ -64,22 +67,58 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  // mettere cactus e dinosauro allo stesso livello
+
   @HostListener('keyup.Space') onJump() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.dinoY = this.dinoY === 0 ? -40 : 0;
-    this.ctx.drawImage(this.img1, 0, this.dinoY);
-    this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+    this.dinoY = this.dinoY === 0 ? -80 : 0;
+    this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
+    this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
+
+    this.salita();
+    setTimeout(() => {
+      this.subscribe2.unsubscribe();
+      this.discesa();
+    }, 400);
+    setTimeout(() => {
+      this.subscribe3.unsubscribe();
+    }, 800);
   }
+
+  salita() {
+    this.subscribe2 = interval(100).subscribe(() => {
+      console.log('parto');
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      while (this.dinoY > -80) {
+        this.dinoY = this.dinoY - 20;
+        this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
+        this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
+      }
+    });
+  }
+
+  discesa() {
+    this.subscribe3 = interval(100).subscribe(() => {
+      console.log('parto2');
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      while (this.dinoY < 0) {
+        this.dinoY = this.dinoY + 20;
+        this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
+        this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
+      }
+    });
+  }
+
   onForward() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.cactusX - 10 > -50) {
       this.cactusX = this.cactusX - 10;
-      this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+      this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
     } else {
       this.cactusX = this.canvas.width - 50;
-      this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
+      this.ctx.drawImage(this.img2, this.cactusX, 17, 120, 210);
     }
-    this.ctx.drawImage(this.img1, 0, 0);
+    this.ctx.drawImage(this.img1, 0, this.dinoY, 150, 150);
   }
 
   onStopAnimation() {
