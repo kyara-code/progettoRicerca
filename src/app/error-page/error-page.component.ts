@@ -33,25 +33,19 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     if (this.error.status !== 'Unknown Route') {
       this.authTriedBefore = true;
     }
+  }
 
+  onStart() {
     const canvas = <HTMLCanvasElement>document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const img = new Image(50, 50); // Create new img element
+    const img = new Image(); // Create new img element
     img.src =
       'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chromium_T-Rex-error-offline.png';
+    console.log(img.src);
     ctx.drawImage(img, 0, 0);
-    // img.src = '../../assets/img/dino.png';
   }
 
-  onJump() {
-    this.isJumping = true;
-    setTimeout(() => {
-      this.isJumping = false;
-    }, 800);
-
-    console.log(this.fire.nativeElement.getBoundingClientRect().bottom);
-    console.log(this.snowman.nativeElement.getBoundingClientRect().bottom);
-  }
+  onJump() {}
 
   onStopAnimation() {
     this.isAnimationOn = !this.isAnimationOn;

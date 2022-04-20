@@ -11,8 +11,7 @@
     <!-- router link che rimanda alla pagina di login
       distingui errore per accesso alla pag admin o errore per pagina non esistente -->
   </div>
-  <div class="animation-container">
-    <!-- <i class="fa-solid fa-fire-flame-curved"></i> -->
+  <!-- <div class="animation-container">
     <div
       [ngClass]="{
         'snowman-not-animation': !isJumping,
@@ -24,17 +23,18 @@
     </div>
     <i class="fa-solid fa-fire animation-fire" #fire></i>
   </div>
-
-  <!-- bottone stop animazione da implementare in seguito -->
   <div style="display: flex; justify-content: right; width: 100%">
     <button class="btn btn-default" (click)="onStopAnimation()">
       <i class="fa-solid fa-stop" *ngIf="isAnimationOn"></i>
       <i class="fa-solid fa-play" *ngIf="!isAnimationOn"></i>
       Animazione
     </button>
-  </div>
+  </div> 
 
   <h3 *ngIf="isGameOver">Game Over</h3>
-</div>
+</div> -->
 
-<canvas id="canvas"> </canvas>
+  <button class="btn btn-success" (click)="onStart()">Start</button>
+  <br />
+  <canvas id="canvas"> </canvas>
+</div>
