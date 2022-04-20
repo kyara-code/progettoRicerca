@@ -55,6 +55,13 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
     this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
     this.ctx.drawImage(this.img1, 0, this.dinoY);
+
+    if (this.subscribe) {
+      this.subscribe.unsubscribe();
+    }
+    this.subscribe = interval(100).subscribe(() => {
+      this.onForward();
+    });
   }
 
   @HostListener('keyup.Space') onJump() {
@@ -63,8 +70,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
     this.ctx.drawImage(this.img1, 0, this.dinoY);
     this.ctx.drawImage(this.img2, this.cactusX, 0, 120, 210);
   }
-
-  @HostListener('keydown.ArrowRight') onForward() {
+  onForward() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.cactusX - 10 > -50) {
       this.cactusX = this.cactusX - 10;
