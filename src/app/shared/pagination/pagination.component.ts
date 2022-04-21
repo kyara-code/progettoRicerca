@@ -90,10 +90,12 @@ export class PaginationComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.httpReq.determineSections();
     let sections;
     this.subscribe1 = this.httpReq.updateSections.subscribe((number) => {
       sections = +number;
       this.array = _.range(sections);
+      this.httpReq.getReqCounter = number;
     });
 
     this.currentClient = this.pagesService.currentClient;

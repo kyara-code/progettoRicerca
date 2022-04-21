@@ -31,7 +31,6 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
         let n = str.length;
         let lastChar = str[n - 1];
         let numberOfPages = str[n - 10];
-        console.log(numberOfPages);
         if (lastChar !== '0') {
           if (numberOfPages <= this.httpReq.getReqCounter) {
             this.subscription = this.httpReq
