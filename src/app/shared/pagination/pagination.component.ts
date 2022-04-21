@@ -26,58 +26,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
     public httpReq: HttpRequestsService
   ) {}
 
-  // let str = params['id'];
-  //     if (str) {
-  //       let n = str.length;
-  //       let lastChar = str[n - 1];
-  //       let numberOfPages = str[n - 10];
-  //       console.log(numberOfPages);
-  //       if (lastChar !== '0') {
-  //         if (numberOfPages <= this.httpReq.getReqCounter) {
-  //           this.subscription = this.httpReq
-  //             .onSearchWithParams(this.httpReq.searchInput + str)
-  //             .subscribe((response) => {
-  //               this.array = response;
-  //             });
-  //           this.router.navigate([
-  //             '/admin-search/' + this.httpReq.searchInput + '/' + params['id'],
-  //           ]);
-  //         } else {
-  //           let newstr = '&_page=1&_limit=' + lastChar;
-  //           this.subscription = this.httpReq
-  //             .onSearchWithParams(this.httpReq.searchInput + newstr)
-  //             .subscribe((response) => {
-  //               this.array = response;
-  //             });
-  //           this.router.navigate([
-  //             '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
-  //           ]);
-  //         }
-  //       } else {
-  //         if (numberOfPages <= this.httpReq.getReqCounter) {
-  //           let newstr = '&_page=' + numberOfPages + '&_limit=3';
-  //           this.subscription = this.httpReq
-  //             .onSearchWithParams(this.httpReq.searchInput + newstr)
-  //             .subscribe((response) => {
-  //               this.array = response;
-  //             });
-  //           this.router.navigate([
-  //             '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
-  //           ]);
-  //         } else {
-  //           let newstr = '&_page=1&_limit=3';
-  //           this.subscription = this.httpReq
-  //             .onSearchWithParams(this.httpReq.searchInput + newstr)
-  //             .subscribe((response) => {
-  //               this.array = response;
-  //             });
-  //           this.router.navigate([
-  //             '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
-  //           ]);
-  //         }
-  //       }
-  //     }
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       let str = params['id'];
@@ -96,7 +44,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
       sections = +number;
       this.array = _.range(sections);
       this.httpReq.getReqCounter = number;
-      console.log(this.array);
     });
 
     this.currentClient = this.pagesService.currentClient;
