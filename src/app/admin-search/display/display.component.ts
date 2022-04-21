@@ -36,30 +36,63 @@ export class DisplayComponent implements OnInit, OnDestroy {
       if (str) {
         let n = str.length;
         let lastChar = str[n - 1];
+        let numberOfPages = str[n - 10];
+        console.log(numberOfPages);
         if (lastChar !== '0') {
-          this.subscription = this.httpReq
-            .onSearchWithParams(this.httpReq.searchInput + str)
-            .subscribe((response) => {
-              this.local.pages = response;
-              this.arrayPages = response;
-            });
-          this.local.currentPath =
-            '/admin-search/' + params['searchInput'] + '/' + params['id'];
+          if (numberOfPages <= this.httpReq.getReqCounter) {
+            this.subscription = this.httpReq
+              .onSearchWithParams(this.httpReq.searchInput + str)
+              .subscribe((response) => {
+                this.local.pages = response;
+                this.arrayPages = response;
+              });
+            this.local.currentPath =
+              '/admin-search/' + params['searchInput'] + '/' + params['id'];
+            this.router.navigate([
+              '/admin-search/' + this.httpReq.searchInput + '/' + params['id'],
+            ]);
+          } else {
+            let newstr = '&_page=1&_limit=' + lastChar;
+            this.subscription = this.httpReq
+              .onSearchWithParams(this.httpReq.searchInput + newstr)
+              .subscribe((response) => {
+                this.local.pages = response;
+                this.arrayPages = response;
+              });
+            this.local.currentPath =
+              '/admin-search/' + params['searchInput'] + '/' + newstr;
+            this.router.navigate([
+              '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
+            ]);
+          }
         } else {
-          let newstr = <string>str;
-          newstr = newstr.slice(0, n - 1);
-          newstr = newstr + '3';
-          this.subscription = this.httpReq
-            .onSearchWithParams(this.httpReq.searchInput + newstr)
-            .subscribe((response) => {
-              this.local.pages = response;
-              this.arrayPages = response;
-            });
-          this.local.currentPath =
-            '/admin-search/' + params['searchInput'] + '/' + newstr;
-          this.router.navigate([
-            '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
-          ]);
+          if (numberOfPages <= this.httpReq.getReqCounter) {
+            let newstr = '&_page=' + numberOfPages + '&_limit=3';
+            this.subscription = this.httpReq
+              .onSearchWithParams(this.httpReq.searchInput + newstr)
+              .subscribe((response) => {
+                this.local.pages = response;
+                this.arrayPages = response;
+              });
+            this.local.currentPath =
+              '/admin-search/' + params['searchInput'] + '/' + newstr;
+            this.router.navigate([
+              '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
+            ]);
+          } else {
+            let newstr = '&_page=1&_limit=3';
+            this.subscription = this.httpReq
+              .onSearchWithParams(this.httpReq.searchInput + newstr)
+              .subscribe((response) => {
+                this.local.pages = response;
+                this.arrayPages = response;
+              });
+            this.local.currentPath =
+              '/admin-search/' + params['searchInput'] + '/' + newstr;
+            this.router.navigate([
+              '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
+            ]);
+          }
         }
       }
     });
