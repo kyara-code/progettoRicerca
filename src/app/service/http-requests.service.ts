@@ -14,6 +14,8 @@ export class HttpRequestsService implements OnDestroy {
   searchInput = '';
   getReqCounter = 0;
 
+  nothingToDisplay = false;
+
   subscribe1: Subscription;
   subscribe2: Subscription;
   subscribe3: Subscription;
@@ -35,9 +37,14 @@ export class HttpRequestsService implements OnDestroy {
         if (response.length > 30) {
           this.getReqCounter = 10;
           this.updateSections.next(this.getReqCounter);
+          this.nothingToDisplay = false;
         } else {
           this.getReqCounter = Math.ceil(response.length / +this.pageLimit);
           this.updateSections.next(this.getReqCounter);
+          this.nothingToDisplay = false;
+          if (response.length === 0) {
+            this.nothingToDisplay = true;
+          }
         }
       });
   }

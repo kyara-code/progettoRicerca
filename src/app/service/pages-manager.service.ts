@@ -44,7 +44,6 @@ export class PagesManagerService {
       url: newPageForm.value.url,
     };
     this.httpReq.compareNewPage(newPageForm.value.url).subscribe((response) => {
-      console.log(response);
       if (response.length) {
         alert('This page already exist!');
       } else {

@@ -32,9 +32,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
       if (str) {
         let n = str.length;
         let lastChar = str[n - 1];
-        if (lastChar === '0') {
-          this.httpReq.pageLimit = '3';
-        } else {
+        if (lastChar !== '0') {
           this.httpReq.pageLimit = lastChar;
         }
       }

@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { localService } from './../local.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebPage } from 'src/app/model/page.model';
 import { HttpRequestsService } from 'src/app/service/http-requests.service';
@@ -15,33 +15,51 @@ export class DisplayComponent implements OnInit, OnDestroy {
   arrayPages: WebPage[] = [];
   searchInput = '';
   subscribe: Subscription;
+  subscribe2: Subscription;
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pagesService: PagesManagerService,
-    private httpReq: HttpRequestsService,
+    public httpReq: HttpRequestsService,
     private local: localService
   ) {}
 
   ngOnInit(): void {
-    console.log('display is alive');
     this.route.params.subscribe((params: Params) => {
       this.httpReq.searchInput = params['searchInput'];
       this.httpReq.getReqCounter = 0;
       this.httpReq.determineSections();
 
-      this.local.currentPath =
-        '/admin-search/' + params['searchInput'] + '/' + params['id'];
-
-      let url = params['searchInput'] + params['id'];
-
-      console.log('url: ' + url);
-      console.log('currentpath: ' + this.local.currentPath);
-      this.httpReq.onSearchWithParams(url).subscribe((response) => {
-        this.local.pages = response;
-        this.arrayPages = this.local.pages;
-        console.log(response);
-      });
+      let str = params['id'];
+      if (str) {
+        let n = str.length;
+        let lastChar = str[n - 1];
+        if (lastChar !== '0') {
+          this.subscription = this.httpReq
+            .onSearchWithParams(this.httpReq.searchInput + str)
+            .subscribe((response) => {
+              this.arrayPages = response;
+            });
+          this.local.currentPath =
+            '/admin-search/' + params['searchInput'] + '/' + params['id'];
+        } else {
+          let newstr = <string>str;
+          newstr = newstr.slice(0, n - 1);
+          newstr = newstr + '3';
+          this.subscription = this.httpReq
+            .onSearchWithParams(this.httpReq.searchInput + newstr)
+            .subscribe((response) => {
+              this.arrayPages = response;
+            });
+          this.local.currentPath =
+            '/admin-search/' + params['searchInput'] + '/' + newstr;
+          this.router.navigate([
+            '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
+          ]);
+        }
+      }
     });
 
     this.subscribe = this.pagesService.newSection.subscribe(

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { HttpRequestsService } from './../service/http-requests.service';
 import { WebPage } from './../model/page.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -16,7 +16,8 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private httpReq: HttpRequestsService
+    public httpReq: HttpRequestsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,12 +26,30 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
       this.httpReq.getReqCounter = 0;
       this.httpReq.determineSections();
 
-      let url = params['searchInput'] + params['id'];
-      this.subscription = this.httpReq
-        .onSearchWithParams(url)
-        .subscribe((response) => {
-          this.arrayPages = response;
-        });
+      let str = params['id'];
+      if (str) {
+        let n = str.length;
+        let lastChar = str[n - 1];
+        if (lastChar !== '0') {
+          this.subscription = this.httpReq
+            .onSearchWithParams(this.httpReq.searchInput + str)
+            .subscribe((response) => {
+              this.arrayPages = response;
+            });
+        } else {
+          let newstr = <string>str;
+          newstr = newstr.slice(0, n - 1);
+          newstr = newstr + '3';
+          this.subscription = this.httpReq
+            .onSearchWithParams(this.httpReq.searchInput + newstr)
+            .subscribe((response) => {
+              this.arrayPages = response;
+            });
+          this.router.navigate([
+            '/search/' + this.httpReq.searchInput + '/' + newstr,
+          ]);
+        }
+      }
     });
   }
 

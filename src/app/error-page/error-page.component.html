@@ -12,10 +12,15 @@
     </div>
 
     <div class="alert alert-default">
+      <h4>Try this little chrome dino game: click on start and have fun!</h4>
+      <span class="help-block" *ngIf="isAnimationOn"
+        >Hint: click the up arrow to jump.</span
+      >
+      <br />
       <button class="btn btn-success" (click)="onStart()">Start</button>
       <br />
       <canvas id="canvas"> </canvas>
-      <h3 *ngIf="isGameOver" class="lost">YOU LOST</h3>
+      <h4 *ngIf="isGameOver" class="lost">YOU LOST</h4>
     </div>
   </div>
 </div>

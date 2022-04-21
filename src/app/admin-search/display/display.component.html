@@ -8,6 +8,9 @@
       (idPageModify)="onModify(i, $event)"
     ></app-admin-single-page>
 
+    <span class="help-block" *ngIf="httpReq.nothingToDisplay">
+      Your search has brought 0 results. Try search something else!
+    </span>
     <div class="center">
       <app-pagination></app-pagination>
     </div>
