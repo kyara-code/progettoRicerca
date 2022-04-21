@@ -39,7 +39,7 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
                 this.arrayPages = response;
               });
             this.router.navigate([
-              'search/' + this.httpReq.searchInput + '/' + params['id'],
+              '/search/' + this.httpReq.searchInput + '/' + params['id'],
             ]);
           } else {
             let newstr = '&_page=1&_limit=' + lastChar;
@@ -49,7 +49,7 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
                 this.arrayPages = response;
               });
             this.router.navigate([
-              'search/' + this.httpReq.searchInput + '/' + newstr,
+              '/search/' + this.httpReq.searchInput + '/' + newstr,
             ]);
           }
         } else {
@@ -61,7 +61,7 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
                 this.arrayPages = response;
               });
             this.router.navigate([
-              'search/' + this.httpReq.searchInput + '/' + newstr,
+              '/search/' + this.httpReq.searchInput + '/' + newstr,
             ]);
           } else {
             let newstr = '&_page=1&_limit=3';
@@ -71,7 +71,7 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
                 this.arrayPages = response;
               });
             this.router.navigate([
-              'search/' + this.httpReq.searchInput + '/' + newstr,
+              '/search/' + this.httpReq.searchInput + '/' + newstr,
             ]);
           }
         }
