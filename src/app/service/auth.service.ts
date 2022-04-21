@@ -48,7 +48,6 @@ export class AuthService {
           this.accessToken = response.access_token;
           this.router.navigate(['/admin-search']);
           this.loggedIn = true;
-          // Imposto una stringa nel localStorage
           localStorage.setItem('token', JSON.stringify(response));
           this.autoLogout(response.tokenExpireIn);
         },

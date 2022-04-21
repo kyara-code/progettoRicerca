@@ -45,7 +45,6 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
       this.pages = pages;
     });
   }
-  // Da mettere in un service
   onSearch(searchForm: NgForm) {
     this.local.searched = true;
     this.local.isNewPage = false;
@@ -66,7 +65,7 @@ export class AdminSearchComponent implements OnInit, OnDestroy {
   onResetForm(searchForm: NgForm) {
     searchForm.reset();
   }
-  //Da mettere in un service
+
   onNewPage() {
     this.local.isNewPage = true;
     this.local.currentPage = null;

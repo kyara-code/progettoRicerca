@@ -71,9 +71,6 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   @HostListener('keydown.ArrowUp') onJump() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // this.dinoY = this.dinoY === 0 ? -80 : 0;
-    // this.ctx.drawImage(this.img1, 0, this.dinoY, 110, 110);
-    // this.ctx.drawImage(this.img2, this.cactusX, 17, 90, 160);
 
     this.salita();
     setTimeout(() => {
