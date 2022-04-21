@@ -34,7 +34,6 @@ export class ClientSearchComponent implements OnInit, OnDestroy {
     this.pagesService.currentClient = 'search';
     this.subscription = this.auth.autoExit.subscribe(() => {
       this.authenticated = false;
-      console.log(this.authenticated);
     });
   }
 

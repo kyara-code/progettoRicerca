@@ -45,7 +45,6 @@ export class AuthService {
       })
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.accessToken = response.access_token;
           this.router.navigate(['/admin-search']);
           this.loggedIn = true;
@@ -56,7 +55,6 @@ export class AuthService {
         error: (errorRes) => {
           this.router.navigate(['/error']);
           this.error = errorRes.error;
-          console.log(errorRes.error);
         },
       });
   }
