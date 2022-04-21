@@ -126,6 +126,8 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   }
 
   onStopAnimation() {
+    this.cactusX = 60;
+    this.dinoY = 10;
     this.isAnimationOn = false;
     if (this.subscribe) {
       this.subscribe.unsubscribe();
