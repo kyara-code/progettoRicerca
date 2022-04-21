@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12">
     <app-admin-single-page
-      *ngFor="let page of arrayPages; let i = index"
+      *ngFor="let page of local.pages; let i = index"
       [singlePage]="page"
       [currentId]="i"
       (idPageDelete)="onDelete($event, i)"

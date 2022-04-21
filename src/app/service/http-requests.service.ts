@@ -88,7 +88,7 @@ export class HttpRequestsService implements OnDestroy {
           Authorization: 'Bearer ' + this.authService.accessToken,
         }),
       })
-      .subscribe({});
+      .subscribe(() => {});
   }
 
   compareNewPage(url: string) {

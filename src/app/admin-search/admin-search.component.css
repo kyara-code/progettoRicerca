@@ -41,6 +41,10 @@
   color: rgb(139, 200, 224);
 }
 
+.lens {
+  cursor: auto !important;
+}
+
 .searchButton {
   display: flex;
   justify-content: center;

@@ -23,7 +23,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     private router: Router,
     private pagesService: PagesManagerService,
     public httpReq: HttpRequestsService,
-    private local: localService
+    public local: localService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
           this.subscription = this.httpReq
             .onSearchWithParams(this.httpReq.searchInput + str)
             .subscribe((response) => {
+              this.local.pages = response;
               this.arrayPages = response;
             });
           this.local.currentPath =
@@ -51,6 +52,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
           this.subscription = this.httpReq
             .onSearchWithParams(this.httpReq.searchInput + newstr)
             .subscribe((response) => {
+              this.local.pages = response;
               this.arrayPages = response;
             });
           this.local.currentPath =

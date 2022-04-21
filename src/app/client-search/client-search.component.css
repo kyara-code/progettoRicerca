@@ -13,6 +13,10 @@
   color: rgb(139, 200, 224);
 }
 
+.lens {
+  cursor: auto !important;
+}
+
 .login-btn {
   display: flex;
   justify-content: flex-end;

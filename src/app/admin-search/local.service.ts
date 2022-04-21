@@ -21,6 +21,7 @@ export class localService {
 
   onDelete(idPage: number, i: number) {
     this.pages.splice(i, 1);
+    console.log(this.pages);
     this.httpReq.deletePage(idPage);
   }
 
