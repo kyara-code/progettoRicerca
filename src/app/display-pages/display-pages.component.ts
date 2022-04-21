@@ -46,7 +46,7 @@ export class DisplayPagesComponent implements OnInit, OnDestroy {
               this.arrayPages = response;
             });
           this.router.navigate([
-            '/admin-search/' + this.httpReq.searchInput + '/' + newstr,
+            '/search/' + this.httpReq.searchInput + '/' + newstr,
           ]);
         }
       }
