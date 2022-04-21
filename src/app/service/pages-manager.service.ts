@@ -47,8 +47,10 @@ export class PagesManagerService {
       if (response.length) {
         alert('This page already exist!');
       } else {
-        this.httpReq.postPage(webPage);
+        this.httpReq.postPage(webPage).subscribe((response) => {});
       }
     });
+    this.pages.push(webPage);
+    this.pagesModified.next(this.pages.slice());
   }
 }

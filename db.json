@@ -8,7 +8,7 @@
       "id": 1
     },
     {
-      "titolo": "Angular 2",
+      "titolo": "Angular 2+",
       "descrizione": "Angular is a platform for building mobile and desktop web applications. Join the community of millions of developers who build compelling user interfaces with ...",
       "chiavi": "javascript,typescript",
       "url": "https://angular.io",
@@ -22,7 +22,7 @@
       "id": 3
     },
     {
-      "titolo": "Google",
+      "titolo": "Google G",
       "descrizione": "Motore di ricerca",
       "chiavi": "ricerca, google",
       "url": "https://www.google.it/",
@@ -34,6 +34,13 @@
       "chiavi": "matematica, università",
       "url": "https://www.mat.uniroma2.it/",
       "id": 5
+    },
+    {
+      "titolo": "Youtube!",
+      "descrizione": "A famous video platform for all tastes!",
+      "chiavi": "video",
+      "url": "https://www.youtube.com",
+      "id": 6
     }
   ]
 }

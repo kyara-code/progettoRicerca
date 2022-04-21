@@ -72,23 +72,19 @@ export class HttpRequestsService implements OnDestroy {
   }
 
   postPage(webSite: WebPage) {
-    this.http
-      .post<WebPage>('http://localhost:3000/ricerca', webSite, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.accessToken,
-        }),
-      })
-      .subscribe((response) => {});
+    return this.http.post<WebPage>('http://localhost:3000/ricerca', webSite, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.authService.accessToken,
+      }),
+    });
   }
 
   deletePage(idPage: number) {
-    this.http
-      .delete('http://localhost:3000/ricerca/' + idPage, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.accessToken,
-        }),
-      })
-      .subscribe(() => {});
+    return this.http.delete('http://localhost:3000/ricerca/' + idPage, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.authService.accessToken,
+      }),
+    });
   }
 
   compareNewPage(url: string) {

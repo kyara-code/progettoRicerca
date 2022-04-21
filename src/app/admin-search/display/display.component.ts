@@ -41,6 +41,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
             .onSearchWithParams(this.httpReq.searchInput + str)
             .subscribe((response) => {
               this.arrayPages = response;
+              this.local.pages = response;
             });
           this.local.currentPath =
             '/admin-search/' + params['searchInput'] + '/' + params['id'];
@@ -51,6 +52,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
           this.subscription = this.httpReq
             .onSearchWithParams(this.httpReq.searchInput + newstr)
             .subscribe((response) => {
+              this.local.pages = response;
               this.arrayPages = response;
             });
           this.local.currentPath =
@@ -64,6 +66,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.subscribe = this.pagesService.newSection.subscribe(
       (pagesOfThisSection) => {
         this.local.pages = pagesOfThisSection;
+
         this.arrayPages = this.local.pages;
       }
     );

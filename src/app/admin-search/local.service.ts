@@ -12,6 +12,7 @@ export class localService {
   currentPage: WebPage;
   currentPath: string = '/admin-search';
 
+  idPageDelete = new Subject<number>();
   addPageDone = new Subject<void>();
 
   constructor(
@@ -21,7 +22,8 @@ export class localService {
 
   onDelete(idPage: number, i: number) {
     this.pages.splice(i, 1);
-    this.httpReq.deletePage(idPage);
+    this.httpReq.deletePage(idPage).subscribe((response) => {});
+    this.pagesManagerService.pagesModified.next(this.pages);
   }
 
   onModify(idPage: number, page: WebPage) {
