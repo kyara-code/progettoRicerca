@@ -47,10 +47,11 @@ export class PagesManagerService {
       if (response.length) {
         alert('This page already exist!');
       } else {
-        this.httpReq.postPage(webPage).subscribe((response) => {});
+        this.httpReq.postPage(webPage).subscribe((response) => {
+          this.pages.push(response);
+        });
       }
     });
-    this.pages.push(webPage);
-    this.pagesModified.next(this.pages.slice());
+    this.pagesModified.next(this.pages);
   }
 }
