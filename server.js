@@ -22,6 +22,10 @@ const userDB = {
   ],
 };
 
+server.get("/*", (req, res) => {
+  res.sendFile("index.html", { root: "" });
+});
+
 server.use(jsonServer.defaults());
 
 server.use(bodyParser.urlencoded({ extended: true }));
