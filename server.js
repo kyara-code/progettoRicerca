@@ -25,7 +25,7 @@ const userDB = {
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
-server.use(jsonServer.defaults("./dist/progetto-ricerca"));
+// server.use(jsonServer.defaults("dist/progetto-ricerca"));
 
 server.get("/", (req, res) => {
   res.sendFile("dist/progetto-ricerca/index.html");
