@@ -28,10 +28,8 @@ server.use(bodyParser.json());
 server.use(jsonServer.defaults("./dist/progetto-ricerca"));
 
 server.get("/", (req, res) => {
-  res.sendFile("index.html", { root: "dist/progetto-ricerca" });
+  res.sendFile("dist/progetto-ricerca/index.html");
 });
-
-// server.use(jsonServer.router("index.html", { root: "dist/progetto-ricerca" }));
 
 const SECRET_KEY_TOKEN = "1234";
 const SECRET_KEY_REFRESHTOKEN = "4321";
