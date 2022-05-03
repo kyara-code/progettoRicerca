@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve src/index.html",
+    "build": "ng build src/index.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "json-server": "node server.js",
