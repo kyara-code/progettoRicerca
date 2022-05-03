@@ -25,12 +25,6 @@ const userDB = {
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
-// server.use(jsonServer.defaults("dist/progetto-ricerca"));
-
-server.get("/", (req, res) => {
-  res.sendFile("dist/progetto-ricerca/index.html");
-});
-
 const SECRET_KEY_TOKEN = "1234";
 const SECRET_KEY_REFRESHTOKEN = "4321";
 const tokenExpiresIn = 300;
