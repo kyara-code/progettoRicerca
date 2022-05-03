@@ -213,6 +213,6 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 
 server.use(router);
 
-server.listen(3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log("Server lanciato per il corso di Angular :)");
 });
