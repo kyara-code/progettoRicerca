@@ -39,7 +39,7 @@ export class AuthService {
 
   logIn(user: string, password: string) {
     this.http
-      .post<AuthResponse>('http://localhost:3000/auth/login', {
+      .post<AuthResponse>('https://yootta-server.herokuapp.com/auth/login', {
         user: user,
         password: password,
       })
