@@ -27,12 +27,16 @@ export class HttpRequestsService implements OnDestroy {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   onSearchWithParams(url: string) {
-    return this.http.get<WebPage[]>('http://localhost:3000/ricerca?q=' + url);
+    return this.http.get<WebPage[]>(
+      'https://yootta-server.herokuapp.com/ricerca?q=' + url
+    );
   }
 
   determineSections() {
     this.http
-      .get<WebPage[]>('http://localhost:3000/ricerca?q=' + this.searchInput)
+      .get<WebPage[]>(
+        'https://yootta-server.herokuapp.com/ricerca?q=' + this.searchInput
+      )
       .subscribe((response) => {
         if (response.length > 30) {
           this.getReqCounter = 10;
@@ -52,7 +56,7 @@ export class HttpRequestsService implements OnDestroy {
   searchPage() {
     let section = this.pageNumber.toString();
     return this.http.get<WebPage[]>(
-      'http://localhost:3000/ricerca?q=' +
+      'https://yootta-server.herokuapp.com/ricerca?q=' +
         this.searchInput +
         '&_page=' +
         section +
@@ -63,32 +67,45 @@ export class HttpRequestsService implements OnDestroy {
 
   updatePage(webPage: WebPage) {
     this.http
-      .put('http://localhost:3000/ricerca/' + webPage.id, webPage, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + this.authService.accessToken,
-        }),
-      })
+      .put(
+        'https://yootta-server.herokuapp.com/ricerca/' + webPage.id,
+        webPage,
+        {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + this.authService.accessToken,
+          }),
+        }
+      )
       .subscribe((response) => {});
   }
 
   postPage(webSite: WebPage) {
-    return this.http.post<WebPage>('http://localhost:3000/ricerca', webSite, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.authService.accessToken,
-      }),
-    });
+    return this.http.post<WebPage>(
+      'https://yootta-server.herokuapp.com/ricerca',
+      webSite,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + this.authService.accessToken,
+        }),
+      }
+    );
   }
 
   deletePage(idPage: number) {
-    return this.http.delete('http://localhost:3000/ricerca/' + idPage, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.authService.accessToken,
-      }),
-    });
+    return this.http.delete(
+      'https://yootta-server.herokuapp.com/ricerca/' + idPage,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + this.authService.accessToken,
+        }),
+      }
+    );
   }
 
   compareNewPage(url: string) {
-    return this.http.get<WebPage[]>('http://localhost:3000/ricerca?url=' + url);
+    return this.http.get<WebPage[]>(
+      'https://yootta-server.herokuapp.com/ricerca?url=' + url
+    );
   }
 
   ngOnDestroy(): void {
